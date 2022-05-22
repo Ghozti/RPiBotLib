@@ -28,7 +28,7 @@ public class Robot {
                 .provider("pigpio-digital-output");
         pin = context.create(pinConfig);
         //pwm = context.create(buildPwmConfig(context,12));
-        //System.out.println("pwm init");
+        System.out.println("pwm init");
     }
 
     public void runRobot(){
@@ -41,7 +41,7 @@ public class Robot {
             context.shutdown();
         }
         //pwm.on(50,1);
-        //System.out.println("robot running");
+        System.out.println("robot running");
     }
 
     protected static PwmConfig buildPwmConfig(Context pi4j, int address) {
