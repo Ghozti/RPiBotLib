@@ -26,7 +26,7 @@ public class DriverStation implements Screen {
     boolean robotRunning;
 
     public DriverStation(){
-
+        robot = new Robot();
     }
 
     @Override
@@ -39,7 +39,6 @@ public class DriverStation implements Screen {
         font = new Font(100);
         enableSound = Gdx.audio.newMusic(Gdx.files.internal("autonstart.mp3"));
         disableSound = Gdx.audio.newMusic(Gdx.files.internal("buzzer.mp3"));
-        robot = new Robot();
     }
 
     private void update(){
