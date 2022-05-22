@@ -13,34 +13,35 @@ import pibotlib.utils.DriverStationState;
 public class Robot {
 
     Context context;
-    //Pwm pwm;
-    DigitalOutputConfigBuilder pinConfig;
-    DigitalOutput pin;
+    Pwm pwm;
+    //DigitalOutputConfigBuilder pinConfig;
+    //DigitalOutput pin;
 
     public Robot(){
         context = Pi4J.newAutoContext();
-        pinConfig = DigitalOutput.newConfigBuilder(context)
-                .id("led")
-                .name("LED Flasher")
-                .address(4)
-                .shutdown(DigitalState.LOW)
-                .initial(DigitalState.LOW)
-                .provider("pigpio-digital-output");
-        pin = context.create(pinConfig);
-        //pwm = context.create(buildPwmConfig(context,12));
-        //System.out.println("pwm init");
+        //pinConfig = DigitalOutput.newConfigBuilder(context)
+        //        .id("led")
+        //        .name("LED Flasher")
+        //        .address(4)
+        //        .shutdown(DigitalState.LOW)
+        //        .initial(DigitalState.LOW)
+        //        .provider("pigpio-digital-output");
+        //pin = context.create(pinConfig);
+        pwm = context.create(buildPwmConfig(context,12));
+        System.out.println("pwm init");
     }
 
     public void runRobot(){
-        if (DriverStationState.getState().equals("Enabled")){
-            pin.high();
-        }
-        if (DriverStationState.getState().equals("Disabled")){
-            pin.low();
-        }else {
-            context.shutdown();
-        }
-        //pwm.on(50,1);
+        //if (DriverStationState.getState().equals("Enabled")){
+        //    pin.high();
+        //}
+        //if (DriverStationState.getState().equals("Disabled")){
+        //    pin.low();
+        //}else {
+        //    context.shutdown();
+        //}
+        pwm.on(50,1);
+        System.out.println("robot running");
     }
 
     protected static PwmConfig buildPwmConfig(Context pi4j, int address) {
