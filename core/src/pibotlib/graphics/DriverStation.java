@@ -47,9 +47,8 @@ public class DriverStation implements Screen {
         mouseHitbox.y = Math.abs(Gdx.input.getY() - (int) Constants.Graphical.Screen.height);
         updateEnableButton();
         updateDisableButton();
-        System.out.println(robot);
         if (DriverStationState.getState().equals("Enabled") && robot != null){
-            robot.runRobot();
+            //robot.runRobot();
         }
     }
 
