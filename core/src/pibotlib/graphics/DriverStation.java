@@ -26,7 +26,7 @@ public class DriverStation implements Screen {
     boolean robotRunning;
 
     public DriverStation(){
-        robot = new Robot();
+
     }
 
     @Override
@@ -39,6 +39,7 @@ public class DriverStation implements Screen {
         font = new Font(100);
         enableSound = Gdx.audio.newMusic(Gdx.files.internal("autonstart.mp3"));
         disableSound = Gdx.audio.newMusic(Gdx.files.internal("buzzer.mp3"));
+        robot = new Robot();
     }
 
     private void update(){
@@ -46,7 +47,8 @@ public class DriverStation implements Screen {
         mouseHitbox.y = Math.abs(Gdx.input.getY() - (int) Constants.Graphical.Screen.height);
         updateEnableButton();
         updateDisableButton();
-        if (DriverStationState.getState().equals("Enabled")){
+        System.out.println(robot);
+        if (DriverStationState.getState().equals("Enabled") && robot != null){
             robot.runRobot();
         }
     }

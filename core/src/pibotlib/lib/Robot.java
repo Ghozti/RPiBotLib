@@ -18,6 +18,7 @@ public class Robot {
     DigitalOutput pin;
 
     public Robot(){
+        System.out.println("robot init");
         context = Pi4J.newAutoContext();
         pinConfig = DigitalOutput.newConfigBuilder(context)
                 .id("led")
