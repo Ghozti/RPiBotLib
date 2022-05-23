@@ -31,14 +31,14 @@ public class Robot {
 
     public void runRobot(){
 
-        //context = Pi4J.newAutoContext();
-        //pinConfig = DigitalOutput.newConfigBuilder(context)
-        //        .id("led")
-        //        .name("LED Flasher")
-        //        .address(4)
-        //        .shutdown(DigitalState.LOW)
-        //        .initial(DigitalState.LOW)
-        //        .provider("pigpio-digital-output");
+        context = Pi4J.newAutoContext();
+        pinConfig = DigitalOutput.newConfigBuilder(context)
+                .id("led")
+                .name("LED Flasher")
+                .address(4)
+                .shutdown(DigitalState.LOW)
+                .initial(DigitalState.LOW)
+                .provider("pigpio-digital-output");
         pin = context.create(pinConfig);
 
         if (DriverStationState.getState().equals("Enabled")){
