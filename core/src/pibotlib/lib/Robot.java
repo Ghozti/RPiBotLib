@@ -20,16 +20,17 @@ public class Robot {
     public Robot(){
         System.out.println("robot init");
         context = Pi4J.newAutoContext();
-        //pinConfig = DigitalOutput.newConfigBuilder(context)
-        //        .id("led")
-        //        .name("LED Flasher")
-        //        .address(4)
-        //        .shutdown(DigitalState.LOW)
-        //        .initial(DigitalState.LOW)
-        //        .provider("pigpio-digital-output");
-        //pin = context.create(pinConfig);
-        pwm = context.create(buildPwmConfig(context,12));
-        pwm.on(50,1);
+        pinConfig = DigitalOutput.newConfigBuilder(context)
+                .id("led")
+                .name("LED Flasher")
+                .address(4)
+                .shutdown(DigitalState.LOW)
+                .initial(DigitalState.LOW)
+                .provider("pigpio-digital-output");
+        pin = context.create(pinConfig);
+        pin.high();
+        //pwm = context.create(buildPwmConfig(context,12));
+        //pwm.on(50,1);
     }
 
     public void runRobot(){
