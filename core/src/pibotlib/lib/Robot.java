@@ -29,6 +29,7 @@ public class Robot {
         //        .provider("pigpio-digital-output");
         //pin = context.create(pinConfig);
         pwm = context.create(buildPwmConfig(context,12));
+        pwm.on(50,1);
     }
 
     public void runRobot(){
