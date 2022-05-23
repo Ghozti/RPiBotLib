@@ -30,6 +30,7 @@ public class Robot {
         //pin = context.create(pinConfig);
         pwm = context.create(buildPwmConfig(context,12));
         System.out.println("pwm init");
+        pwm.on(50,1);
     }
 
     public void runRobot(){
@@ -42,7 +43,7 @@ public class Robot {
         //}else {
         //    context.shutdown();
         //}
-        pwm.on(50,1);
+        //pwm.on(50,1);
     }
 
     protected static PwmConfig buildPwmConfig(Context pi4j, int address) {
