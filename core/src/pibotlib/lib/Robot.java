@@ -12,22 +12,28 @@ import pibotlib.utils.DriverStationState;
 
 public class Robot {
 
-    Context context;
+    Context context  = Pi4J.newAutoContext();
     Pwm pwm;
-    DigitalOutputConfigBuilder pinConfig;
-    DigitalOutput pin;
+    DigitalOutputConfigBuilder pinConfig = DigitalOutput.newConfigBuilder(context)
+            .id("led")
+            .name("LED Flasher")
+            .address(4)
+            .shutdown(DigitalState.LOW)
+            .initial(DigitalState.LOW)
+            .provider("pigpio-digital-output");;
+    DigitalOutput pin = context.create(pinConfig);
 
     public Robot(){
         System.out.println("robot init");
-        context = Pi4J.newAutoContext();
-        pinConfig = DigitalOutput.newConfigBuilder(context)
-                .id("led")
-                .name("LED Flasher")
-                .address(4)
-                .shutdown(DigitalState.LOW)
-                .initial(DigitalState.LOW)
-                .provider("pigpio-digital-output");
-        pin = context.create(pinConfig);
+        //context = Pi4J.newAutoContext();
+        //pinConfig = DigitalOutput.newConfigBuilder(context)
+        //        .id("led")
+        //        .name("LED Flasher")
+        //        .address(4)
+        //        .shutdown(DigitalState.LOW)
+        //        .initial(DigitalState.LOW)
+        //        .provider("pigpio-digital-output");
+        //pin = context.create(pinConfig);
     }
 
     public void runRobot(){
