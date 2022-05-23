@@ -18,33 +18,6 @@ public class Robot {
     DigitalOutput pin;
 
     public Robot(){
-        //System.out.println("robot init");
-        //context = Pi4J.newAutoContext();
-        //pinConfig = DigitalOutput.newConfigBuilder(context)
-        //        .id("led")
-        //        .name("LED Flasher")
-        //        .address(4)
-        //        .shutdown(DigitalState.LOW)
-        //        .initial(DigitalState.LOW)
-        //        .provider("pigpio-digital-output");
-        //pin = context.create(pinConfig);
-        //pwm = context.create(buildPwmConfig(context,12));
-        //System.out.println("pwm init");
-        //pwm.on(50,1);
-
-        //if (DriverStationState.getState().equals("Enabled")){
-        //    System.out.println("robot running");
-        //    pin.high();
-        //}
-        //if (DriverStationState.getState().equals("Disabled")){
-        //    pin.low();
-        //}else {
-        //    context.shutdown();
-        //}
-    }
-
-    public void runRobot(){
-
         context = Pi4J.newAutoContext();
         pinConfig = DigitalOutput.newConfigBuilder(context)
                 .id("led")
@@ -53,6 +26,19 @@ public class Robot {
                 .shutdown(DigitalState.LOW)
                 .initial(DigitalState.LOW)
                 .provider("pigpio-digital-output");
+        pin = context.create(pinConfig);
+    }
+
+    public void runRobot(){
+
+        //context = Pi4J.newAutoContext();
+        //pinConfig = DigitalOutput.newConfigBuilder(context)
+        //        .id("led")
+        //        .name("LED Flasher")
+        //        .address(4)
+        //        .shutdown(DigitalState.LOW)
+        //        .initial(DigitalState.LOW)
+        //        .provider("pigpio-digital-output");
         pin = context.create(pinConfig);
 
         if (DriverStationState.getState().equals("Enabled")){
