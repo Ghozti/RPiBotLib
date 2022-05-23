@@ -34,15 +34,15 @@ public class Robot {
 
     public void runRobot(){
         if (DriverStationState.getState().equals("Enabled")){
-           // pin.high();
+            System.out.println("robot running");
+            pin.high();
         }
         if (DriverStationState.getState().equals("Disabled")){
             pin.low();
         }else {
-           // context.shutdown();
+            context.shutdown();
         }
         //pwm.on(50,1);
-        //System.out.println("robot running");
     }
 
     protected static PwmConfig buildPwmConfig(Context pi4j, int address) {
