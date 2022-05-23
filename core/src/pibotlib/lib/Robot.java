@@ -12,31 +12,34 @@ import pibotlib.utils.DriverStationState;
 
 public class Robot {
 
-    Context context  = Pi4J.newAutoContext();
+    Context context;
     Pwm pwm;
-    DigitalOutputConfigBuilder pinConfig = DigitalOutput.newConfigBuilder(context)
-            .id("led")
-            .name("LED Flasher")
-            .address(4)
-            .shutdown(DigitalState.LOW)
-            .initial(DigitalState.LOW)
-            .provider("pigpio-digital-output");;
-    DigitalOutput pin = context.create(pinConfig);
+    DigitalOutputConfigBuilder pinConfig;
+    DigitalOutput pin;
 
     public Robot(){
         System.out.println("robot init");
-        //context = Pi4J.newAutoContext();
-        //pinConfig = DigitalOutput.newConfigBuilder(context)
-        //        .id("led")
-        //        .name("LED Flasher")
-        //        .address(4)
-        //        .shutdown(DigitalState.LOW)
-        //        .initial(DigitalState.LOW)
-        //        .provider("pigpio-digital-output");
-        //pin = context.create(pinConfig);
+        context = Pi4J.newAutoContext();
+        pinConfig = DigitalOutput.newConfigBuilder(context)
+                .id("led")
+                .name("LED Flasher")
+                .address(4)
+                .shutdown(DigitalState.LOW)
+                .initial(DigitalState.LOW)
+                .provider("pigpio-digital-output");
+        pin = context.create(pinConfig);
     }
 
     public void runRobot(){
+        context = Pi4J.newAutoContext();
+        pinConfig = DigitalOutput.newConfigBuilder(context)
+                .id("led")
+                .name("LED Flasher")
+                .address(4)
+                .shutdown(DigitalState.LOW)
+                .initial(DigitalState.LOW)
+                .provider("pigpio-digital-output");
+        pin = context.create(pinConfig);
         if (DriverStationState.getState().equals("Enabled")){
             System.out.println("robot running");
             pin.high();
