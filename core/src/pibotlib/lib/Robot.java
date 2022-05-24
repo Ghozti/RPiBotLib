@@ -80,6 +80,9 @@ public class Robot implements Runnable{
                 .provider("pigpio-digital-output");
         pin = context.create(pinConfig);
         pin.high();
+        if (DriverStationState.getState().equals("Disabled")){
+            pin.low();
+        }
         //pwm = context.create(buildPwmConfig(context,12));
         //pwm.on(50,1);
     }
