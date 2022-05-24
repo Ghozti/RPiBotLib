@@ -39,7 +39,8 @@ public class DriverStation implements Screen {
         font = new Font(100);
         enableSound = Gdx.audio.newMusic(Gdx.files.internal("autonstart.mp3"));
         disableSound = Gdx.audio.newMusic(Gdx.files.internal("buzzer.mp3"));
-        robot = new Robot();
+        Thread thread = new Thread(new Robot());
+        thread.start();
     }
 
     private void update(){
