@@ -10,7 +10,7 @@ import com.pi4j.io.pwm.PwmConfig;
 import com.pi4j.io.pwm.PwmType;
 import pibotlib.utils.DriverStationState;
 
-public class Robot {
+public class Robot implements Runnable{
 
     Context context;
     Pwm pwm;
@@ -18,19 +18,19 @@ public class Robot {
     DigitalOutput pin;
 
     public Robot(){
-        System.out.println("robot init");
-        context = Pi4J.newAutoContext();
-        pinConfig = DigitalOutput.newConfigBuilder(context)
-                .id("led")
-                .name("LED Flasher")
-                .address(4)
-                .shutdown(DigitalState.LOW)
-                .initial(DigitalState.LOW)
-                .provider("pigpio-digital-output");
-        pin = context.create(pinConfig);
-        pin.high();
-        //pwm = context.create(buildPwmConfig(context,12));
-        //pwm.on(50,1);
+        //System.out.println("robot init");
+        //context = Pi4J.newAutoContext();
+        //pinConfig = DigitalOutput.newConfigBuilder(context)
+        //        .id("led")
+        //        .name("LED Flasher")
+        //        .address(4)
+        //        .shutdown(DigitalState.LOW)
+        //        .initial(DigitalState.LOW)
+        //        .provider("pigpio-digital-output");
+        //pin = context.create(pinConfig);
+        //pin.high();
+        ////pwm = context.create(buildPwmConfig(context,12));
+        ////pwm.on(50,1);
     }
 
     public void runRobot(){
@@ -67,4 +67,20 @@ public class Robot {
                 .build();
     }
 
+    @Override
+    public void run() {
+        System.out.println("robot init");
+        context = Pi4J.newAutoContext();
+        pinConfig = DigitalOutput.newConfigBuilder(context)
+                .id("led")
+                .name("LED Flasher")
+                .address(4)
+                .shutdown(DigitalState.LOW)
+                .initial(DigitalState.LOW)
+                .provider("pigpio-digital-output");
+        pin = context.create(pinConfig);
+        pin.high();
+        //pwm = context.create(buildPwmConfig(context,12));
+        //pwm.on(50,1);
+    }
 }
