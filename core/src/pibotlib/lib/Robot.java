@@ -83,14 +83,14 @@ public class Robot implements Runnable{
     public void run() {
         context = Pi4J.newAutoContext();
         pwm = context.create(buildPwmConfig(context,18));
-        pin = context.create(outputConfigBuilder(context,3));
-        pin2 = context.create(outputConfigBuilder(context,4));
+        pin = context.create(outputConfigBuilder(context,14));
+        pin2 = context.create(outputConfigBuilder(context,15));
 
         while (true) {
             if (DriverStationState.getState().equals("Enabled")) {
                 pin.high();
                 pin2.high();
-                pwm.on(50,1);
+                pwm.on(100,1);
             }
             if (DriverStationState.getState().equals("Disabled")) {
                 pin.low();
