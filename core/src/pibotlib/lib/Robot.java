@@ -17,7 +17,7 @@ public class Robot implements Runnable{
     Context context;
     Pwm pwm;
     DigitalOutputConfigBuilder pinConfig;
-    DigitalOutput pin;
+    DigitalOutput pin,pin2;
 
     public Robot(){
         //System.out.println("robot init");
@@ -69,25 +69,33 @@ public class Robot implements Runnable{
                 .build();
     }
 
-    @Override
-    public void run() {
-        System.out.println("robot init");
-        context = Pi4J.newAutoContext();
-        pinConfig = DigitalOutput.newConfigBuilder(context)
+    public static DigitalOutputConfigBuilder outputConfigBuilder(Context context, int adress){
+        return  DigitalOutput.newConfigBuilder(context)
                 .id("led")
                 .name("LED Flasher")
-                .address(4)
+                .address(adress)
                 .shutdown(DigitalState.LOW)
                 .initial(DigitalState.LOW)
                 .provider("pigpio-digital-output");
-        pin = context.create(pinConfig);
+    }
+
+    @Override
+    public void run() {
+        context = Pi4J.newAutoContext();
+        pwm = context.create(buildPwmConfig(context,2));
+        pin = context.create(outputConfigBuilder(context,3));
+        pin2 = context.create(outputConfigBuilder(context,4));
 
         while (true) {
             if (DriverStationState.getState().equals("Enabled")) {
                 pin.high();
+                pin2.high();
+                pwm.on(50,1);
             }
             if (DriverStationState.getState().equals("Disabled")) {
                 pin.low();
+                pin2.low();
+                pwm.on(0,1);
             }
         }
         //pwm = context.create(buildPwmConfig(context,12));
