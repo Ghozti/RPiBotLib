@@ -69,10 +69,10 @@ public class Robot implements Runnable{
                 .build();
     }
 
-    public static DigitalOutputConfigBuilder outputConfigBuilder(Context context, int adress, String id){
+    public static DigitalOutputConfigBuilder outputConfigBuilder(Context context, int adress, String id, String name){
         return  DigitalOutput.newConfigBuilder(context)
                 .id(id)
-                .name("LED Flasher")
+                .name(name)
                 .address(adress)
                 .shutdown(DigitalState.LOW)
                 .initial(DigitalState.LOW)
@@ -83,8 +83,8 @@ public class Robot implements Runnable{
     public void run() {
         context = Pi4J.newAutoContext();
         pwm = context.create(buildPwmConfig(context,18));
-        pin = context.create(outputConfigBuilder(context,14,"pin14"));
-        pin2 = context.create(outputConfigBuilder(context,15,"pin14"));
+        pin = context.create(outputConfigBuilder(context,14,"pin14","bitch"));
+        pin2 = context.create(outputConfigBuilder(context,15,"pin15","fuckthis pin"));
 
         while (true) {
             if (DriverStationState.getState().equals("Enabled")) {
