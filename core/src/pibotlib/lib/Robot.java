@@ -96,7 +96,6 @@ public class Robot implements Runnable{
                 pin.low();
                 pin2.low();
                 pwm.on(0,1);
-                context.shutdown();
             }
         }
         //pwm = context.create(buildPwmConfig(context,12));
