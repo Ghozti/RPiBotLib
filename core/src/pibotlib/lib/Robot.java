@@ -82,7 +82,7 @@ public class Robot implements Runnable{
     @Override
     public void run() {
         context = Pi4J.newAutoContext();
-        pwm = context.create(buildPwmConfig(context,2));
+        pwm = context.create(buildPwmConfig(context,18));
         pin = context.create(outputConfigBuilder(context,3));
         pin2 = context.create(outputConfigBuilder(context,4));
 
