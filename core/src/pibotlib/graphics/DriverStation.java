@@ -114,6 +114,10 @@ public class DriverStation implements Screen {
             }
         }
 
+        if (Gdx.input.isKeyPressed(Input.Keys.K)){
+            DriverStationState.setKill();
+        }
+
         if (disableButton.getHitbox().overlaps(mouseHitbox)){
             disableButton.changePath("disable(1).png");
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)){

@@ -11,6 +11,10 @@ public class DriverStationState {
             }
         }
 
+        public static void setKill(){
+            state = "kill";
+        }
+
         public static String getState() {
             return state;
         }

@@ -12,6 +12,8 @@ import com.pi4j.io.pwm.PwmConfig;
 import com.pi4j.io.pwm.PwmType;
 import pibotlib.utils.DriverStationState;
 
+import java.util.Scanner;
+
 public class Robot implements Runnable{
 
     Context context;
@@ -85,16 +87,27 @@ public class Robot implements Runnable{
         pwm = context.create(buildPwmConfig(context,18));
         pin = context.create(outputConfigBuilder(context,14,"pin14","bitch"));
         pin2 = context.create(outputConfigBuilder(context,15,"pin15","fuckthis pin"));
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("enter duty cycle:");
+        int dutyCycle = scanner.nextInt();
 
         while (true) {
             if (DriverStationState.getState().equals("Enabled")) {
                 pin.high();
-                pwm.on(100,1);
+                pwm.on(dutyCycle,1);
             }
             if (DriverStationState.getState().equals("Disabled")) {
                 pin.low();
                 pin2.low();
                 pwm.on(0,1);
+            }
+
+            if (DriverStationState.getState().equals("Kill")){
+                pin.shutdown(context);
+                pin2.shutdown(context);
+                pwm.shutdown(context);
+                context.shutdown();
+                break;
             }
         }
         //pwm = context.create(buildPwmConfig(context,12));
