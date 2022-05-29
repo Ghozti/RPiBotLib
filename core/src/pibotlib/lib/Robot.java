@@ -88,13 +88,11 @@ public class Robot implements Runnable{
         pin = context.create(outputConfigBuilder(context,14,"pin14","bitch"));
         pin2 = context.create(outputConfigBuilder(context,15,"pin15","fuckthis pin"));
         Scanner scanner = new Scanner(System.in);
-        System.out.println("enter duty cycle:");
-        int dutyCycle = scanner.nextInt();
 
         while (true) {
             if (DriverStationState.getState().equals("Enabled")) {
                 pin.high();
-                pwm.on(dutyCycle,1);
+                pwm.on(100,50);
             }
             if (DriverStationState.getState().equals("Disabled")) {
                 pin.low();
