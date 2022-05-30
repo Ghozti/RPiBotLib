@@ -1,5 +1,7 @@
 package pibotlib.lib;
 
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
 import com.pi4j.Pi4J;
 import com.pi4j.context.Context;
 import com.pi4j.io.gpio.analog.AnalogOutput;
@@ -90,14 +92,14 @@ public class Robot implements Runnable{
 
         while (true) {
             if (DriverStationState.getState().equals("Enabled")) {
-                pwm.on(25);
+                pwm.on(55);
                 pin.high();
                 pin2.low();
             }
             if (DriverStationState.getState().equals("Disabled")) {
                 pin.low();
                 pin2.low();
-                pwm.on(0);
+                pwm.on(100);
             }
 
             if (DriverStationState.getState().equals("Kill")){
