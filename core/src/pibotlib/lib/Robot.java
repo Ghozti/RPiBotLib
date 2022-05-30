@@ -92,14 +92,14 @@ public class Robot implements Runnable{
 
         while (true) {
             if (DriverStationState.getState().equals("Enabled")) {
-                pwm.on(55,976);
+                pwm.on(55,1000);
                 pin.high();
                 pin2.low();
             }
             if (DriverStationState.getState().equals("Disabled")) {
                 pin.low();
                 pin2.low();
-                pwm.on(256,976);
+                pwm.on(256,1000);
             }
 
             if (DriverStationState.getState().equals("Kill")){
