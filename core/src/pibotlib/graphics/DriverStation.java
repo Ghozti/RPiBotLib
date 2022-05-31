@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.Controllers;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,6 +14,7 @@ import pibotlib.graphics.utils.Font;
 import pibotlib.lib.Robot;
 import pibotlib.utils.Constants;
 import pibotlib.utils.DriverStationState;
+import pibotlib.utils.LocalXboxController;
 
 public class DriverStation implements Screen {
 
@@ -21,12 +24,10 @@ public class DriverStation implements Screen {
     com.badlogic.gdx.math.Rectangle mouseHitbox;
     Font font;
     Music enableSound, disableSound;
-
     Robot robot;
-    boolean robotRunning;
+    LocalXboxController controller;
 
     public DriverStation(){
-
     }
 
     @Override
@@ -39,8 +40,9 @@ public class DriverStation implements Screen {
         font = new Font(100);
         enableSound = Gdx.audio.newMusic(Gdx.files.internal("autonstart.mp3"));
         disableSound = Gdx.audio.newMusic(Gdx.files.internal("buzzer.mp3"));
-        Thread thread = new Thread(new Robot());
-        thread.start();
+        //Thread thread = new Thread(new Robot());
+        //thread.start();
+        controller = new LocalXboxController();
     }
 
     private void update(){
@@ -63,6 +65,10 @@ public class DriverStation implements Screen {
         batch.draw(disableButton.getTexture(),disableButton.getX(),disableButton.getY(),disableButton.getWidth(), disableButton.getHeight());
         font.draw(batch,"Robot State: ",480,200,0,false);
         font.draw(batch, DriverStationState.getState(),480,100,0,false);
+        font.draw(batch,controller.getLeftXAxis() + "",600,600,0,false);
+        font.draw(batch,controller.getLeftYAxis() + "",600,500,0,false);
+        font.draw(batch,controller.getRightXAxis() + "",600,400,0,false);
+        font.draw(batch,controller.getRightYAxis() + "",600,300,0,false);
         batch.end();
     }
 
