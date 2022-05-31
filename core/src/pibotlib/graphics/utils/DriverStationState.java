@@ -1,4 +1,4 @@
-package pibotlib.utils;
+package pibotlib.graphics.utils;
 
 public class DriverStationState {
         private static String state = "Disabled";

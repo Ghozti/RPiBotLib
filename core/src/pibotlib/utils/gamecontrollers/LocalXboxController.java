@@ -1,4 +1,4 @@
-package pibotlib.utils;
+package pibotlib.utils.gamecontrollers;
 
 import com.badlogic.gdx.controllers.Controller;
 import com.badlogic.gdx.controllers.Controllers;

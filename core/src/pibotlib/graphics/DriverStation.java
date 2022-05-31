@@ -4,17 +4,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.controllers.Controller;
-import com.badlogic.gdx.controllers.Controllers;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import pibotlib.graphics.utils.Font;
 import pibotlib.lib.Robot;
-import pibotlib.utils.Constants;
-import pibotlib.utils.DriverStationState;
-import pibotlib.utils.LocalXboxController;
+import pibotlib.utils.constants.Constants;
+import pibotlib.graphics.utils.DriverStationState;
+import pibotlib.utils.gamecontrollers.LocalXboxController;
 
 public class DriverStation implements Screen {
 
