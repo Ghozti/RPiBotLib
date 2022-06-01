@@ -1,5 +1,7 @@
 package pibotlib.utils.motorcontrollers;
 
+import com.pi4j.context.Context;
+
 public interface MotorController {
 
     void motor1Forward(int speedVal);
@@ -8,6 +10,7 @@ public interface MotorController {
     void motor2Backward(int speedVal);
 
     void setID(int id);
+    void setContext(Context context);
 
     void setmotor1Inverted(boolean inverted);
     void setmotor2Inverted(boolean inverted);
