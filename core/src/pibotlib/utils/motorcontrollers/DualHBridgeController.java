@@ -52,7 +52,7 @@ public class DualHBridgeController implements MotorController{
     }
 
     @Override
-    public void motor1Forward(int speedVal) {
+    public void motor1Forward(double speedVal) {
         motor1PWMOutput.on(speedVal,1000);
         if (!motor1Inverted) {
             motor1DigitalForward.high();
@@ -64,7 +64,7 @@ public class DualHBridgeController implements MotorController{
     }
 
     @Override
-    public void motor1Backward(int speedVal) {
+    public void motor1Backward(double speedVal) {
         motor1PWMOutput.on(speedVal,1000);
         if (motor1Inverted) {
             motor1DigitalBackward.high();
@@ -76,7 +76,7 @@ public class DualHBridgeController implements MotorController{
     }
 
     @Override
-    public void motor2Forward(int speedVal) {
+    public void motor2Forward(double speedVal) {
         motor2PWMOutput.on(speedVal,1000);
         if (!motor2Inverted) {
             motor2DigitalForward.high();
@@ -88,7 +88,7 @@ public class DualHBridgeController implements MotorController{
     }
 
     @Override
-    public void motor2Backward(int speedVal) {
+    public void motor2Backward(double speedVal) {
         motor2PWMOutput.on(speedVal,1000);
         if (motor2Inverted) {
             motor2DigitalBackward.high();
@@ -151,6 +151,20 @@ public class DualHBridgeController implements MotorController{
 
     @Override
     public int getMotor2BackwardChannel() {return motor2ChannelBackward;}
+
+    @Override
+    public void motor1Kill() {
+        motor1PWMOutput.off();
+        motor1DigitalForward.low();
+        motor1DigitalBackward.low();
+    }
+
+    @Override
+    public void motor2Kill() {
+        motor2PWMOutput.off();
+        motor2DigitalForward.low();
+        motor2DigitalBackward.low();
+    }
 
     @Override
     public int getMotor1Speed() {return 0;}

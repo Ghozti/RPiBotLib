@@ -4,10 +4,10 @@ import com.pi4j.context.Context;
 
 public interface MotorController {
 
-    void motor1Forward(int speedVal);
-    void motor1Backward(int speedVal);
-    void motor2Forward(int speedVal);
-    void motor2Backward(int speedVal);
+    void motor1Forward(double speedVal);
+    void motor1Backward(double speedVal);
+    void motor2Forward(double speedVal);
+    void motor2Backward(double speedVal);
 
     void setID(int id);
     void setContext(Context context);
@@ -24,6 +24,8 @@ public interface MotorController {
     int getMotor1BackwardChannel();
     int getMotor2ForwardChannel();
     int getMotor2BackwardChannel();
+    void motor1Kill();
+    void motor2Kill();
 
     int getMotor1Speed();
     int getMotor2Speed();
