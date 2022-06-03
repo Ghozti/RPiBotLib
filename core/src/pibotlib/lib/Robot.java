@@ -34,7 +34,7 @@ public class Robot implements Runnable{
                 .name("Buzzer")
                 .address(address)
                 .pwmType(type)
-                .provider("pigpio-pwm")
+                .provider("pigpio-digital-output")
                 .initial(0)
                 .shutdown(0)
                 .build();
