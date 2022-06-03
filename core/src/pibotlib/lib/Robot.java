@@ -56,7 +56,7 @@ public class Robot implements Runnable{
 
         while (true) {
             if (DriverStationState.getState().equals("Enabled")) {
-                pwm.on(controller.getLeftYAxis(),1000);
+                pwm.on(controller.getLeftYAxis()*100,1000);
                 pin.high();
                 pin2.low();
             }

@@ -25,6 +25,7 @@ public class DriverStation implements Screen {
     LocalXboxController controller;
 
     public DriverStation(){
+
     }
 
     @Override
@@ -37,8 +38,8 @@ public class DriverStation implements Screen {
         font = new Font(100);
         enableSound = Gdx.audio.newMusic(Gdx.files.internal("autonstart.mp3"));
         disableSound = Gdx.audio.newMusic(Gdx.files.internal("buzzer.mp3"));
-        //Thread thread = new Thread(new Robot());
-        //thread.start();
+        Thread thread = new Thread(new Robot());
+        thread.start();
         controller = new LocalXboxController();
     }
 
@@ -48,7 +49,7 @@ public class DriverStation implements Screen {
         updateEnableButton();
         updateDisableButton();
         if (DriverStationState.getState().equals("Enabled") && robot != null){
-            robot.runRobot();
+            //robot.runRobot();
         }
     }
 
