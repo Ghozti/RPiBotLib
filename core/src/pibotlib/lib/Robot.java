@@ -34,7 +34,7 @@ public class Robot implements Runnable{
                 .name("Buzzer")
                 .address(address)
                 .pwmType(type)
-                .provider("pigpio-digital-output")
+                .provider("pigpio-pwm")
                 .initial(0)
                 .shutdown(0)
                 .build();
@@ -59,7 +59,7 @@ public class Robot implements Runnable{
         leftController = new DualHBridgeController(14,15,23,24);
         rightController = new DualHBridgeController(9,25,11,8);
 
-        leftController.configMotor1PWM(buildPwmConfig(context,17,PwmType.SOFTWARE));
+        leftController.configMotor1PWM(buildPwmConfig(context,17,PwmType.HARDWARE));
         leftController.configMotor2PWM(buildPwmConfig(context,4,PwmType.SOFTWARE));
 
         rightController.configMotor1PWM(buildPwmConfig(context,27,PwmType.SOFTWARE));
