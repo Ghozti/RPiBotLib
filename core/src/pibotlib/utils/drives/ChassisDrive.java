@@ -2,7 +2,7 @@ package pibotlib.utils.drives;
 
 import pibotlib.utils.motorcontrollers.MotorController;
 
-public class ChassisDrive {
+public abstract class ChassisDrive {
 
     MotorController leftController, rightController;
 
