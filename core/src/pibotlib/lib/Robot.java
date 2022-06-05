@@ -53,7 +53,7 @@ public class Robot implements Runnable{
     @Override
     public void run() {
         context = Pi4J.newAutoContext();
-        pwm = context.create(buildPwmConfig(context,17,PwmType.SOFTWARE));
+        pwm = context.create(buildPwmConfig(context,18,PwmType.HARDWARE));
         pin = context.create(outputConfigBuilder(context,14,"pin14","left motor"));
         pin2 = context.create(outputConfigBuilder(context,15,"pin15","right motor"));
         //leftController = new DualHBridgeController(14,15,23,24);
