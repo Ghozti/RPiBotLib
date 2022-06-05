@@ -53,40 +53,40 @@ public class Robot implements Runnable{
     @Override
     public void run() {
         context = Pi4J.newAutoContext();
-        //pwm = context.create(buildPwmConfig(context,18));
-        //pin = context.create(outputConfigBuilder(context,14,"pin14","left motor"));
-        //pin2 = context.create(outputConfigBuilder(context,15,"pin15","right motor"));
-        leftController = new DualHBridgeController(14,15,23,24);
-        rightController = new DualHBridgeController(9,25,11,8);
-
-        leftController.configMotor1PWM(buildPwmConfig(context,17,PwmType.HARDWARE));
-        leftController.configMotor2PWM(buildPwmConfig(context,4,PwmType.SOFTWARE));
-
-        rightController.configMotor1PWM(buildPwmConfig(context,27,PwmType.SOFTWARE));
-        rightController.configMotor2PWM(buildPwmConfig(context,22,PwmType.SOFTWARE));
-
-        differentialDrive = new DifferentialDrive(leftController,rightController);
+        pwm = context.create(buildPwmConfig(context,17,PwmType.SOFTWARE));
+        pin = context.create(outputConfigBuilder(context,14,"pin14","left motor"));
+        pin2 = context.create(outputConfigBuilder(context,15,"pin15","right motor"));
+        //leftController = new DualHBridgeController(14,15,23,24);
+        //rightController = new DualHBridgeController(9,25,11,8);
+//
+        //leftController.configMotor1PWM(buildPwmConfig(context,17,PwmType.SOFTWARE));
+        //leftController.configMotor2PWM(buildPwmConfig(context,4,PwmType.SOFTWARE));
+//
+        //rightController.configMotor1PWM(buildPwmConfig(context,27,PwmType.SOFTWARE));
+        //rightController.configMotor2PWM(buildPwmConfig(context,22,PwmType.SOFTWARE));
+//
+        //differentialDrive = new DifferentialDrive(leftController,rightController);
 
         while (true) {
-            //if (DriverStationState.getState().equals("Enabled")) {
-            //    pwm.on(controller.getLeftYAxis()*100,1000);
-            //    pin.high();
-            //    pin2.low();
-            //}
-            //if (DriverStationState.getState().equals("Disabled")) {
-            //    pwm.on(0,1000);
-            //    pin.high();
-            //    pin2.low();
-            //}
+            if (DriverStationState.getState().equals("Enabled")) {
+                pwm.on(controller.getLeftYAxis()*100,1000);
+                pin.high();
+                pin2.low();
+            }
+            if (DriverStationState.getState().equals("Disabled")) {
+                pwm.on(0,1000);
+                pin.high();
+                pin2.low();
+            }
 //
-            //if (DriverStationState.getState().equals("Kill")){
-            //    pin.shutdown(context);
-            //    pin2.shutdown(context);
-            //    pwm.shutdown(context);
-            //    context.shutdown();
-            //    break;
-            //}
-            differentialDrive.arcadeDrive(controller.getLeftYAxis(),controller.getRightXAxis());
+            if (DriverStationState.getState().equals("Kill")){
+                pin.shutdown(context);
+                pin2.shutdown(context);
+                pwm.shutdown(context);
+                context.shutdown();
+                break;
+            }
+           //differentialDrive.arcadeDrive(controller.getLeftYAxis(),controller.getRightXAxis());
         }
     }
 }
