@@ -1,5 +1,6 @@
 package pibotlib.lib;
 
+import com.badlogic.gdx.controllers.Controller;
 import com.pi4j.Pi4J;
 import com.pi4j.context.Context;
 import com.pi4j.io.gpio.digital.DigitalOutput;
@@ -26,6 +27,10 @@ public class Robot implements Runnable{
 
     public Robot(){
         controller = new LocalXboxController();
+    }
+
+    public Robot(LocalXboxController controller){
+        this.controller = controller;
     }
 
     private static PwmConfig buildPwmConfig(Context pi4j, int address, PwmType type) {
@@ -69,7 +74,8 @@ public class Robot implements Runnable{
 
         while (true) {
             if (DriverStationState.getState().equals("Enabled")) {
-                pwm.on(50,1000);
+                System.out.println(controller.getLeftYAxis()*100);
+                pwm.on(controller.getLeftYAxis()*100,1000);
                 pin.high();
                 pin2.low();
             }

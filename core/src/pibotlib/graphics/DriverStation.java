@@ -39,7 +39,7 @@ public class DriverStation implements Screen {
         enableSound = Gdx.audio.newMusic(Gdx.files.internal("autonstart.mp3"));
         disableSound = Gdx.audio.newMusic(Gdx.files.internal("buzzer.mp3"));
         controller = new LocalXboxController();
-        Thread thread = new Thread(new Robot());
+        Thread thread = new Thread(new Robot(controller));
         thread.start();
     }
 
