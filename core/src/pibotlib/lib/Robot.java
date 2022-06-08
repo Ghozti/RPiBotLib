@@ -63,8 +63,8 @@ public class Robot implements Runnable{
         pin = context.create(outputConfigBuilder(context,14,"pin14","left motor"));
         pin2 = context.create(outputConfigBuilder(context,15,"pin15","right motor"));
 
-        leftController = new DualHBridgeController(14,15,23,24);
-        rightController = new DualHBridgeController(9,25,11,8);
+        leftController = new DualHBridgeController(context, 14,15,23,24);
+        rightController = new DualHBridgeController(context, 9,25,11,8);
 
         leftController.configMotor1PWM(buildPwmConfig(context,18,PwmType.HARDWARE));
         leftController.configMotor2PWM(buildPwmConfig(context,12,PwmType.HARDWARE));
