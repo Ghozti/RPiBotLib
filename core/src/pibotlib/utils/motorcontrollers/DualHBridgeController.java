@@ -16,6 +16,7 @@ public class DualHBridgeController implements MotorController{
     boolean motor1Inverted, motor2Inverted;
 
     public DualHBridgeController(Context context, int motor1ChannelForward, int motor1ChannelBackward, int motor2ChannelForward, int motor2ChannelBackward){
+        this.pi4j = context;
         this.motor1ChannelForward = motor1ChannelForward;
         this.motor1ChannelBackward = motor1ChannelBackward;
         this.motor2ChannelForward = motor2ChannelForward;
@@ -23,6 +24,7 @@ public class DualHBridgeController implements MotorController{
     }
 
     public DualHBridgeController(Context context, int motor1ChannelForward, int motor1ChannelBackward){
+        this.pi4j = context;
         this.motor1ChannelForward = motor1ChannelForward;
         this.motor1ChannelBackward = motor1ChannelBackward;
     }
