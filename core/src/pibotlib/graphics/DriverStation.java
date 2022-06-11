@@ -34,7 +34,7 @@ public class DriverStation implements Screen {
         img = new Texture(Gdx.files.internal("PiBotLib Driver Station.png"));
         enableButton = new DriverStationButton("Enable (1).png",80,50);
         disableButton = new DriverStationButton("disable.png",280,50);
-        mouseHitbox = new com.badlogic.gdx.math.Rectangle(Gdx.input.getX()*100,-Gdx.input.getY()*100,15,15);
+        mouseHitbox = new com.badlogic.gdx.math.Rectangle(Gdx.input.getX(),-Gdx.input.getY(),15,15);
         font = new Font(100);
         enableSound = Gdx.audio.newMusic(Gdx.files.internal("autonstart.mp3"));
         disableSound = Gdx.audio.newMusic(Gdx.files.internal("buzzer.mp3"));
@@ -63,10 +63,10 @@ public class DriverStation implements Screen {
         batch.draw(disableButton.getTexture(),disableButton.getX(),disableButton.getY(),disableButton.getWidth(), disableButton.getHeight());
         font.draw(batch,"Robot State: ",480,200,0,false);
         font.draw(batch, DriverStationState.getState(),480,100,0,false);
-        font.draw(batch,controller.getLeftXAxis() + "",600,600,0,false);
-        font.draw(batch,controller.getLeftYAxis() + "",600,500,0,false);
-        font.draw(batch,controller.getRightXAxis() + "",600,400,0,false);
-        font.draw(batch,controller.getRightYAxis() + "",600,300,0,false);
+        font.draw(batch,controller.getLeftXAxis() + " LX",600,600,0,false);
+        font.draw(batch,controller.getLeftYAxis() + " LY",600,500,0,false);
+        font.draw(batch,controller.getRightXAxis() + " RX",600,400,0,false);
+        font.draw(batch,controller.getRightYAxis() + " RY",600,300,0,false);
         batch.end();
     }
 
