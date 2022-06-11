@@ -66,20 +66,20 @@ public class Robot implements Runnable{
         leftController = new DualHBridgeController(context, 14,15,23,24);
         rightController = new DualHBridgeController(context, 9,25,11,8);
 
-        leftController.configMotor1PWM(buildPwmConfig(context,18,PwmType.HARDWARE));
-        leftController.configMotor2PWM(buildPwmConfig(context,12,PwmType.HARDWARE));
-        rightController.configMotor1PWM(buildPwmConfig(context,13,PwmType.HARDWARE));
-        rightController.configMotor2PWM(buildPwmConfig(context,19,PwmType.HARDWARE));
+        leftController.configMotor1PWM(buildPwmConfig(leftController.getContext(), 18,PwmType.HARDWARE));
+        leftController.configMotor2PWM(buildPwmConfig(leftController.getContext(),12,PwmType.HARDWARE));
+        rightController.configMotor1PWM(buildPwmConfig(rightController.getContext(), 13,PwmType.HARDWARE));
+        rightController.configMotor2PWM(buildPwmConfig(rightController.getContext(),19,PwmType.HARDWARE));
 
-        leftController.setMotor1DigitalForward(outputConfigBuilder(context,23,"pin23","left motorL"));
-        leftController.setMotor1DigitalBackward(outputConfigBuilder(context,24,"pin24","left motorL"));
-        leftController.setMotor2DigitalForward(outputConfigBuilder(context,25,"pin25","left motorR"));
-        leftController.setMotor2DigitalBackward(outputConfigBuilder(context,8,"pin8","left motorR"));
+        leftController.setMotor1DigitalForward(outputConfigBuilder(leftController.getContext(), 23,"pin23","left motorL"));
+        leftController.setMotor1DigitalBackward(outputConfigBuilder(leftController.getContext(), 24,"pin24","left motorL"));
+        leftController.setMotor2DigitalForward(outputConfigBuilder(leftController.getContext(), 25,"pin25","left motorR"));
+        leftController.setMotor2DigitalBackward(outputConfigBuilder(leftController.getContext(), 8,"pin8","left motorR"));
 
-        rightController.setMotor1DigitalForward(outputConfigBuilder(context,17,"pin17","left motorL"));
-        rightController.setMotor1DigitalBackward(outputConfigBuilder(context,27,"pin27","left motorL"));
-        rightController.setMotor2DigitalForward(outputConfigBuilder(context,22,"pin22","left motorR"));
-        rightController.setMotor2DigitalBackward(outputConfigBuilder(context,10,"pin10","left motorR"));
+        rightController.setMotor1DigitalForward(outputConfigBuilder(rightController.getContext(),17,"pin17","left motorL"));
+        rightController.setMotor1DigitalBackward(outputConfigBuilder(rightController.getContext(),27,"pin27","left motorL"));
+        rightController.setMotor2DigitalForward(outputConfigBuilder(rightController.getContext(),22,"pin22","left motorR"));
+        rightController.setMotor2DigitalBackward(outputConfigBuilder(rightController.getContext(),10,"pin10","left motorR"));
 
         differentialDrive = new DifferentialDrive(leftController,rightController);
 

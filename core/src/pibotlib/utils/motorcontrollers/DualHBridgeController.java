@@ -1,5 +1,6 @@
 package pibotlib.utils.motorcontrollers;
 
+import com.pi4j.Pi4J;
 import com.pi4j.context.Context;
 import com.pi4j.io.gpio.digital.DigitalOutput;
 import com.pi4j.io.gpio.digital.DigitalOutputConfigBuilder;
@@ -174,5 +175,9 @@ public class DualHBridgeController implements MotorController{
     @Override
     public int getMotor2Speed() {
         return 0;
+    }
+
+    public Context getContext(){
+        return pi4j;
     }
 }
