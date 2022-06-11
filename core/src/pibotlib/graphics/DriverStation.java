@@ -25,7 +25,6 @@ public class DriverStation implements Screen {
     Music enableSound, disableSound;
     Robot robot;
     LocalXboxController controller;
-    DifferentialDrive differentialDrive;
 
     public DriverStation(){
 
@@ -42,9 +41,8 @@ public class DriverStation implements Screen {
         enableSound = Gdx.audio.newMusic(Gdx.files.internal("autonstart.mp3"));
         disableSound = Gdx.audio.newMusic(Gdx.files.internal("buzzer.mp3"));
         controller = new LocalXboxController();
-        //Thread thread = new Thread(new Robot(controller));
-        //thread.start();
-        differentialDrive = new DifferentialDrive(null,null);
+        Thread thread = new Thread(new Robot(controller));
+        thread.start();
     }
 
     private void update(){
@@ -55,7 +53,6 @@ public class DriverStation implements Screen {
         if (DriverStationState.getState().equals("Enabled") && robot != null){
             //robot.runRobot();
         }
-        differentialDrive.arcadeDrive(-controller.getLeftYAxis()*100,controller.getRightYAxis()*100);
     }
 
     @Override
