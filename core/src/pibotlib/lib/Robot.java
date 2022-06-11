@@ -102,7 +102,7 @@ public class Robot implements Runnable{
             //    context.shutdown();
             //    break;
             //}
-           differentialDrive.arcadeDrive(controller.getLeftYAxis(),controller.getRightXAxis());
+           differentialDrive.arcadeDrive(controller.getLeftYAxis()*100,controller.getRightXAxis()*100);
         }
     }
 }
