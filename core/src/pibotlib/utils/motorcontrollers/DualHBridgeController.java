@@ -69,7 +69,7 @@ public class DualHBridgeController implements MotorController{
     @Override
     public void motor1Backward(double speedVal) {
         motor1PWMOutput.on(speedVal,1000);
-        if (motor1Inverted) {
+        if (!motor1Inverted) {
             motor1DigitalBackward.high();
             motor1DigitalForward.low();
         }else {
@@ -93,7 +93,7 @@ public class DualHBridgeController implements MotorController{
     @Override
     public void motor2Backward(double speedVal) {
         motor2PWMOutput.on(speedVal,1000);
-        if (motor2Inverted) {
+        if (!motor2Inverted) {
             motor2DigitalBackward.high();
             motor2DigitalForward.low();
         }else {

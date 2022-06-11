@@ -10,21 +10,25 @@ public class DifferentialDrive extends ChassisDrive{
 
     public void arcadeDrive(double x, double y){
         if (x > 0){//forward
+            System.out.println("Forward");
             getLeftController().motor1Forward(x);
             getLeftController().motor2Forward(x);
             getRightController().motor1Forward(x);
             getRightController().motor2Forward(x);
         }else if (x < 0){//backward
+            System.out.println("Backwards");
             getLeftController().motor1Backward(x);
             getLeftController().motor2Backward(x);
             getRightController().motor1Backward(x);
             getRightController().motor2Backward(x);
         }else if(y < 0) {//left turn
+            System.out.println("left");
             getLeftController().motor1Backward(y);
             getLeftController().motor2Backward(y);
             getRightController().motor1Forward(y);
             getRightController().motor2Forward(y);
         }else if(y > 0){//right turn
+            System.out.println("right");
             getRightController().motor1Backward(y);
             getRightController().motor2Backward(y);
             getLeftController().motor1Forward(y);
