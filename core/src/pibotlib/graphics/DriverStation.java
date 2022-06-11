@@ -7,10 +7,12 @@ import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import jdk.internal.org.jline.utils.DiffHelper;
 import pibotlib.graphics.utils.Font;
 import pibotlib.lib.Robot;
 import pibotlib.utils.constants.Constants;
 import pibotlib.graphics.utils.DriverStationState;
+import pibotlib.utils.drives.DifferentialDrive;
 import pibotlib.utils.gamecontrollers.LocalXboxController;
 
 public class DriverStation implements Screen {
@@ -23,6 +25,7 @@ public class DriverStation implements Screen {
     Music enableSound, disableSound;
     Robot robot;
     LocalXboxController controller;
+    DifferentialDrive differentialDrive;
 
     public DriverStation(){
 
@@ -39,8 +42,9 @@ public class DriverStation implements Screen {
         enableSound = Gdx.audio.newMusic(Gdx.files.internal("autonstart.mp3"));
         disableSound = Gdx.audio.newMusic(Gdx.files.internal("buzzer.mp3"));
         controller = new LocalXboxController();
-        Thread thread = new Thread(new Robot(controller));
-        thread.start();
+        //Thread thread = new Thread(new Robot(controller));
+        //thread.start();
+        differentialDrive = new DifferentialDrive(null,null);
     }
 
     private void update(){
@@ -51,6 +55,7 @@ public class DriverStation implements Screen {
         if (DriverStationState.getState().equals("Enabled") && robot != null){
             //robot.runRobot();
         }
+        differentialDrive.arcadeDrive(-controller.getLeftYAxis()*100,controller.getRightYAxis()*100);
     }
 
     @Override
