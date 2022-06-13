@@ -1,4 +1,4 @@
-package pibotlib.utils.constants;
+package pibotlib.lib.constants;
 
 public class Constants {
 

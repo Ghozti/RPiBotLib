@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.utils.Align;
-import pibotlib.utils.constants.Constants;
+import pibotlib.lib.constants.Constants;
 
 public class Font {
     BitmapFont font;

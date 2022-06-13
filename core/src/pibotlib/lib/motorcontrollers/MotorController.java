@@ -1,4 +1,4 @@
-package pibotlib.utils.motorcontrollers;
+package pibotlib.lib.motorcontrollers;
 
 import com.pi4j.context.Context;
 

@@ -1,6 +1,6 @@
-package pibotlib.utils.drives;
+package pibotlib.lib.drives;
 
-import pibotlib.utils.motorcontrollers.MotorController;
+import pibotlib.lib.motorcontrollers.MotorController;
 
 public abstract class ChassisDrive {
 

@@ -1,6 +1,5 @@
-package pibotlib.lib;
+package Robot;
 
-import com.badlogic.gdx.controllers.Controller;
 import com.pi4j.Pi4J;
 import com.pi4j.context.Context;
 import com.pi4j.io.gpio.digital.DigitalOutput;
@@ -9,18 +8,13 @@ import com.pi4j.io.gpio.digital.DigitalState;
 import com.pi4j.io.pwm.Pwm;
 import com.pi4j.io.pwm.PwmConfig;
 import com.pi4j.io.pwm.PwmType;
-import pibotlib.graphics.utils.DriverStationState;
-import pibotlib.utils.drives.DifferentialDrive;
-import pibotlib.utils.gamecontrollers.LocalXboxController;
-import pibotlib.utils.motorcontrollers.DualHBridgeController;
-import pibotlib.utils.motorcontrollers.MotorController;
+import pibotlib.lib.drives.DifferentialDrive;
+import pibotlib.lib.gamecontrollers.LocalXboxController;
+import pibotlib.lib.motorcontrollers.DualHBridgeController;
 
 public class Robot implements Runnable{
 
     Context context;
-    Pwm pwm;
-    DigitalOutputConfigBuilder pinConfig;
-    DigitalOutput pin,pin2;
     LocalXboxController controller;
     DualHBridgeController leftController, rightController;
     DifferentialDrive differentialDrive;
@@ -59,10 +53,6 @@ public class Robot implements Runnable{
     public void run() {
         context = Pi4J.newAutoContext();
 
-        //pwm = context.create(buildPwmConfig(context,18,PwmType.HARDWARE));
-        //pin = context.create(outputConfigBuilder(context,14,"pin14","left motor"));
-        //pin2 = context.create(outputConfigBuilder(context,15,"pin15","right motor"));
-
         leftController = new DualHBridgeController(context, 14,15,23,24);
         rightController = new DualHBridgeController(context, 9,25,11,8);
 
@@ -84,24 +74,6 @@ public class Robot implements Runnable{
         differentialDrive = new DifferentialDrive(leftController,rightController);
 
         while (true) {
-            //if (DriverStationState.getState().equals("Enabled")) {
-            //    pwm.on(-controller.getLeftYAxis()*100,1000);
-            //    pin.high();
-            //    pin2.low();
-            //}
-            //if (DriverStationState.getState().equals("Disabled")) {
-            //    pwm.on(0,1000);
-            //    pin.low();
-            //    pin2.low();
-            //}
-////
-            //if (DriverStationState.getState().equals("Kill")){
-            //    pin.shutdown(context);
-            //    pin2.shutdown(context);
-            //    pwm.shutdown(context);
-            //    context.shutdown();
-            //    break;
-            //}
            differentialDrive.arcadeDrive(-controller.getLeftYAxis()*100,controller.getRightYAxis()*100);
         }
     }
