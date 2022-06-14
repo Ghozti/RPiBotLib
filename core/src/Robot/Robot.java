@@ -20,14 +20,16 @@ public class Robot implements Runnable{
     DifferentialDrive differentialDrive;
 
     public Robot(){
+        //constructor called once which can create its own controller
         controller = new LocalXboxController();
     }
 
     public Robot(LocalXboxController controller){
+        //constructor which takes a controller as an argument
         this.controller = controller;
     }
 
-    private static PwmConfig buildPwmConfig(Context pi4j, int address, PwmType type) {
+    private static PwmConfig buildPwmConfig(Context pi4j, int address, PwmType type) {//pwm config builder
         return Pwm.newConfigBuilder(pi4j)
                 .id("BCM" + address)
                 .name("Buzzer")
@@ -39,7 +41,7 @@ public class Robot implements Runnable{
                 .build();
     }
 
-    private static DigitalOutputConfigBuilder outputConfigBuilder(Context context, int adress, String id, String name){
+    private static DigitalOutputConfigBuilder outputConfigBuilder(Context context, int adress, String id, String name){//dio config
         return  DigitalOutput.newConfigBuilder(context)
                 .id(id)
                 .name(name)
@@ -51,7 +53,9 @@ public class Robot implements Runnable{
 
     @Override
     public void run() {
-        context = Pi4J.newAutoContext();
+        // will run in its own thread to not interfere with libgdx's runtime
+
+        context = Pi4J.newAutoContext();//always call first
 
         leftController = new DualHBridgeController(context, 14,15,23,24);
         rightController = new DualHBridgeController(context, 9,25,11,8);
