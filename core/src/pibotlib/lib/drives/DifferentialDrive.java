@@ -10,8 +10,13 @@ public class DifferentialDrive extends ChassisDrive{
 
     public void arcadeDrive(double x, double y){
 
+        //TODO
+        //try having the output be the differnece between the speeds
+        //ex if you are trying to go forward and make a right turn have the output of the motors be:
+        // left: x
+        // right: x - y
+
         if(Math.abs(x/100) < .1 && Math.abs(y/100) < .1){
-            System.out.println("Kill");
             getLeftController().motor1Kill();
             getLeftController().motor2Kill();
             getRightController().motor1Kill();
