@@ -25,5 +25,13 @@ public class RobotStateLight {
         pwm = context.create(config);
     }
 
+    public void blinkRSL(){
+
+    }
+
+    public void shutDown(){
+
+    }
+
 
 }
