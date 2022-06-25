@@ -8,6 +8,8 @@ import com.pi4j.io.gpio.digital.DigitalState;
 import com.pi4j.io.pwm.Pwm;
 import com.pi4j.io.pwm.PwmConfig;
 import com.pi4j.io.pwm.PwmType;
+import pibotlib.graphics.utils.DriverStationState;
+import pibotlib.lib.addons.RobotStateLight;
 import pibotlib.lib.drives.DifferentialDrive;
 import pibotlib.lib.gamecontrollers.LocalXboxController;
 import pibotlib.lib.motorcontrollers.DualHBridgeController;
@@ -18,6 +20,7 @@ public class Robot implements Runnable{
     LocalXboxController controller;
     DualHBridgeController leftController, rightController;
     DifferentialDrive differentialDrive;
+    RobotStateLight stateLight;
 
     public Robot(){
         //constructor called once which can create its own controller
@@ -76,9 +79,13 @@ public class Robot implements Runnable{
         rightController.setMotor2DigitalBackward(outputConfigBuilder(rightController.getContext(),10,"pin10","left motorR"));
 
         differentialDrive = new DifferentialDrive(leftController,rightController);
+        stateLight = new RobotStateLight(context,0);
 
-        while (true) {
+        while (DriverStationState.getState().equals("Enabled")) {
            differentialDrive.arcadeDrive(-controller.getLeftYAxis()*100,controller.getRightYAxis()*100);
+           stateLight.blinkRSL();
         }
+        stateLight.shutDown();
+        differentialDrive.arcadeDrive(0,0);
     }
 }
