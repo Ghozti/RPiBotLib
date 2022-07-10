@@ -57,6 +57,7 @@ public class Robot implements Runnable{
     @Override
     public void run() {
         // will run in its own thread to not interfere with libgdx's runtime
+        System.out.println("thread run");
 
         context = Pi4J.newAutoContext();//always call first
 
