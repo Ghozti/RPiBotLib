@@ -96,8 +96,8 @@ public class DriverStation implements Screen {
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
                 if (!DriverStationState.getState().equals("Enabled")) {
                     DriverStationState.switchState();
-                    enableSound.play();
-                    disableSound.stop();
+                    //enableSound.play();
+                    //disableSound.stop();
                 }
             }
         }else {
@@ -122,8 +122,8 @@ public class DriverStation implements Screen {
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
                 if (!DriverStationState.getState().equals("Disabled")) {
                     DriverStationState.switchState();
-                    disableSound.play();
-                    enableSound.stop();
+                    //disableSound.play();
+                    //enableSound.stop();
                 }
             }
         }else {
