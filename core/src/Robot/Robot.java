@@ -79,7 +79,7 @@ public class Robot implements Runnable{
         rightController.setMotor2DigitalBackward(outputConfigBuilder(rightController.getContext(),10,"pin10","left motorR"));
 
         differentialDrive = new DifferentialDrive(leftController,rightController);
-        stateLight = new RobotStateLight(context,0);
+        stateLight = new RobotStateLight(context,16);
 
         while (DriverStationState.getState().equals("Enabled")) {
            differentialDrive.arcadeDrive(-controller.getLeftYAxis()*100,controller.getRightYAxis()*100);
