@@ -57,7 +57,6 @@ public class Robot implements Runnable{
     @Override
     public void run() {
         // will run in its own thread to not interfere with libgdx's runtime
-        System.out.println("thread run");
 
         context = Pi4J.newAutoContext();//always call first
 
@@ -82,12 +81,15 @@ public class Robot implements Runnable{
         differentialDrive = new DifferentialDrive(leftController,rightController);
         stateLight = new RobotStateLight(context,16);
         System.out.println("robot init");
-        while (DriverStationState.getState().equals("Enabled")) {
-           differentialDrive.arcadeDrive(-controller.getLeftYAxis()*100,controller.getRightYAxis()*100);
-           stateLight.blinkRSL();
-            System.out.println("robot running");
+        while(true) {
+            if (DriverStationState.getState().equals("Enabled")) {
+                differentialDrive.arcadeDrive(-controller.getLeftYAxis() * 100, controller.getRightYAxis() * 100);
+                stateLight.blinkRSL();
+                System.out.println("robot running");
+            }else {
+                stateLight.shutDown();
+                differentialDrive.arcadeDrive(0, 0);
+            }
         }
-        stateLight.shutDown();
-        differentialDrive.arcadeDrive(0,0);
     }
 }
