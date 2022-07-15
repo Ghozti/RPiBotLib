@@ -19,4 +19,12 @@ public class Constants {
         }
 
     }
+
+    public static class DriverStationStates{
+
+        public static final String ENABLED = "enabled";
+        public static final String DISABLED = "disabled";
+        public static final String KILL = "kill";
+
+    }
 }

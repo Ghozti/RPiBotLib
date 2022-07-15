@@ -94,7 +94,7 @@ public class DriverStation implements Screen {
         if (enableButton.getHitbox().overlaps(mouseHitbox)){
             enableButton.changePath("Enable.png");
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
-                if (!DriverStationState.getState().equals("Enabled")) {
+                if (!DriverStationState.getState().equals(Constants.DriverStationStates.ENABLED)) {
                     DriverStationState.switchState();
                     //enableSound.play();
                     //disableSound.stop();
@@ -108,7 +108,7 @@ public class DriverStation implements Screen {
     private void updateDisableButton(){
 
         if (Gdx.input.isKeyPressed(Input.Keys.SPACE) || Gdx.input.isKeyPressed(Input.Keys.ENTER)){
-            if (!DriverStationState.getState().equals("Disabled")) {
+            if (!DriverStationState.getState().equals(Constants.DriverStationStates.DISABLED)) {
                 DriverStationState.switchState();
             }
         }
@@ -120,10 +120,8 @@ public class DriverStation implements Screen {
         if (disableButton.getHitbox().overlaps(mouseHitbox)){
             disableButton.changePath("disable(1).png");
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
-                if (!DriverStationState.getState().equals("Disabled")) {
+                if (!DriverStationState.getState().equals(Constants.DriverStationStates.DISABLED)) {
                     DriverStationState.switchState();
-                    //disableSound.play();
-                    //enableSound.stop();
                 }
             }
         }else {
