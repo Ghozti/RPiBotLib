@@ -1,18 +1,20 @@
 package pibotlib.graphics.utils;
 
+import pibotlib.lib.constants.Constants;
+
 public class DriverStationState {
-        private static String state = "Disabled";
+        private static String state = Constants.DriverStationStates.DISABLED;
 
         public static void switchState(){
-            if (state.equals("Disabled")){
-                state = "Enabled";
-            }else if (state.equals("Enabled")){
-                state = "Disabled";
+            if (state.equals(Constants.DriverStationStates.DISABLED)){
+                state = Constants.DriverStationStates.ENABLED;
+            }else if (state.equals(Constants.DriverStationStates.ENABLED)){
+                state = Constants.DriverStationStates.DISABLED;
             }
         }
 
         public static void setKill(){
-            state = "kill";
+            state = Constants.DriverStationStates.KILL;
         }
 
         public static String getState() {
