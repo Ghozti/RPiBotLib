@@ -28,6 +28,11 @@ public class ElapseTimer implements Runnable {
         stopTimer = true;
     }
 
+    public void reset(){
+        elapsedMilliseconds = 0;
+        elapsedSeconds = 0;
+    }
+
     public long getElapsedMilliseconds(){
         return elapsedMilliseconds;
     }
