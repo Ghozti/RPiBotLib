@@ -84,8 +84,9 @@ public class Robot implements Runnable{
 
         differentialDrive = new DifferentialDrive(leftController,rightController);
         stateLight = new RobotStateLight(context,16);
+
         while(true) {
-            if (DriverStationState.getState().equals("Enabled")) {
+            if (DriverStationState.getState().equals(Constants.DriverStationStates.ENABLED)) {
                 differentialDrive.arcadeDrive(-controller.getLeftYAxis() * 100, controller.getRightYAxis() * 100);
                 stateLight.blinkRSL();
             }else {

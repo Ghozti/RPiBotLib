@@ -20,8 +20,6 @@ public class DriverStation implements Screen {
     DriverStationButton enableButton, disableButton;
     com.badlogic.gdx.math.Rectangle mouseHitbox;
     Font font;
-    Music enableSound, disableSound;
-    Robot robot;
     LocalXboxController controller;
 
     public DriverStation(){
