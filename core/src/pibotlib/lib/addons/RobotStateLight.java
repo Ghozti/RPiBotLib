@@ -26,7 +26,7 @@ public class RobotStateLight {
     }
 
     public void blinkRSL(){
-        pwm.on(50,100);
+        pwm.on(25,1000);
     }
 
     public void shutDown(){
