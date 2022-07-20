@@ -17,6 +17,10 @@ public class DriverStationState {
             state = Constants.DriverStationStates.KILL;
         }
 
+        public static void setAuto(){
+            state = Constants.DriverStationStates.AUTO;
+        }
+
         public static String getState() {
             return state;
         }

@@ -25,6 +25,7 @@ public class Constants {
         public static final String ENABLED = "enabled";
         public static final String DISABLED = "disabled";
         public static final String KILL = "kill";
+        public static final String AUTO = "AUTO";
 
     }
 }

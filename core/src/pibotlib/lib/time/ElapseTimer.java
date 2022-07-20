@@ -24,7 +24,6 @@ public class ElapseTimer implements Runnable {
     }
 
     public void stopTimer(){
-        System.out.println("*");
         stopTimer = true;
     }
 
