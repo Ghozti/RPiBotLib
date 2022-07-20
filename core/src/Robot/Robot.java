@@ -1,7 +1,5 @@
 package Robot;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
 import com.pi4j.Pi4J;
 import com.pi4j.context.Context;
 import com.pi4j.io.gpio.digital.DigitalOutput;
@@ -16,7 +14,6 @@ import pibotlib.lib.constants.Constants;
 import pibotlib.lib.drives.DifferentialDrive;
 import pibotlib.lib.gamecontrollers.LocalXboxController;
 import pibotlib.lib.motorcontrollers.DualHBridgeController;
-import pibotlib.lib.time.ElapseTimer;
 
 public class Robot implements Runnable{
 
@@ -112,7 +109,7 @@ public class Robot implements Runnable{
 
             if (!controllerFound){
                 try {
-                    LocalXboxController controller = new LocalXboxController();
+                    controller = new LocalXboxController();
                     controllerFound = true;
                 }catch (Exception e){
                     System.out.println("No controller found");
