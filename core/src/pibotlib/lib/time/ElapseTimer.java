@@ -9,8 +9,8 @@ import java.util.concurrent.TimeUnit;
 
 public class ElapseTimer implements Runnable {
 
-    double elapsedSeconds;
-    long elapsedMilliseconds;
+    public volatile double elapsedSeconds;
+    public volatile long elapsedMilliseconds;
     boolean stopTimer;
 
     public ElapseTimer(){
@@ -42,11 +42,9 @@ public class ElapseTimer implements Runnable {
 
     @Override
     public void run() {
-        Runnable helloRunnable = new Runnable() {
-            public void run() {
-                elapsedMilliseconds +=  1;
-                elapsedSeconds = elapsedMilliseconds/1000d;
-            }
+        Runnable helloRunnable = () -> {
+            elapsedMilliseconds +=  1;
+            elapsedSeconds = elapsedMilliseconds/1000d;
         };
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
         if (stopTimer){

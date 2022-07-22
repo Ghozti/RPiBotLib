@@ -100,6 +100,16 @@ public class Robot implements Runnable{
         }
 
         while(true) {
+
+            try
+            {
+                Thread.sleep(50);
+            }
+            catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
             if (DriverStationState.getState().equals(Constants.DriverStationStates.KILL)){
                 stateLight.shutDown();
                 differentialDrive.arcadeDrive(0, 0);

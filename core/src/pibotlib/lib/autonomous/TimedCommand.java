@@ -5,29 +5,37 @@ import pibotlib.lib.time.ElapseTimer;
 
 public class TimedCommand {
 
-    ElapseTimer timer;
+    public ElapseTimer timer;
     boolean isDone;
     double durationSeconds;
     long durationMilliseconds;
+    String name;
 
     public TimedCommand(double durationSeconds){
         timer = new ElapseTimer();
-        this.durationSeconds = durationSeconds;
+        durationMilliseconds = (long) (durationSeconds * 1000);
     }
 
-    public TimedCommand(long durationMilliseconds){
+    public TimedCommand(long durationMilliseconds, String name){
+        System.out.println("Command " + name + " init");
         timer = new ElapseTimer();
         this.durationMilliseconds = durationMilliseconds;
+        this.name = name;
     }
 
     public void execute(DifferentialDrive drive, double x, double y){
         timer.startTimer();
-        while (!isDone) {
-            if (durationSeconds >= timer.getElapsedSeconds() || durationMilliseconds >= timer.getElapsedMilliseconds()){
+        System.out.println("command " + name + " running");
+        do {
+            if (timer.getElapsedMilliseconds() <= durationMilliseconds){
+
+            }else {
+                System.out.println("command " + name + " is done");
                 isDone = true;
+                timer.stopTimer();
             }
-            drive.arcadeDrive(x, y);
-        }
+        }while (!isDone);
+
     }
 
     public boolean isDone(){

@@ -11,6 +11,7 @@ import Robot.Robot;
 import pibotlib.lib.constants.Constants;
 import pibotlib.graphics.utils.DriverStationState;
 import pibotlib.lib.gamecontrollers.LocalXboxController;
+import pibotlib.lib.time.ElapseTimer;
 
 public class DriverStation implements Screen {
 
@@ -20,6 +21,7 @@ public class DriverStation implements Screen {
     com.badlogic.gdx.math.Rectangle mouseHitbox;
     Font font;
     LocalXboxController controller;
+    ElapseTimer timer;
 
     public DriverStation(){
 
@@ -34,6 +36,7 @@ public class DriverStation implements Screen {
         mouseHitbox = new com.badlogic.gdx.math.Rectangle(Gdx.input.getX(),-Gdx.input.getY(),15,15);
         font = new Font(100);
         controller = new LocalXboxController();
+        timer = new ElapseTimer();
         Thread thread = new Thread(new Robot(controller));
         thread.start();
     }
