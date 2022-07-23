@@ -11,35 +11,35 @@ public class LocalXboxController {
         controller = Controllers.getCurrent();
     }
 
-    public double getLeftXAxis(){
+    public synchronized double getLeftXAxis(){
         return  Math.round(controller.getAxis(controller.getMapping().axisLeftX) * 100.0) / 100.0;
     }
 
-    public double getLeftYAxis(){
+    public synchronized double getLeftYAxis(){
         return  Math.round(controller.getAxis(controller.getMapping().axisLeftY) * 100.0) / 100.0;
     }
 
-    public double getRightXAxis(){
+    public synchronized double getRightXAxis(){
         return  Math.round(controller.getAxis(controller.getMapping().axisRightY) * 100.0) / 100.0;
     }
 
-    public double getRightYAxis(){
+    public synchronized double getRightYAxis(){
         return  Math.round(controller.getAxis(controller.getMapping().axisRightX) * 100.0) / 100.0;
     }
 
-    public boolean getA(){
+    public synchronized boolean getA(){
         return controller.getButton(controller.getMapping().buttonA);
     }
 
-    public boolean getB(){
+    public synchronized boolean getB(){
         return controller.getButton(controller.getMapping().buttonB);
     }
 
-    public boolean getX(){
+    public synchronized boolean getX(){
         return controller.getButton(controller.getMapping().buttonX);
     }
 
-    public boolean getY(){
+    public synchronized boolean getY(){
         return controller.getButton(controller.getMapping().buttonY);
     }
 }

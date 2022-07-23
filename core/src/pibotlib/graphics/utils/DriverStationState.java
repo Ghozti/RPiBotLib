@@ -3,7 +3,9 @@ package pibotlib.graphics.utils;
 import pibotlib.lib.constants.Constants;
 
 public class DriverStationState {
-        private static String state = Constants.DriverStationStates.DISABLED;
+
+        private static volatile String state = Constants.DriverStationStates.DISABLED;
+        private static volatile String robotMode = Constants.RobotSates.TELEOP;
 
         public static void switchState(){
             if (state.equals(Constants.DriverStationStates.DISABLED)){
@@ -13,15 +15,21 @@ public class DriverStationState {
             }
         }
 
-        public static void setKill(){
-            state = Constants.DriverStationStates.KILL;
+        public static void switchRobotMode(){
+            if (robotMode.equals(Constants.RobotSates.AUTO)){
+                robotMode = Constants.RobotSates.TELEOP;
+            }else if (robotMode.equals(Constants.RobotSates.TELEOP)){
+                robotMode = Constants.RobotSates.AUTO;
+            }
         }
 
-        public static void setAuto(){
-            state = Constants.DriverStationStates.AUTO;
+        public static void setKill(){
+            state = Constants.DriverStationStates.KILL;
         }
 
         public static String getState() {
             return state;
         }
+
+        public static String getRobotMode(){return robotMode;}
 }

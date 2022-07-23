@@ -21,11 +21,13 @@ public class Constants {
     }
 
     public static class DriverStationStates{
-
         public static final String ENABLED = "enabled";
         public static final String DISABLED = "disabled";
         public static final String KILL = "kill";
-        public static final String AUTO = "AUTO";
+    }
 
+    public static class RobotSates{
+        public static final String AUTO = "autonomous";
+        public static final String TELEOP = "tele-operated";
     }
 }

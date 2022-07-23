@@ -2,14 +2,10 @@ package Robot;
 
 import pibotlib.graphics.utils.DriverStationState;
 import pibotlib.lib.constants.Constants;
-import pibotlib.lib.gamecontrollers.LocalXboxController;
-
 import java.util.Timer;
 import java.util.TimerTask;
 
 public abstract class TimedRobotBase implements Runnable {
-
-    String robotSate;
 
     public abstract void robotInit();
 
@@ -26,13 +22,35 @@ public abstract class TimedRobotBase implements Runnable {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                robotPeriodic();
+                System.out.println("***");
+                if (!DriverStationState.getState().equals(Constants.DriverStationStates.KILL)){
+
+                    robotPeriodic();
+
+                    if (DriverStationState.getRobotMode().equals(Constants.RobotSates.AUTO)){
+                        if (DriverStationState.getState().equals(Constants.DriverStationStates.ENABLED)){
+                            autonomousPeriodic();
+                        }
+                    }
+
+                    if (DriverStationState.getRobotMode().equals(Constants.RobotSates.TELEOP)){
+                        if (DriverStationState.getState().equals(Constants.DriverStationStates.ENABLED)){
+                            teleopPeriodic();
+                        }
+                    }
+
+                }else {
+                    robotShutDown();
+                    timer.cancel();
+                    System.exit(0);
+                }
             }
-        }, 0, 1);
+        }, 0, 10);
     }
 
     @Override
     public void run() {
+        robotInit();
         runRobot();
     }
 }
