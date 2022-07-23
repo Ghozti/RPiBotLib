@@ -18,7 +18,7 @@ import pibotlib.lib.motorcontrollers.DualHBridgeController;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class Robot implements Runnable{
+public class Robot extends TimedRobotBase implements Runnable{
 
     Context context;
     LocalXboxController controller;
@@ -132,5 +132,30 @@ public class Robot implements Runnable{
                 }
             }
         }, 0, 1);
+    }
+
+    @Override
+    public void robotInit() {
+
+    }
+
+    @Override
+    public void robotPeriodic() {
+
+    }
+
+    @Override
+    public void autonomousPeriodic() {
+
+    }
+
+    @Override
+    public void teleopPeriodic() {
+
+    }
+
+    @Override
+    public void robotShutDown() {
+
     }
 }
