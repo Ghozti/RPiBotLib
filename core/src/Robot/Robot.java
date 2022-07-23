@@ -15,6 +15,9 @@ import pibotlib.lib.drives.DifferentialDrive;
 import pibotlib.lib.gamecontrollers.LocalXboxController;
 import pibotlib.lib.motorcontrollers.DualHBridgeController;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class Robot implements Runnable{
 
     Context context;
@@ -99,40 +102,35 @@ public class Robot implements Runnable{
             System.out.println("Robot init fail, reboot raspberry pi and try again");
         }
 
-        while(true) {
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (DriverStationState.getState().equals(Constants.DriverStationStates.KILL)){
+                    stateLight.shutDown();
+                    differentialDrive.arcadeDrive(0, 0);
+                    context.shutdown();
+                    timer.cancel();
+                    return;
+                }
 
-            try
-            {
-                Thread.sleep(50);
-            }
-            catch (Exception e)
-            {
-                e.printStackTrace();
-            }
+                if (!controllerFound){
+                    try {
+                        controller = new LocalXboxController();
+                        controllerFound = true;
+                    }catch (Exception e){
+                        System.out.println("No controller found");
+                    }
+                }
 
-            if (DriverStationState.getState().equals(Constants.DriverStationStates.KILL)){
-                stateLight.shutDown();
-                differentialDrive.arcadeDrive(0, 0);
-                context.shutdown();
-                return;
-            }
-
-            if (!controllerFound){
-                try {
-                    controller = new LocalXboxController();
-                    controllerFound = true;
-                }catch (Exception e){
-                    System.out.println("No controller found");
+                if (DriverStationState.getState().equals(Constants.DriverStationStates.ENABLED)) {
+                    differentialDrive.arcadeDrive(-controller.getLeftYAxis() * 100, controller.getRightYAxis() * 100);
+                    stateLight.blinkRSL();
+                }else {
+                    stateLight.shutDown();
+                    differentialDrive.arcadeDrive(0, 0);
                 }
             }
-
-            if (DriverStationState.getState().equals(Constants.DriverStationStates.ENABLED)) {
-                differentialDrive.arcadeDrive(-controller.getLeftYAxis() * 100, controller.getRightYAxis() * 100);
-                stateLight.blinkRSL();
-            }else {
-                stateLight.shutDown();
-                differentialDrive.arcadeDrive(0, 0);
-            }
-        }
+        }, 0, 1);
     }
 }
