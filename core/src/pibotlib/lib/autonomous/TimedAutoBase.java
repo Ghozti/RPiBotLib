@@ -18,7 +18,6 @@ public class TimedAutoBase {
         //run auto here
         for (TimedCommand command : commands) {
             command.execute(null,0,0);
-            command = null;
         }
     }
 
