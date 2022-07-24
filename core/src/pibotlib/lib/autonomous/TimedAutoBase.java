@@ -19,5 +19,7 @@ public class TimedAutoBase {
         for (TimedCommand command : commands) {
             command.execute();
         }
+
+        commands.clear();
     }
 }

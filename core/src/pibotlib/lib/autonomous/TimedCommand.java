@@ -1,15 +1,20 @@
 package pibotlib.lib.autonomous;
 
+import pibotlib.graphics.utils.DriverStationState;
+import pibotlib.lib.constants.Constants;
 import pibotlib.lib.drives.DifferentialDrive;
 import pibotlib.lib.time.ElapseTimer;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class TimedCommand {
 
-    public ElapseTimer timer;
-    boolean isDone;
-    long durationMilliseconds;
-    DifferentialDrive drive;
-    double x,y;
+    volatile public ElapseTimer timer;
+    volatile boolean isDone;
+    volatile long durationMilliseconds;
+    volatile DifferentialDrive drive;
+    volatile double x,y;
 
     public TimedCommand(double durationSeconds, DifferentialDrive drive, double x, double y){
         timer = new ElapseTimer();
@@ -29,14 +34,19 @@ public class TimedCommand {
 
     public void execute(){
         timer.startTimer();
-        do {
-            if (timer.getElapsedMilliseconds() <= durationMilliseconds){
-                drive.arcadeDrive(x,y);
-            }else {
-                isDone = true;
-                timer.stopTimer();
+
+        Timer taskTimer = new Timer();
+        taskTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (timer.getElapsedMilliseconds() <= durationMilliseconds){
+                    drive.arcadeDrive(x,y);
+                }else {
+                    isDone = true;
+                    timer.stopTimer();
+                }
             }
-        }while (!isDone);
+        }, 0, 10);
 
     }
 
