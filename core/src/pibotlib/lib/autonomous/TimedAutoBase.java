@@ -17,17 +17,7 @@ public class TimedAutoBase {
     public void runAuto() {
         //run auto here
         for (TimedCommand command : commands) {
-            command.execute(null,0,0);
+            command.execute();
         }
-    }
-
-    public static void main(String[] args) {
-        TimedAutoBase base = new TimedAutoBase();
-
-        base.addCommand(new TimedCommand(5000,"command 1"));
-        base.addCommand(new TimedCommand(5000,"command 2"));
-        base.addCommand(new TimedCommand(5000,"command 3"));
-
-        base.runAuto();
     }
 }

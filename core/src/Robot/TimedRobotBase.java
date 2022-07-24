@@ -22,7 +22,6 @@ public abstract class TimedRobotBase implements Runnable {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                System.out.println("***");
                 if (!DriverStationState.getState().equals(Constants.DriverStationStates.KILL)){
 
                     robotPeriodic();

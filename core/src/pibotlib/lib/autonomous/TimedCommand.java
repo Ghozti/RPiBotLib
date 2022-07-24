@@ -7,30 +7,32 @@ public class TimedCommand {
 
     public ElapseTimer timer;
     boolean isDone;
-    double durationSeconds;
     long durationMilliseconds;
-    String name;
+    DifferentialDrive drive;
+    double x,y;
 
-    public TimedCommand(double durationSeconds){
+    public TimedCommand(double durationSeconds, DifferentialDrive drive, double x, double y){
         timer = new ElapseTimer();
         durationMilliseconds = (long) (durationSeconds * 1000);
+        this.drive = drive;
+        this.x = x;
+        this.y = y;
     }
 
-    public TimedCommand(long durationMilliseconds, String name){
-        System.out.println("Command " + name + " init");
+    public TimedCommand(long durationMilliseconds, DifferentialDrive drive, double x, double y){
         timer = new ElapseTimer();
         this.durationMilliseconds = durationMilliseconds;
-        this.name = name;
+        this.drive = drive;
+        this.x = x;
+        this.y = y;
     }
 
-    public void execute(DifferentialDrive drive, double x, double y){
+    public void execute(){
         timer.startTimer();
-        System.out.println("command " + name + " running");
         do {
             if (timer.getElapsedMilliseconds() <= durationMilliseconds){
-
+                drive.arcadeDrive(x,y);
             }else {
-                System.out.println("command " + name + " is done");
                 isDone = true;
                 timer.stopTimer();
             }

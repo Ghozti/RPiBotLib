@@ -6,6 +6,8 @@ import com.pi4j.io.pwm.PwmType;
 import pibotlib.lib.addons.DigitalOutputConfig;
 import pibotlib.lib.addons.PwmConfig;
 import pibotlib.lib.addons.RobotStateLight;
+import pibotlib.lib.autonomous.TimedAutoBase;
+import pibotlib.lib.autonomous.TimedCommand;
 import pibotlib.lib.drives.DifferentialDrive;
 import pibotlib.lib.gamecontrollers.LocalXboxController;
 import pibotlib.lib.motorcontrollers.DualHBridgeController;
@@ -18,6 +20,8 @@ public class Robot extends TimedRobotBase {
     DifferentialDrive differentialDrive;
     RobotStateLight stateLight;
     boolean controllerFound;
+
+    TimedAutoBase autoBase;
 
     public Robot(){
         //constructor called once which can create its own controller
@@ -66,6 +70,7 @@ public class Robot extends TimedRobotBase {
 
             differentialDrive = new DifferentialDrive(leftController, rightController);
             stateLight = new RobotStateLight(context, 16);
+            autoBase = new TimedAutoBase();
         }catch (Exception e){
             System.out.println("Robot init fail, reboot raspberry pi and try again");
         }
@@ -86,6 +91,9 @@ public class Robot extends TimedRobotBase {
     @Override
     public void autonomousPeriodic() {
         stateLight.blinkRSL();
+        autoBase.addCommand(new TimedCommand(2000L,differentialDrive,50,0));
+        autoBase.addCommand(new TimedCommand(2000L,differentialDrive,0,0));
+        autoBase.runAuto();
     }
 
     @Override
