@@ -87,6 +87,7 @@ public class Robot extends TimedRobotBase {
         //        System.out.println("No controller found");
         //    }
         //}
+        leftController.motor1Forward(100);
     }
 
     @Override
@@ -100,7 +101,6 @@ public class Robot extends TimedRobotBase {
     @Override
     public void teleopPeriodic() {
         //differentialDrive.arcadeDrive(-controller.getLeftYAxis() * 100, controller.getRightYAxis() * 100);
-        leftController.motor1Forward(100);
         stateLight.blinkRSL();
     }
 
