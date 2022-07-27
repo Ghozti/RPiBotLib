@@ -11,8 +11,8 @@ public class DesktopLauncher {
 		config.setTitle("PiBot lib driver station");
 		config.setWindowSizeLimits(1080,720,1080,720);
 		config.setWindowedMode(1080,720);
-		config.setForegroundFPS(30);
-		config.setIdleFPS(10);
+		config.setForegroundFPS(160);
+		config.setIdleFPS(160);
 		new Lwjgl3Application(new DriverStationLauncher(), config);
 	}
 }
