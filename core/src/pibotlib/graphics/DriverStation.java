@@ -32,8 +32,8 @@ public class DriverStation implements Screen {
         mouseHitbox = new com.badlogic.gdx.math.Rectangle(Gdx.input.getX(),-Gdx.input.getY(),15,15);
         font = new Font(100);
         controller = new LocalXboxController();
-        Thread thread = new Thread(new Robot(controller));
-        thread.start();
+        //Thread thread = new Thread(new Robot(controller));
+        //thread.start();
     }
 
     private void update(){
