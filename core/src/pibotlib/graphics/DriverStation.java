@@ -23,6 +23,7 @@ public class DriverStation implements Screen {
 
     @Override
     public void show() {
+        System.out.println("new stuff");
         batch = new SpriteBatch();
         img = new Texture(Gdx.files.internal("PiBotLib Driver Station.png"));
         enableButton = new DriverStationButton("Enable (1).png",80,50);
