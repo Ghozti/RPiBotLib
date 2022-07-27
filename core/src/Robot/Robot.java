@@ -78,28 +78,28 @@ public class Robot extends TimedRobotBase {
 
     @Override
     public void robotPeriodic() {
-        if (!controllerFound){
-            try {
-                controller = new LocalXboxController();
-                controllerFound = true;
-            }catch (Exception e){
-                System.out.println("No controller found");
-            }
-        }
+        //if (!controllerFound){
+        //    try {
+        //        controller = new LocalXboxController();
+        //        controllerFound = true;
+        //    }catch (Exception e){
+        //        System.out.println("No controller found");
+        //    }
+        //}
     }
 
     @Override
     public void autonomousPeriodic() {
-        stateLight.blinkRSL();
-        autoBase.addCommand(new TimedCommand(2000L,differentialDrive,50,0));
-        autoBase.addCommand(new TimedCommand(2000L,differentialDrive,0,0));
-        autoBase.runAuto();
+        //stateLight.blinkRSL();
+        //autoBase.addCommand(new TimedCommand(2000L,differentialDrive,50,0));
+        //autoBase.addCommand(new TimedCommand(2000L,differentialDrive,0,0));
+        //autoBase.runAuto();
     }
 
     @Override
     public void teleopPeriodic() {
-        differentialDrive.arcadeDrive(-controller.getLeftYAxis() * 100, controller.getRightYAxis() * 100);
-        stateLight.blinkRSL();
+        //differentialDrive.arcadeDrive(-controller.getLeftYAxis() * 100, controller.getRightYAxis() * 100);
+        //stateLight.blinkRSL();
     }
 
     @Override
