@@ -38,12 +38,12 @@ public class DriverStation implements Screen {
     }
 
     private void update(){
-        mouseHitbox.x = Gdx.input.getX();
-        mouseHitbox.y = Math.abs(Gdx.input.getY() - (int) Constants.Graphical.Screen.height);
-        updateEnableButton();
-        updateDisableButton();
-        updateAutoButton();
-        updateTeleopButton();
+        //mouseHitbox.x = Gdx.input.getX();
+        //mouseHitbox.y = Math.abs(Gdx.input.getY() - (int) Constants.Graphical.Screen.height);
+        //updateEnableButton();
+        //updateDisableButton();
+        //updateAutoButton();
+        //updateTeleopButton();
     }
 
     @Override
@@ -52,14 +52,14 @@ public class DriverStation implements Screen {
         ScreenUtils.clear(0, 0,0, 1f);
         batch.begin();
         batch.draw(img,0,0,1080,720);
-        batch.draw(enableButton.getTexture(),enableButton.getX(),enableButton.getY(),enableButton.getWidth(), enableButton.getHeight());
-        batch.draw(disableButton.getTexture(),disableButton.getX(),disableButton.getY(),disableButton.getWidth(), disableButton.getHeight());
-        batch.draw(autoButton.getTexture(),autoButton.getX(),autoButton.getY(),autoButton.getWidth(), autoButton.getHeight());
-        batch.draw(teleopButton.getTexture(),teleopButton.getX(),teleopButton.getY(),teleopButton.getWidth(), teleopButton.getHeight());
-        font.draw(batch,"Robot State: ",480,200,0,false);
-        font.draw(batch,"Robot Mode: ",480,400,0,false);
-        font.draw(batch, DriverStationState.getState(),480,100,0,false);
-        font.draw(batch, DriverStationState.getRobotMode(),480,300,0,false);
+        //batch.draw(enableButton.getTexture(),enableButton.getX(),enableButton.getY(),enableButton.getWidth(), enableButton.getHeight());
+        //batch.draw(disableButton.getTexture(),disableButton.getX(),disableButton.getY(),disableButton.getWidth(), disableButton.getHeight());
+        //batch.draw(autoButton.getTexture(),autoButton.getX(),autoButton.getY(),autoButton.getWidth(), autoButton.getHeight());
+        //batch.draw(teleopButton.getTexture(),teleopButton.getX(),teleopButton.getY(),teleopButton.getWidth(), teleopButton.getHeight());
+        //font.draw(batch,"Robot State: ",480,200,0,false);
+        //font.draw(batch,"Robot Mode: ",480,400,0,false);
+        //font.draw(batch, DriverStationState.getState(),480,100,0,false);
+        //font.draw(batch, DriverStationState.getRobotMode(),480,300,0,false);
         font.draw(batch,controller.getLeftXAxis() + " LX",600,600,0,false);
         font.draw(batch,controller.getLeftYAxis() + " LY",600,500,0,false);
         font.draw(batch,controller.getRightXAxis() + " RX",600,400,0,false);
