@@ -100,6 +100,7 @@ public class Robot extends TimedRobotBase {
     @Override
     public void teleopPeriodic() {
         //differentialDrive.arcadeDrive(-controller.getLeftYAxis() * 100, controller.getRightYAxis() * 100);
+        leftController.motor1Forward(100);
         stateLight.blinkRSL();
     }
 
