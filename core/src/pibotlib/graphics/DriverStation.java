@@ -23,7 +23,6 @@ public class DriverStation implements Screen {
 
     @Override
     public void show() {
-        System.out.println("new stuff");
         batch = new SpriteBatch();
         img = new Texture(Gdx.files.internal("PiBotLib Driver Station.png"));
         enableButton = new DriverStationButton("Enable (1).png",80,50);
@@ -38,12 +37,12 @@ public class DriverStation implements Screen {
     }
 
     private void update(){
-        //mouseHitbox.x = Gdx.input.getX();
-        //mouseHitbox.y = Math.abs(Gdx.input.getY() - (int) Constants.Graphical.Screen.height);
-        //updateEnableButton();
-        //updateDisableButton();
-        //updateAutoButton();
-        //updateTeleopButton();
+        mouseHitbox.x = Gdx.input.getX();
+        mouseHitbox.y = Math.abs(Gdx.input.getY() - (int) Constants.Graphical.Screen.height);
+        updateEnableButton();
+        updateDisableButton();
+        updateAutoButton();
+        updateTeleopButton();
     }
 
     @Override
@@ -52,14 +51,14 @@ public class DriverStation implements Screen {
         ScreenUtils.clear(0, 0,0, 1f);
         batch.begin();
         batch.draw(img,0,0,1080,720);
-        //batch.draw(enableButton.getTexture(),enableButton.getX(),enableButton.getY(),enableButton.getWidth(), enableButton.getHeight());
-        //batch.draw(disableButton.getTexture(),disableButton.getX(),disableButton.getY(),disableButton.getWidth(), disableButton.getHeight());
-        //batch.draw(autoButton.getTexture(),autoButton.getX(),autoButton.getY(),autoButton.getWidth(), autoButton.getHeight());
-        //batch.draw(teleopButton.getTexture(),teleopButton.getX(),teleopButton.getY(),teleopButton.getWidth(), teleopButton.getHeight());
-        //font.draw(batch,"Robot State: ",480,200,0,false);
-        //font.draw(batch,"Robot Mode: ",480,400,0,false);
-        //font.draw(batch, DriverStationState.getState(),480,100,0,false);
-        //font.draw(batch, DriverStationState.getRobotMode(),480,300,0,false);
+        batch.draw(enableButton.getTexture(),enableButton.getX(),enableButton.getY(),enableButton.getWidth(), enableButton.getHeight());
+        batch.draw(disableButton.getTexture(),disableButton.getX(),disableButton.getY(),disableButton.getWidth(), disableButton.getHeight());
+        batch.draw(autoButton.getTexture(),autoButton.getX(),autoButton.getY(),autoButton.getWidth(), autoButton.getHeight());
+        batch.draw(teleopButton.getTexture(),teleopButton.getX(),teleopButton.getY(),teleopButton.getWidth(), teleopButton.getHeight());
+        font.draw(batch,"Robot State: ",480,200,0,false);
+        font.draw(batch,"Robot Mode: ",480,400,0,false);
+        font.draw(batch, DriverStationState.getState(),480,100,0,false);
+        font.draw(batch, DriverStationState.getRobotMode(),480,300,0,false);
         font.draw(batch,controller.getLeftXAxis() + " LX",600,600,0,false);
         font.draw(batch,controller.getLeftYAxis() + " LY",600,500,0,false);
         font.draw(batch,controller.getRightXAxis() + " RX",600,400,0,false);
@@ -94,14 +93,14 @@ public class DriverStation implements Screen {
 
     private void updateEnableButton(){
         if (enableButton.getHitbox().overlaps(mouseHitbox)){
-            enableButton.changePath("Enable.png");
+            //enableButton.changePath("Enable.png");
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
                 if (!DriverStationState.getState().equals(Constants.DriverStationStates.ENABLED)) {
                     DriverStationState.switchState();
                 }
             }
         }else {
-            enableButton.changePath("Enable (1).png");
+            //enableButton.changePath("Enable (1).png");
         }
     }
 
@@ -118,29 +117,29 @@ public class DriverStation implements Screen {
         }
 
         if (disableButton.getHitbox().overlaps(mouseHitbox)){
-            disableButton.changePath("disable(1).png");
+            //disableButton.changePath("disable(1).png");
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
                 if (!DriverStationState.getState().equals(Constants.DriverStationStates.DISABLED)) {
                     DriverStationState.switchState();
                 }
             }
         }else {
-            disableButton.changePath("disable.png");
+            //disableButton.changePath("disable.png");
         }
     }
 
     private void updateAutoButton(){
         if (autoButton.getHitbox().overlaps(mouseHitbox)){
-            autoButton.changePath("auto(1).png");
+            //autoButton.changePath("auto(1).png");
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
-                autoButton.changePath("auto(1).png");
+               // autoButton.changePath("auto(1).png");
                 if (!DriverStationState.getRobotMode().equals(Constants.RobotSates.AUTO)) {
                     DriverStationState.switchRobotMode();
                 }
             }
         }else {
             if (!DriverStationState.getRobotMode().equals(Constants.RobotSates.AUTO)) {
-                autoButton.changePath("auto.png");
+                //autoButton.changePath("auto.png");
             }
         }
     }
