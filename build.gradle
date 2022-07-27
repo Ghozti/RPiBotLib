@@ -20,7 +20,7 @@ allprojects {
     version = '1.0'
     ext {
         appName = "PiBotLib"
-        gdxVersion = '1.10.1-SNAPSHOT'
+        gdxVersion = '1.11.0'
         roboVMVersion = '2.3.12'
         box2DLightsVersion = '1.5'
         ashleyVersion = '1.7.3'

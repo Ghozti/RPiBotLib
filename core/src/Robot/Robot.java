@@ -25,24 +25,24 @@ public class Robot extends TimedRobotBase {
 
     public Robot(){
         //constructor called once which can create its own controller
-        //try {
-        //    controller = new LocalXboxController();
-        //    controllerFound = true;
-        //}catch (Exception e){
-        //    System.out.println("No controller detected");
-        //    controllerFound = false;
-        //}
+        try {
+            controller = new LocalXboxController();
+            controllerFound = true;
+        }catch (Exception e){
+            System.out.println("No controller detected");
+            controllerFound = false;
+        }
     }
 
     public Robot(LocalXboxController controller){
         //constructor which takes a controller as an argument
-        //try {
-        //    controllerFound = true;
-        //    this.controller = controller;
-        //}catch (Exception e){
-        //    System.out.println("No controller detected");
-        //    controllerFound = false;
-        //}
+        try {
+            controllerFound = true;
+            this.controller = controller;
+        }catch (Exception e){
+            System.out.println("No controller detected");
+            controllerFound = false;
+        }
     }
 
     @Override
@@ -79,15 +79,14 @@ public class Robot extends TimedRobotBase {
 
     @Override
     public void robotPeriodic() {
-        //if (!controllerFound){
-        //    try {
-        //        controller = new LocalXboxController();
-        //        controllerFound = true;
-        //    }catch (Exception e){
-        //        System.out.println("No controller found");
-        //    }
-        //}
-        differentialDrive.arcadeDrive(100,0);
+        if (!controllerFound){
+            try {
+                controller = new LocalXboxController();
+                controllerFound = true;
+            }catch (Exception e){
+                System.out.println("No controller found");
+            }
+        }
     }
 
     @Override
@@ -100,7 +99,7 @@ public class Robot extends TimedRobotBase {
 
     @Override
     public void teleopPeriodic() {
-        //differentialDrive.arcadeDrive(-controller.getLeftYAxis() * 100, controller.getRightYAxis() * 100);
+        differentialDrive.arcadeDrive(-controller.getLeftYAxis() * 100, controller.getRightYAxis() * 100);
         stateLight.blinkRSL();
     }
 
