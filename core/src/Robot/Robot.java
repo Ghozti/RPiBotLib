@@ -87,7 +87,7 @@ public class Robot extends TimedRobotBase {
         //        System.out.println("No controller found");
         //    }
         //}
-        leftController.motor1Forward(100);
+        differentialDrive.arcadeDrive(100,0);
     }
 
     @Override
