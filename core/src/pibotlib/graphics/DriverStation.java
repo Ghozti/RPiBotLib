@@ -3,8 +3,8 @@ package pibotlib.graphics;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 import pibotlib.graphics.utils.Font;
 import Robot.Robot;
@@ -15,22 +15,23 @@ import pibotlib.lib.gamecontrollers.LocalXboxController;
 public class DriverStation implements Screen {
 
     SpriteBatch batch;
-    Texture img;
+    TextureRegion img;
     DriverStationButton enableButton, disableButton , autoButton, teleopButton;
     com.badlogic.gdx.math.Rectangle mouseHitbox;
-    Font font;
+    Font font, versionFont;
     LocalXboxController controller;
 
     @Override
     public void show() {
         batch = new SpriteBatch();
-        img = new Texture(Gdx.files.internal("PiBotLib Driver Station.png"));
-        enableButton = new DriverStationButton("Enable (1).png",80,50);
-        disableButton = new DriverStationButton("disable.png",280,50);
-        autoButton = new DriverStationButton("auto.png",280,250);
-        teleopButton = new DriverStationButton("teleop(1).png",80,250);
+        img = Constants.Graphical.atlas.findRegion("PiBotLib Driver Station");
+        enableButton = new DriverStationButton("enable1",80,50);
+        disableButton = new DriverStationButton("disable",280,50);
+        autoButton = new DriverStationButton("auto",280,250);
+        teleopButton = new DriverStationButton("teleop1",80,250);
         mouseHitbox = new com.badlogic.gdx.math.Rectangle(Gdx.input.getX(),-Gdx.input.getY(),15,15);
         font = new Font(100);
+        versionFont = new Font(20);
         controller = new LocalXboxController();
         Thread thread = new Thread(new Robot(controller));
         thread.start();
@@ -59,10 +60,11 @@ public class DriverStation implements Screen {
         font.draw(batch,"Robot Mode: ",480,400,0,false);
         font.draw(batch, DriverStationState.getState(),480,100,0,false);
         font.draw(batch, DriverStationState.getRobotMode(),480,300,0,false);
-        font.draw(batch,controller.getLeftXAxis() + " LX",600,600,0,false);
-        font.draw(batch,controller.getLeftYAxis() + " LY",600,500,0,false);
-        font.draw(batch,controller.getRightXAxis() + " RX",600,400,0,false);
-        font.draw(batch,controller.getRightYAxis() + " RY",600,300,0,false);
+        font.draw(batch,controller.getLeftXAxis() + " LX",100,600,0,false);
+        font.draw(batch,controller.getLeftYAxis() + " LY",100,500,0,false);
+        font.draw(batch,controller.getRightXAxis() + " RX",600,600,0,false);
+        font.draw(batch,controller.getRightYAxis() + " RY",600,500,0,false);
+        versionFont.draw(batch,"Version: " + Constants.LibConstants.LIB_VERSION ,920,20,0,false);
         batch.end();
     }
 
@@ -93,14 +95,14 @@ public class DriverStation implements Screen {
 
     private void updateEnableButton(){
         if (enableButton.getHitbox().overlaps(mouseHitbox)){
-            //enableButton.changePath("Enable.png");
+            enableButton.changePath("enable");
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
                 if (!DriverStationState.getState().equals(Constants.DriverStationStates.ENABLED)) {
                     DriverStationState.switchState();
                 }
             }
         }else {
-            //enableButton.changePath("Enable (1).png");
+            enableButton.changePath("enable1");
         }
     }
 
@@ -117,45 +119,45 @@ public class DriverStation implements Screen {
         }
 
         if (disableButton.getHitbox().overlaps(mouseHitbox)){
-            //disableButton.changePath("disable(1).png");
+            disableButton.changePath("disable1");
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
                 if (!DriverStationState.getState().equals(Constants.DriverStationStates.DISABLED)) {
                     DriverStationState.switchState();
                 }
             }
         }else {
-            //disableButton.changePath("disable.png");
+            disableButton.changePath("disable");
         }
     }
 
     private void updateAutoButton(){
         if (autoButton.getHitbox().overlaps(mouseHitbox)){
-            //autoButton.changePath("auto(1).png");
+            autoButton.changePath("auto1");
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
-               // autoButton.changePath("auto(1).png");
+                autoButton.changePath("auto1");
                 if (!DriverStationState.getRobotMode().equals(Constants.RobotSates.AUTO)) {
                     DriverStationState.switchRobotMode();
                 }
             }
         }else {
             if (!DriverStationState.getRobotMode().equals(Constants.RobotSates.AUTO)) {
-                //autoButton.changePath("auto.png");
+                autoButton.changePath("auto");
             }
         }
     }
 
     private void updateTeleopButton(){
         if (teleopButton.getHitbox().overlaps(mouseHitbox)){
-            teleopButton.changePath("teleop(1).png");
+            teleopButton.changePath("teleop1");
             if (Gdx.input.isButtonPressed(Input.Buttons.LEFT)){
-                teleopButton.changePath("teleop(1).png");
+                teleopButton.changePath("teleop1");
                 if (!DriverStationState.getRobotMode().equals(Constants.RobotSates.TELEOP)) {
                     DriverStationState.switchRobotMode();
                 }
             }
         }else {
             if (!DriverStationState.getRobotMode().equals(Constants.RobotSates.TELEOP)) {
-                teleopButton.changePath("teleop.png");
+                teleopButton.changePath("teleop");
             }
         }
     }

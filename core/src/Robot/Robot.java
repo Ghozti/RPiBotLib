@@ -48,7 +48,6 @@ public class Robot extends TimedRobotBase {
     @Override
     public void robotInit() {
         try {
-            System.out.println("robot init");
             context = Pi4J.newAutoContext();//always call first
 
             leftController = new DualHBridgeController(context, 14, 15, 23, 24);

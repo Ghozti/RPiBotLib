@@ -20,11 +20,11 @@ public class LocalXboxController {
     }
 
     public synchronized double getRightXAxis(){
-        return  Math.round(controller.getAxis(controller.getMapping().axisRightY) * 100.0) / 100.0;
+        return  Math.round(controller.getAxis(controller.getMapping().axisRightX) * 100.0) / 100.0;
     }
 
     public synchronized double getRightYAxis(){
-        return  Math.round(controller.getAxis(controller.getMapping().axisRightX) * 100.0) / 100.0;
+        return  Math.round(controller.getAxis(controller.getMapping().axisRightY) * 100.0) / 100.0;
     }
 
     public synchronized boolean getA(){

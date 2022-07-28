@@ -10,11 +10,11 @@ import pibotlib.lib.time.ElapseTimer;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();
-		config.setTitle("PiBot lib driver station");
+		config.setTitle("RPiBotLib driver station");
 		config.setWindowSizeLimits(1080,720,1080,720);
 		config.setWindowedMode(1080,720);
-		config.setForegroundFPS(30);
-		config.setIdleFPS(10);
+		config.setForegroundFPS(20);
+		config.setIdleFPS(5);
 		new Lwjgl3Application(new DriverStationLauncher(), config);
 	}
 }

@@ -2,18 +2,17 @@ package pibotlib.graphics;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 import pibotlib.lib.constants.Constants;
 
 public class DriverStationButton {
-    private Texture texture;
-    private String path;
+    private TextureRegion texture;
     private float width, height, x ,y;
     private com.badlogic.gdx.math.Rectangle hitbox;
 
-    public DriverStationButton(String defaultPath, float x, float y){
-        this.path = defaultPath;
-        this.texture = new Texture(Gdx.files.internal(defaultPath));
+    public DriverStationButton(String path, float x, float y){
+        this.texture = Constants.Graphical.atlas.findRegion(path);
         this.width = Constants.Graphical.DriverStation.buttonWidth;
         this.height = Constants.Graphical.DriverStation.buttonHeight;
         this.x = x;
@@ -22,10 +21,10 @@ public class DriverStationButton {
     }
 
     public void changePath(String path) {
-        texture = new Texture(Gdx.files.internal(path));
+        texture = Constants.Graphical.atlas.findRegion(path);
     }
 
-    public Texture getTexture(){
+    public TextureRegion getTexture(){
         return texture;
     }
 
