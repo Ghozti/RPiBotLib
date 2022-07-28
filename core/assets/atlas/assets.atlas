@@ -1,0 +1,76 @@
+
+assets.png
+size: 4096, 2048
+format: RGBA8888
+filter: Nearest, Nearest
+repeat: none
+PiBotLib Driver Station
+  rotate: false
+  xy: 2, 650
+  size: 1920, 1080
+  orig: 1920, 1080
+  offset: 0, 0
+  index: -1
+auto
+  rotate: false
+  xy: 1006, 148
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+auto1
+  rotate: false
+  xy: 2, 148
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+disable
+  rotate: false
+  xy: 2928, 1230
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+disable1
+  rotate: false
+  xy: 1924, 728
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+enable
+  rotate: false
+  xy: 504, 148
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+enable1
+  rotate: false
+  xy: 2426, 1230
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+frame
+  rotate: false
+  xy: 2, 2
+  size: 256, 144
+  orig: 256, 144
+  offset: 0, 0
+  index: -1
+teleop
+  rotate: false
+  xy: 1924, 1230
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
+teleop1
+  rotate: false
+  xy: 2426, 728
+  size: 500, 500
+  orig: 500, 500
+  offset: 0, 0
+  index: -1
