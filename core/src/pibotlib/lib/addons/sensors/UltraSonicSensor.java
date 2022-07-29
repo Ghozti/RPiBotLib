@@ -59,7 +59,6 @@ public class UltraSonicSensor implements Runnable, Sensor{
                         }
 
                         distance = (long) ((((endTime-startTime)/1e3)/2)/29.1);
-                        System.out.println(distance);
                         Thread.sleep(1000);
                     } catch (Exception e) {
                         System.out.println("Sonic sensor failure");
