@@ -101,7 +101,7 @@ public class Robot extends TimedRobotBase {
     @Override
     public void autonomousPeriodic() {
         stateLight.blinkRSL();
-        autoBase.addCommand(new TimedCommand(2000L,differentialDrive,50,0));
+        autoBase.addCommand(new TimedCommand(2000L,differentialDrive,0,80));
         autoBase.addCommand(new TimedCommand(2000L,differentialDrive,0,0));
         autoBase.runAuto();
     }

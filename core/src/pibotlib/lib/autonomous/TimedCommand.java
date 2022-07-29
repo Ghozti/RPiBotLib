@@ -44,6 +44,7 @@ public class TimedCommand {
                 }else {
                     isDone = true;
                     timer.stopTimer();
+                    taskTimer.cancel();
                 }
             }
         }, 0, 10);
