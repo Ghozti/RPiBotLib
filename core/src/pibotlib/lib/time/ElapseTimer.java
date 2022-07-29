@@ -23,11 +23,11 @@ public class ElapseTimer implements Runnable {
         thread.start();
     }
 
-    public void stopTimer(){
+    public synchronized void stopTimer(){
         stopTimer = true;
     }
 
-    public void reset(){
+    public synchronized void reset(){
         elapsedMilliseconds = 0;
         elapsedSeconds = 0;
     }
@@ -41,7 +41,7 @@ public class ElapseTimer implements Runnable {
     }
 
     @Override
-    public void run() {
+    public void run() {//TODO check this works
         Runnable helloRunnable = () -> {
             elapsedMilliseconds +=  1;
             elapsedSeconds = elapsedMilliseconds/1000d;

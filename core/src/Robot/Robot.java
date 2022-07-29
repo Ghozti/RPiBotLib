@@ -6,6 +6,7 @@ import com.pi4j.io.pwm.PwmType;
 import pibotlib.lib.addons.DigitalOutputConfig;
 import pibotlib.lib.addons.PwmConfig;
 import pibotlib.lib.addons.RobotStateLight;
+import pibotlib.lib.addons.UltraSonicSensor;
 import pibotlib.lib.autonomous.TimedAutoBase;
 import pibotlib.lib.autonomous.TimedCommand;
 import pibotlib.lib.drives.DifferentialDrive;
@@ -19,6 +20,7 @@ public class Robot extends TimedRobotBase {
     DualHBridgeController leftController, rightController;
     DifferentialDrive differentialDrive;
     RobotStateLight stateLight;
+    UltraSonicSensor sonicSensor;
     boolean controllerFound;
 
     TimedAutoBase autoBase;
@@ -70,7 +72,10 @@ public class Robot extends TimedRobotBase {
 
             differentialDrive = new DifferentialDrive(leftController, rightController);
             stateLight = new RobotStateLight(context, 16);
+            sonicSensor = new UltraSonicSensor(context,5,6);
             autoBase = new TimedAutoBase();
+
+            sonicSensor.runSensor();
         }catch (Exception e){
             System.out.println("Robot init fail, reboot raspberry pi and try again");
         }
@@ -84,6 +89,7 @@ public class Robot extends TimedRobotBase {
                 controllerFound = true;
             }catch (Exception e){
                 System.out.println("No controller found");
+                e.printStackTrace();
             }
         }
     }
