@@ -48,12 +48,10 @@ public class UltraSonicSensor implements Runnable{
                         sensorTriggerPin.high();
                         sensorTriggerPin.low();
                         System.out.println("sensor logic running");
-                        while (sensorTriggerPin.isLow()){
-                            startTime = System.nanoTime();
-                        }
-                        while (sensorTriggerPin.isHigh()){
-                            endTime = System.nanoTime();
-                        }
+                        while (sensorEchoPin.isLow()){}
+                        startTime = System.nanoTime();
+                        while (sensorEchoPin.isHigh()){}
+                        endTime = System.nanoTime();
                         distance = (long) ((((endTime-startTime)/1e3)/2)/29.1);
                         System.out.println(distance);
                         Thread.sleep(1000);
