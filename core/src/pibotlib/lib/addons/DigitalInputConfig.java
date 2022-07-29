@@ -10,6 +10,6 @@ public class DigitalInputConfig {
                 .name(name)
                 .address(adress)
                 .pull(pullResistance)
-                .provider("pigpio-digital-output");
+                .provider("pigpio-digital-input");
     }
 }
