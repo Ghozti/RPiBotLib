@@ -49,7 +49,7 @@ public class Robot extends TimedRobotBase {
 
     @Override
     public void robotInit() {
-        try {
+        //try {
             context = Pi4J.newAutoContext();//always call first
 
             //leftController = new DualHBridgeController(context, 14, 15, 23, 24);
@@ -76,10 +76,10 @@ public class Robot extends TimedRobotBase {
             sonicSensor = new UltraSonicSensor(context,5,6);
 
             sonicSensor.runSensor();
-        }catch (Exception e){
-            System.out.println("Robot init fail, reboot raspberry pi and try again");
-            e.printStackTrace();
-        }
+        //}catch (Exception e){
+        //    System.out.println("Robot init fail, reboot raspberry pi and try again");
+        //    e.printStackTrace();
+        //}
     }
 
     @Override
