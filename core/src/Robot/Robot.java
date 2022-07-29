@@ -78,6 +78,7 @@ public class Robot extends TimedRobotBase {
             sonicSensor.runSensor();
         }catch (Exception e){
             System.out.println("Robot init fail, reboot raspberry pi and try again");
+            e.printStackTrace();
         }
     }
 
