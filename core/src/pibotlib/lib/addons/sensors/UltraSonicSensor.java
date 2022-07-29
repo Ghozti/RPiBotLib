@@ -21,16 +21,15 @@ public class UltraSonicSensor implements Runnable, Sensor{
     Context context;
     Thread thread;
 
-    public UltraSonicSensor(Context context, int sensorTrigger, int sensorEcho, String name){//5,6
-        //thread = new Thread(this,"sensorThread");
-        //this.context = context;
-        //sensorTriggerPin = context.create(DigitalOutputConfig.buildDigitalOutputConfig(context,sensorTrigger,"5","trigger"));
-        //sensorEchoPin = context.create(DigitalInputConfig.buildDigitalOutputConfig(context,sensorEcho,"6","echo", PullResistance.PULL_DOWN));
+    public UltraSonicSensor(Context context, int sensorTrigger, int sensorEcho, String name){
+        thread = new Thread(this,"sensorThread");
+        this.context = context;
+        sensorTriggerPin = context.create(DigitalOutputConfig.buildDigitalOutputConfig(context,sensorTrigger,"5","trigger"));
+        sensorEchoPin = context.create(DigitalInputConfig.buildDigitalOutputConfig(context,sensorEcho,"6","echo", PullResistance.PULL_DOWN));
         this.name  = name;
     }
 
     public void runSensor(){
-        System.out.println("sensor run method");
         thread.start();
     }
 
