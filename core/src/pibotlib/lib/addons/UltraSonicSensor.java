@@ -25,6 +25,7 @@ public class UltraSonicSensor implements Runnable{
     }
 
     public void runSensor(){
+        System.out.println("sensor run method");
         thread.start();
     }
 
