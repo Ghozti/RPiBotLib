@@ -9,7 +9,6 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import pibotlib.graphics.utils.Font;
 import Robot.Robot;
 import pibotlib.lib.addons.sensors.Sensor;
-import pibotlib.lib.addons.sensors.UltraSonicSensor;
 import pibotlib.lib.constants.Constants;
 import pibotlib.graphics.utils.DriverStationState;
 import pibotlib.lib.gamecontrollers.LocalXboxController;

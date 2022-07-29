@@ -57,7 +57,6 @@ public class UltraSonicSensor implements Runnable, Sensor{
                         while (sensorEchoPin.isHigh()) {
                             endTime = System.nanoTime();
                         }
-
                         distance = (long) ((((endTime-startTime)/1e3)/2)/29.1);
                         Thread.sleep(1000);
                     } catch (Exception e) {
