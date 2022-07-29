@@ -34,16 +34,19 @@ public class UltraSonicSensor implements Runnable{
 
     @Override
     public void run() {
+        System.out.println("sensor run");
         if (Thread.currentThread().getName().equals("sensorThread")) {
             Timer timer = new Timer();
             timer.schedule(new TimerTask() {
                 @Override
                 public void run() {
                     try {
+                        System.out.println("sensor init");
                         sensorTriggerPin.low();
                         Thread.sleep(2000);
                         sensorTriggerPin.high();
                         sensorTriggerPin.low();
+                        System.out.println("sensor logic running");
                         while (sensorTriggerPin.isLow()){
                             startTime = System.nanoTime();
                         }
