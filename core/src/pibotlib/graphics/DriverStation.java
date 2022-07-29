@@ -40,7 +40,7 @@ public class DriverStation implements Screen {
         interfaceFont = new Font(35);
         controller = new LocalXboxController();
 
-        Thread thread = new Thread(new Robot(controller));
+        Thread thread = new Thread(new Robot());
         thread.start();
     }
 
