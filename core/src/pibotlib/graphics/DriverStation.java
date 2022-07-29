@@ -8,9 +8,13 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 import pibotlib.graphics.utils.Font;
 import Robot.Robot;
+import pibotlib.lib.addons.sensors.Sensor;
+import pibotlib.lib.addons.sensors.UltraSonicSensor;
 import pibotlib.lib.constants.Constants;
 import pibotlib.graphics.utils.DriverStationState;
 import pibotlib.lib.gamecontrollers.LocalXboxController;
+
+import java.util.ArrayList;
 
 public class DriverStation implements Screen {
 
@@ -18,8 +22,9 @@ public class DriverStation implements Screen {
     TextureRegion img;
     DriverStationButton enableButton, disableButton , autoButton, teleopButton;
     com.badlogic.gdx.math.Rectangle mouseHitbox;
-    Font font, versionFont;
+    Font font, versionFont, interfaceFont;
     LocalXboxController controller;
+    static ArrayList<Sensor> sensors = new ArrayList<>();
 
     @Override
     public void show() {
@@ -32,7 +37,9 @@ public class DriverStation implements Screen {
         mouseHitbox = new com.badlogic.gdx.math.Rectangle(Gdx.input.getX(),-Gdx.input.getY(),15,15);
         font = new Font(100);
         versionFont = new Font(20);
+        interfaceFont = new Font(35);
         controller = new LocalXboxController();
+
         Thread thread = new Thread(new Robot(controller));
         thread.start();
     }
@@ -56,14 +63,34 @@ public class DriverStation implements Screen {
         batch.draw(disableButton.getTexture(),disableButton.getX(),disableButton.getY(),disableButton.getWidth(), disableButton.getHeight());
         batch.draw(autoButton.getTexture(),autoButton.getX(),autoButton.getY(),autoButton.getWidth(), autoButton.getHeight());
         batch.draw(teleopButton.getTexture(),teleopButton.getX(),teleopButton.getY(),teleopButton.getWidth(), teleopButton.getHeight());
+
         font.draw(batch,"Robot State: ",480,200,0,false);
         font.draw(batch,"Robot Mode: ",480,400,0,false);
+
         font.draw(batch, DriverStationState.getState(),480,100,0,false);
         font.draw(batch, DriverStationState.getRobotMode(),480,300,0,false);
-        font.draw(batch,controller.getLeftXAxis() + " LX",100,600,0,false);
-        font.draw(batch,controller.getLeftYAxis() + " LY",100,500,0,false);
-        font.draw(batch,controller.getRightXAxis() + " RX",600,600,0,false);
-        font.draw(batch,controller.getRightYAxis() + " RY",600,500,0,false);
+
+        interfaceFont.draw(batch,"Controller: ",80,590,0,false);
+        interfaceFont.draw(batch,controller.getLeftXAxis() + " LX",80,520,0,false);
+        interfaceFont.draw(batch,controller.getLeftYAxis() + " LY",80,450,0,false);
+        interfaceFont.draw(batch,controller.getRightXAxis() + " RX",250,520,0,false);
+        interfaceFont.draw(batch,controller.getRightYAxis() + " RY",250,450,0,false);
+
+        interfaceFont.draw(batch,"Sensors:",480,590,0,false);//sensors.get(0).getName()
+        if ((sensors.size() >= 1)) {
+            interfaceFont.draw(batch, sensors.get(0).getName() + " :", 480, 520, 0, false);
+            interfaceFont.draw(batch, sensors.get(0).getValueToString(), 900, 520, 0, false);
+        }
+        if ((sensors.size() >= 2)) {
+            interfaceFont.draw(batch, sensors.get(1).getName() + " :", 480, 485, 0, false);
+            interfaceFont.draw(batch, sensors.get(1).getValueToString(), 900, 485, 0, false);
+        }
+        if ((sensors.size() == 3)) {
+            interfaceFont.draw(batch, sensors.get(2).getName() + " :", 480, 450, 0, false);
+            interfaceFont.draw(batch, sensors.get(2).getValueToString(), 900, 450, 0, false);
+        }
+
+
         versionFont.draw(batch,"Version: " + Constants.LibConstants.LIB_VERSION ,920,20,0,false);
         batch.end();
     }
@@ -159,6 +186,14 @@ public class DriverStation implements Screen {
             if (!DriverStationState.getRobotMode().equals(Constants.RobotSates.TELEOP)) {
                 teleopButton.changePath("teleop");
             }
+        }
+    }
+
+    public static void addSensor(Sensor sensor){
+        if (sensors.size() == 3){
+            System.out.println("Driver station sensor capacity full");
+        }else {
+            sensors.add(sensor);
         }
     }
 }
