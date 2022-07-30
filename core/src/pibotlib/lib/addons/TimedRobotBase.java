@@ -1,4 +1,4 @@
-package Robot;
+package pibotlib.lib.addons;
 
 import pibotlib.graphics.utils.DriverStationState;
 import pibotlib.lib.constants.Constants;
