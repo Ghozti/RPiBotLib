@@ -11,7 +11,7 @@ public class ElapseTimer implements Runnable {
 
     public volatile double elapsedSeconds;
     public volatile long elapsedMilliseconds;
-    boolean stopTimer;
+    volatile boolean stopTimer;
 
     public ElapseTimer(){
         elapsedSeconds = 0;
@@ -32,11 +32,11 @@ public class ElapseTimer implements Runnable {
         elapsedSeconds = 0;
     }
 
-    public long getElapsedMilliseconds(){
+    public synchronized long getElapsedMilliseconds(){
         return elapsedMilliseconds;
     }
 
-    public double getElapsedSeconds(){
+    public synchronized   double getElapsedSeconds(){
         return elapsedSeconds;
     }
 

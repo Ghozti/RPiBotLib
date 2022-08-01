@@ -39,9 +39,8 @@ public class TimedCommand {
         taskTimer.schedule(new TimerTask() {
             @Override
             public void run() {
-                if (timer.getElapsedMilliseconds() <= durationMilliseconds){
-                    drive.arcadeDrive(x,y);
-                }else {
+                drive.arcadeDrive(x,y);
+                if (timer.getElapsedMilliseconds() >= durationMilliseconds){
                     isDone = true;
                     timer.stopTimer();
                     taskTimer.cancel();
