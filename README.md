@@ -15,6 +15,11 @@
 > + `$sudo apt install pigpio python-pigpio python3-pigpio`
 >
 > Once the project is cloned, you may open the **RPIBotLib folder** then go to **core/src/Robot**. This is where you will find `Robot.java` and where you fill focus on to program your robot. While the entire project is available, it is not recommended for users to alter or change the source code of the library unless they are familar with the LibGDX and Pi4J libaries. Altering any other class except `Robot.java` could cause critical errors.
+>
+> It is recommended to set up **VNC Viewer** onto your raspberry pi in order to be able to remote control it from your PC. 
+> + You can do this by using this link: [How To Set Up VNC Connect on Raspberry Pi - RealVNC](https://www.realvnc.com/en/blog/how-to-setup-vnc-connect-raspberry-pi/)
+> 
+> In order to remote control your raspberry pi, you will need both devices under the same internet connection.
 
 ### Understanding The Library
 > `robotInit()` is a method which is called once at the start of the program. This is where it is suggested to declare all motor controllers, sensors, and etc. Essentially this method works as a constructor.
@@ -31,11 +36,26 @@
 >![DriverStation](https://cdn.discordapp.com/attachments/412278280180203552/1002756776724271195/Capture.PNG)
 >
 > The driver station has several features to it, including 4 functional buttons:
-> + **Teleop, Auto, Enabled,** and **Disabled**
+> + **Teleop:** where the user is able to take control of the robot via a joystick or controller.
+> + **Autonomous:** will allow the user-programmed autonomous code to run. By default, enabling this mode will not do anything unless the user fills in the `autonomousPeriodic()` method.
+> + **Enable**
+> + **Disable** 
 >
-> These buttons allow the user to select their **robot mode** and **state**. On the right, there is a text indicator that displays the current setting of the robot. Above the buttons there is also a section which shows the current connected controller's **stick values** with both their X and Y axis. On its right there is a sensor section which will allow a **maximum of 3 sensors** to be added. The sensor section will only display the sensors when they are manually added via code using `DriverStation.addSensor(Sensor sensor)`. This method is recommended to use in `robotInit()`
+> These buttons allow the user to select their **robot mode** and **state** along with a text indicator that displays the current setting of the robot. Above the buttons there is also a section which shows the current connected controller's **stick values** with both their X and Y axis.
+> 
+>   On its right there is a sensor section which will allow a **maximum of 3 sensors** to be added. The sensor section will only display the sensors when they are manually added via code using `DriverStation.addSensor(Sensor sensor)`. This method is recommended to use in `robotInit()`
 >
+> When a sensor is added, the driver station will display its name as well as its returned value. 
 >
+> As stated before there is a third robot state known as kill, to set this mode simply press **k.**
 >
+> The current robot mode will always be indicated in **green.**
+>
+### Basic Classes To Know
+> ### TimedAutoBase
+> Timed auto base is a timed-based class that can be used to develop simple autonomous code. The class can be called and instantiated in `Robot.java` and takes no parameters.
+>
+> ### LocalXboxController
+> LocalXboxController is a wrapper class of the Controller class found in LibGDX. This class will allow for easy access to the left and right axis values found on a controller as well as a boolean value for when **A, B, X, or Y** is pressed. The axis will return a double, ranging from **-1 to 1** with decimals included. The class must be instantiated in `Robot.java`.
 >
 
