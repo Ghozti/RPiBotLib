@@ -79,10 +79,17 @@ public class Robot extends TimedRobotBase {
             DriverStation.addSensor(sonicSensor);
 
             sonicSensor.runSensor();
+            autoBuild();
+
         }catch (Exception e){
             System.out.println("Robot init fail, reboot raspberry pi and try again");
             e.printStackTrace();
         }
+    }
+
+    private void autoBuild(){
+        autoBase.addCommand(new TimedCommand(2000L,differentialDrive,0,80));
+        autoBase.addCommand(new TimedCommand(2000L,differentialDrive,0,0));
     }
 
     @Override
@@ -101,8 +108,6 @@ public class Robot extends TimedRobotBase {
     @Override
     public void autonomousPeriodic() {
         stateLight.blinkRSL();
-        autoBase.addCommand(new TimedCommand(2000L,differentialDrive,0,80));
-        autoBase.addCommand(new TimedCommand(2000L,differentialDrive,0,0));
         autoBase.runAuto();
     }
 

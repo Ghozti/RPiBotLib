@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class TimedAutoBase {
 
     ArrayList<TimedCommand> commands;
+    boolean autoStarted;
 
     public TimedAutoBase(){
         commands = new ArrayList<>();
@@ -16,10 +17,14 @@ public class TimedAutoBase {
 
     public void runAuto() {
         //run auto here
-        for (TimedCommand command : commands) {
-            command.execute();
-        }
+        if (!autoStarted) {
+            autoStarted = true;
 
-        commands.clear();
+            for (TimedCommand command : commands) {
+                command.execute();
+            }
+
+            commands.clear();
+        }
     }
 }
