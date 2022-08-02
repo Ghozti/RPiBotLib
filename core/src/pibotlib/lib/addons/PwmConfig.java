@@ -6,6 +6,8 @@ import com.pi4j.io.pwm.PwmType;
 
 public class PwmConfig {
 
+    /**
+     *returns a new pi4j PWMConfig object*/
     public static com.pi4j.io.pwm.PwmConfig buildPwmConfig(Context pi4j, int address, PwmType type) {//pwm config builder
         return Pwm.newConfigBuilder(pi4j)
                 .id("BCM" + address)

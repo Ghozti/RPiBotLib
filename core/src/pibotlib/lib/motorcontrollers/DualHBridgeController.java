@@ -6,6 +6,8 @@ import com.pi4j.io.gpio.digital.DigitalOutputConfigBuilder;
 import com.pi4j.io.pwm.Pwm;
 import com.pi4j.io.pwm.PwmConfig;
 
+/**
+ *used to declare new dual H-bridge motor controllers*/
 public class DualHBridgeController implements MotorController{
 
     int motor1ChannelForward, motor1ChannelBackward, motor2ChannelForward, motor2ChannelBackward;
@@ -53,6 +55,8 @@ public class DualHBridgeController implements MotorController{
         motor2DigitalBackward = pi4j.create(config);
     }
 
+    /**
+     *will drive motor 1 forward (speedVal should be from 0-100)*/
     @Override
     public void motor1Forward(double speedVal) {
         motor1PWMOutput.on(speedVal,1000);
@@ -65,6 +69,8 @@ public class DualHBridgeController implements MotorController{
         }
     }
 
+    /**
+     *will drive motor 1 backward (speedVal should be from 0-100)*/
     @Override
     public void motor1Backward(double speedVal) {
         motor1PWMOutput.on(speedVal,1000);
@@ -77,6 +83,8 @@ public class DualHBridgeController implements MotorController{
         }
     }
 
+    /**
+     *will drive motor 2 forward (speedVal should be from 0-100)*/
     @Override
     public void motor2Forward(double speedVal) {
         motor2PWMOutput.on(speedVal,1000);
@@ -89,6 +97,8 @@ public class DualHBridgeController implements MotorController{
         }
     }
 
+    /**
+     *will drive motor 2 backward (speedVal should be from 0-100)*/
     @Override
     public void motor2Backward(double speedVal) {
         motor2PWMOutput.on(speedVal,1000);
@@ -101,21 +111,29 @@ public class DualHBridgeController implements MotorController{
         }
     }
 
+    /**
+     *will give an id to this controller*/
     @Override
     public void setID(int id) {
         this.controllerID = id;
     }
 
+    /**
+     *gives a pi4j context*/
     @Override
     public void setContext(Context context) {
         this.pi4j = context;
     }
 
+    /**
+     *will invert motor 1 ex: (if it's forward by default it will be backwards)*/
     @Override
     public void setmotor1Inverted(boolean inverted) {
         this.motor1Inverted = inverted;
     }
 
+    /**
+     *will invert motor 2 ex: (if it's forward by default it will be backwards)*/
     @Override
     public void setmotor2Inverted(boolean inverted) {
         this.motor2Inverted = inverted;
@@ -154,6 +172,8 @@ public class DualHBridgeController implements MotorController{
     @Override
     public int getMotor2BackwardChannel() {return motor2ChannelBackward;}
 
+    /**
+     *will shut down motor 1*/
     @Override
     public void motor1Kill() {
         motor1PWMOutput.off();
@@ -161,6 +181,8 @@ public class DualHBridgeController implements MotorController{
         motor1DigitalBackward.low();
     }
 
+    /**
+     *will shut down motor2*/
     @Override
     public void motor2Kill() {
         motor2PWMOutput.off();
@@ -168,9 +190,13 @@ public class DualHBridgeController implements MotorController{
         motor2DigitalBackward.low();
     }
 
+    /**
+     *DO NOT USE, WILL RETURN 0 AT ALL TIMES*/
     @Override
     public int getMotor1Speed() {return 0;}
 
+    /**
+     *DO NOT USE, WILL RETURN 0 AT ALL TIMES*/
     @Override
     public int getMotor2Speed() {
         return 0;

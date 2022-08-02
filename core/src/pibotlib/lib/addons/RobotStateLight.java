@@ -5,6 +5,8 @@ import com.pi4j.io.pwm.Pwm;
 import com.pi4j.io.pwm.PwmConfig;
 import com.pi4j.io.pwm.PwmType;
 
+/**
+ *allows for an LED to serve as an "indicator" that thje robot is on/enabled/disabled etc...*/
 public class RobotStateLight {
 
     Context context;
@@ -25,13 +27,15 @@ public class RobotStateLight {
         pwm = context.create(config);
     }
 
+    /**
+     *will blink the LED*/
     public void blinkRSL(){
         pwm.on(10,1000);
     }
 
+    /**
+     *will turn off the LED*/
     public void shutDown(){
         pwm.off();
     }
-
-
 }

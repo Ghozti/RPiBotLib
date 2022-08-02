@@ -2,19 +2,17 @@ package pibotlib.lib.drives;
 
 import pibotlib.lib.motorcontrollers.MotorController;
 
+/**
+ *used to handle driving logic*/
 public class DifferentialDrive extends ChassisDrive{
 
     public DifferentialDrive(MotorController leftcontroller, MotorController rightController) {
         super(leftcontroller, rightController);
     }
 
+    /**
+     *will handle the logic required to drive the robot using an x and y value provided from the controller*/
     public void arcadeDrive(double x, double y){
-
-        //TODO
-        //try having the output be the differnece between the speeds
-        //ex if you are trying to go forward and make a right turn have the output of the motors be:
-        // left: x
-        // right: x - y
 
         if(Math.abs(x/100) < .1 && Math.abs(y/100) < .1){
             getLeftController().motor1Kill();

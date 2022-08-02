@@ -8,6 +8,8 @@ import pibotlib.lib.time.ElapseTimer;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ *used to develop timed-autonomous code, objects from this class will be provided to the TimedAutoBase command list*/
 public class TimedCommand {
 
     volatile public ElapseTimer timer;
@@ -32,7 +34,7 @@ public class TimedCommand {
         this.y = y;
     }
 
-    public void execute(){
+    protected void execute(){
         timer.startTimer();
 
         Timer taskTimer = new Timer();

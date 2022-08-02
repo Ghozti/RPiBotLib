@@ -10,6 +10,8 @@ import pibotlib.lib.addons.DigitalOutputConfig;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ *Used for the HC-SR04 sensor or any other ultra-sonic sensor that works like it*/
 public class UltraSonicSensor implements Runnable, Sensor{
 
     DigitalOutput sensorTriggerPin;
@@ -29,10 +31,14 @@ public class UltraSonicSensor implements Runnable, Sensor{
         this.name  = name;
     }
 
+    /**
+     *starts the sensor*/
     public void runSensor(){
         thread.start();
     }
 
+    /**
+     *returns the distance the sensor detects in cm*/
     public synchronized long getDistance(){
         return distance;
     }
@@ -68,11 +74,15 @@ public class UltraSonicSensor implements Runnable, Sensor{
         }
     }
 
+    /**
+     *returns the distance of the sensor in a string*/
     @Override
     public String getValueToString() {
         return getDistance() + " cm";
     }
 
+    /**
+     *returns the name of the sensor*/
     @Override
     public String getName() {
         return name;

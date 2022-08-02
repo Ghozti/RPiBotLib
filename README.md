@@ -1,6 +1,6 @@
 # RPiBotLib
 ## Introduction
-> A open-sourced and simple to use LibGDX and Pi4J based library that uses a Raspberry Pi GPIO to be able to control robots or other electronics such as motors or sensors. Similarly to the FRC WPILib, the RPIBotLib functions on a time based runtime, as well as a similar user-side programming process. 
+> RPiBotLib is an open-sourced and simple to use LibGDX and Pi4J based library that uses the Raspberry Pi GPIO to be able to control robots or other electronics such as motors or sensors. Similarly to the FRC WPILib, the RPIBotLib functions on a time based runtime, as well as a similar user-side programming process. 
 
 ## How To Use It
 ### Pre-Requirements
@@ -17,9 +17,9 @@
 > Once the project is cloned, you may open the **RPIBotLib folder** then go to **core/src/Robot**. This is where you will find `Robot.java` and where you fill focus on to program your robot. While the entire project is available, it is not recommended for users to alter or change the source code of the library unless they are familar with the LibGDX and Pi4J libaries. Altering any other class except `Robot.java` could cause critical errors.
 >
 > It is recommended to set up **VNC Viewer** onto your raspberry pi in order to be able to remote control it from your PC. 
-> + You can do this by using this link: [How To Set Up VNC Connect on Raspberry Pi - RealVNC](https://www.realvnc.com/en/blog/how-to-setup-vnc-connect-raspberry-pi/)
+> + visit: [How To Set Up VNC Connect on Raspberry Pi - RealVNC](https://www.realvnc.com/en/blog/how-to-setup-vnc-connect-raspberry-pi/)
 > 
-> In order to remote control your raspberry pi, you will need both devices under the same internet connection.
+> ***In order to remote control your raspberry pi, you will need both devices under the same internet connection.***
 
 ### Understanding The Library
 > `robotInit()` is a method which is called once at the start of the program. This is where it is suggested to declare all motor controllers, sensors, and etc. Essentially this method works as a constructor.
@@ -51,12 +51,12 @@
 >
 > The current robot mode will always be indicated in **green.**
 >
-### Basic Classes To Know
+### Fundamentals to getting a working robot
 > ### TimedAutoBase
-> Timed auto base is a timed-based class that can be used to develop simple autonomous code. The class can be called and instantiated in `Robot.java` and takes no parameters.
+> `TimedAutoBase` is a timed-based class that can be used to develop simple autonomous code. The class can be called and instantiated in `Robot.java` and takes no parameters.
 >
 > ### LocalXboxController
-> LocalXboxController is a wrapper class of the Controller class found in LibGDX. This class will allow for easy access to the left and right axis values found on a controller as well as a boolean value for when **A, B, X, or Y** is pressed. The axis will return a double, ranging from **-1 to 1** with decimals included. The class must be instantiated in `Robot.java`. Once instantiated, the program will search for a connected controller. Please ensure your raspberry pi is connected to a controller prior to running your program.
+> `LocalXboxController` is a wrapper class of the `Controller` class found in LibGDX. This class will allow for easy access to the left and right axis values found on a controller as well as a boolean value for when **A, B, X, or Y** is pressed. The axis will return a double, ranging from **-1 to 1** with decimals included. The class must be instantiated in `Robot.java`. Once instantiated, the program will search for a connected controller. Please ensure your raspberry pi is connected to a controller prior to running your program.
 >
 > ### Context
 > The Context class is a PI4J class which is used to be able to control the raspberry pi GPIO. This class is mandatory to instantiate in order to be able to execute your program. The best place to instantiate this class is in `robotInit()`. No parameters are needed in order to instantiate this class. 
@@ -66,12 +66,30 @@
 > + Learn more on the Raspberry Pi pins here: [Understanding the GPIO pins - Pi4J](https://pi4j.com/getting-started/understanding-the-pins/)
 > 
 > ### DualHBridgeController
-> The Dual H Bridge class is designed for dual h devices like the I298N motor controller. This class allows for up to **2** motors to be added to the motor controller, and will require the user to manually configure these motors. The DualHBridgeController object will take in a Pi4J context object as well as the forward and back channel for both motors. To properly configure any motor in this object, you must call the `configMotor1PWM` or `confiMotor2PWM` methods which will take in a pwm config object.
+> The Dual H Bridge class is designed for dual h devices like the I298N motor controller. This class allows for up to **2** motors to be added to the motor controller, and will require the user to manually configure these motors. `The DualHBridgeController` object will take in a Pi4J context object as well as the forward and back channel for both motors. To properly configure any motor in this object, you must call the `configMotor1PWM` or `confiMotor2PWM` methods which will take in a pwm config object.
 >
 > ### DifferentialDrive
+> The `DifferentialDrive` class will handle all the logic needed to drive your robot. The class constructor takes in 2 motor controllers (left and right) and had the `arcadeDrive()` method which takes in an x and y value (x being the turning and y being forward/backward) as parameters. The `arcadeDrive()` method should be called in `teleopPeriodic()`.
 > 
 > ### TimedAutoBase
-> this class is used to develop timed-based autonomous code. It is simple to use as you only need to instantiate it and use the addCommand() method to program your autonomous. Once done, simply call the runAuto() method in autonomousPeriodic
+> this class is used to develop timed-based autonomous code. It is simple to use as you only need to instantiate it and use the `addCommand()` method to program your autonomous. Once done, simply call the `runAuto()` method in `autonomousPeriodic()`.
 > 
 > ### TimedCommand
-> This class is used to create new commands to add to the TimedAutoBase list of commands. The constructor takes a DifferentialDrive object as well as an x and y value and the duration in seconds (double) or milliseconds (long) for the command to be executed for. 
+> This class is used to create new commands to add to the `TimedAutoBase` list of commands. The constructor takes a `DifferentialDrive` object as well as an x and y value and the duration in seconds (double) or milliseconds (long) for the command to be executed for. 
+> 
+### Running your project
+> ### Creating a jar
+> Once you have finished programming your robot, you will need to create a jar for it. Doing this is simple, all you need to do is select the gradle icon on your IDE -> "Execute Gradle Task" -> "gradle: :desktop:dist". Once done you should find a jar file under "desktop/build/libs" in your project. 
+> 
+> ### Running your jar
+> After you have created your jar all you have to do is run it on your raspberry pi. ***you will need to run this project as sudo in order to be able to initialize pigpio***
+> 
+> After you open a new terminal you can do: 
+>
+> + `$ sudo java -jar jarfilename.jar`
+> 
+> or
+> 
+> + `$ sudo su`
+> 
+> + `$ java -jar jarfilename.jar`

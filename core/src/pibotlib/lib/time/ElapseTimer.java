@@ -7,6 +7,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
+/**
+ *an elapse timer that can count in milliseconds or seconds*/
 public class ElapseTimer implements Runnable {
 
     public volatile double elapsedSeconds;
@@ -18,24 +20,34 @@ public class ElapseTimer implements Runnable {
         elapsedMilliseconds = 0;
     }
 
+    /**
+     *starts the timer count*/
     public void startTimer(){
         Thread thread = new Thread(this);
         thread.start();
     }
 
+    /**
+     *stops the timer*/
     public synchronized void stopTimer(){
         stopTimer = true;
     }
 
+    /**
+     *resets current counted time to 0*/
     public synchronized void reset(){
         elapsedMilliseconds = 0;
         elapsedSeconds = 0;
     }
 
+    /**
+     *returns the elapsed milliseconds*/
     public synchronized long getElapsedMilliseconds(){
         return elapsedMilliseconds;
     }
 
+    /**
+     *returns the elapsed seconds*/
     public synchronized   double getElapsedSeconds(){
         return elapsedSeconds;
     }

@@ -188,6 +188,8 @@ public class DriverStation implements Screen {
         }
     }
 
+    /**
+     *adds a sensor to the graphical driver station. NOTE: only 3 sensors are allowed at a time*/
     public static void addSensor(Sensor sensor){
         if (sensors.size() == 3){
             System.out.println("Driver station sensor capacity full");
