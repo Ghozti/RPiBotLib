@@ -64,6 +64,14 @@
 > ### PwmConfig, DigitalOutputConfig, and DigitalInputConfig
 > These classes are wrapper classes of the Pi4J config classes used to declare a new pin for pwm or digital input/output use. These wrappers allow a simple use of the Pi4J classes. The wrapper classes contain a method that return a dedicated object of said configuration. The digital input/output method will require a Pi4J context object, a pin address, and a pin ID in the form of a string and a name. The pwm config method will require a context object, a pin address, and a pwm type whether it be digital or hardware. 
 > + Learn more on the Raspberry Pi pins here: [Understanding the GPIO pins - Pi4J](https://pi4j.com/getting-started/understanding-the-pins/)
->
+> 
 > ### DualHBridgeController
 > The Dual H Bridge class is designed for dual h devices like the I298N motor controller. This class allows for up to **2** motors to be added to the motor controller, and will require the user to manually configure these motors. The DualHBridgeController object will take in a Pi4J context object as well as the forward and back channel for both motors. To properly configure any motor in this object, you must call the `configMotor1PWM` or `confiMotor2PWM` methods which will take in a pwm config object.
+>
+> ### DifferentialDrive
+> 
+> ### TimedAutoBase
+> this class is used to develop timed-based autonomous code. It is simple to use as you only need to instantiate it and use the addCommand() method to program your autonomous. Once done, simply call the runAuto() method in autonomousPeriodic
+> 
+> ### TimedCommand
+> This class is used to create new commands to add to the TimedAutoBase list of commands. The constructor takes a DifferentialDrive object as well as an x and y value and the duration in seconds (double) or milliseconds (long) for the command to be executed for. 
