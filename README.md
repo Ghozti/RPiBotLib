@@ -52,15 +52,13 @@
 > The current robot mode will always be indicated in **green.**
 >
 ### Fundamentals to getting a working robot
-> ### TimedAutoBase
-> `TimedAutoBase` is a timed-based class that can be used to develop simple autonomous code. The class can be called and instantiated in `Robot.java` and takes no parameters.
->
 > ### LocalXboxController
 > `LocalXboxController` is a wrapper class of the `Controller` class found in LibGDX. This class will allow for easy access to the left and right axis values found on a controller as well as a boolean value for when **A, B, X, or Y** is pressed. The axis will return a double, ranging from **-1 to 1** with decimals included. The class must be instantiated in `Robot.java`. Once instantiated, the program will search for a connected controller. Please ensure your raspberry pi is connected to a controller prior to running your program.
 >
 > ### Context
 > The Context class is a PI4J class which is used to be able to control the raspberry pi GPIO. This class is mandatory to instantiate in order to be able to execute your program. The best place to instantiate this class is in `robotInit()`. No parameters are needed in order to instantiate this class. 
 > + For more inforation on the PI4J library, visit: [Welcome to Pi4J](https://pi4j.com/)
+> 
 > ### PwmConfig, DigitalOutputConfig, and DigitalInputConfig
 > These classes are wrapper classes of the Pi4J config classes used to declare a new pin for pwm or digital input/output use. These wrappers allow a simple use of the Pi4J classes. The wrapper classes contain a method that return a dedicated object of said configuration. The digital input/output method will require a Pi4J context object, a pin address, and a pin ID in the form of a string and a name. The pwm config method will require a context object, a pin address, and a pwm type whether it be digital or hardware. 
 > + Learn more on the Raspberry Pi pins here: [Understanding the GPIO pins - Pi4J](https://pi4j.com/getting-started/understanding-the-pins/)
@@ -93,3 +91,5 @@
 > + `$ sudo su`
 > 
 > + `$ java -jar jarfilename.jar`
+> 
+>***NOTE: ensure that you have your raspberry pi plugged in to a monitor before running your program. Once the program runs, you may disconnect the raspberry pi from the monitor***
