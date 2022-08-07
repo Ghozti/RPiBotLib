@@ -1,4 +1,4 @@
-package pibotlib;
+package pibotlib.graphics;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
