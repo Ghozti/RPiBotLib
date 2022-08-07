@@ -93,3 +93,6 @@
 > + `$ java -jar jarfilename.jar`
 > 
 >***NOTE: ensure that you have your raspberry pi plugged in to a monitor before running your program. Once the program runs, you may disconnect the raspberry pi from the monitor***
+> 
+### Version Logs
+>#### ***1.0.0*** - provides a basic library with everything needed to run a simple robot with autonomous capabilities
