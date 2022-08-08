@@ -48,7 +48,6 @@ allprojects {
 project(":desktop") {
     apply plugin: "java-library"
 
-
     dependencies {
         implementation project(":core")
         implementation 'org.slf4j:slf4j-api:1.7.32'
@@ -71,7 +70,6 @@ project(":desktop") {
 
 project(":core") {
     apply plugin: "java-library"
-
 
     dependencies {
         implementation 'org.slf4j:slf4j-api:1.7.32'
