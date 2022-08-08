@@ -1,21 +1,6 @@
 sourceCompatibility = 11
 targetCompatibility = 11
 
-publishing {
-    publications {
-        // This mavenJava can be filled in randomly, it's just a task name
-        // MavenPublication must have, this is the task class to call
-        mavenJava(MavenPublication) {
-            // The header here is the artifacts configuration information, do not fill in the default
-            groupId = 'com.github.Ghozti'
-            artifactId = 'library'
-            version = '1.0.0'
-
-            from components.java
-        }
-    }
-}
-
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
 sourceSets.main.java.srcDirs = [ "src/" ]
