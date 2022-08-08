@@ -1,5 +1,4 @@
 buildscript {
-    
 
     repositories {
         mavenLocal()
@@ -16,10 +15,14 @@ buildscript {
 
 allprojects {
     apply plugin: "eclipse"
+    apply plugin: 'maven'
+    apply plugin: 'maven-publish'
 
-    version = '1.0.0'
+    group = 'com.github.Ghozti'
+    version = 'v1.0.0'
+
     ext {
-        appName = "PiBotLib"
+        appName = "RPiBotLib"
         gdxVersion = '1.11.0'
         roboVMVersion = '2.3.12'
         box2DLightsVersion = '1.5'
@@ -34,6 +37,11 @@ allprojects {
         google()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+    }
+
+    wrapper {
+        gradleVersion = "6.7"
+        distributionType = Wrapper.DistributionType.ALL
     }
 }
 
