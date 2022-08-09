@@ -48,7 +48,6 @@ public class DriverStation implements Screen {
             Thread thread = new Thread(robot);
             thread.start();
             robotStarted = true;
-            System.out.println("end of update");
         }
         mouseHitbox.x = Gdx.input.getX();
         mouseHitbox.y = Math.abs(Gdx.input.getY() - (int) Constants.Graphical.Screen.height);
