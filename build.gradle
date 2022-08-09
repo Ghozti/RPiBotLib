@@ -1,5 +1,6 @@
 buildscript {
 
+
     repositories {
         mavenLocal()
         mavenCentral()
@@ -8,7 +9,7 @@ buildscript {
         google()
     }
     dependencies {
-        
+
 
     }
 }
@@ -19,6 +20,7 @@ allprojects {
     apply plugin: 'maven-publish'
 
     group = 'com.github.Ghozti'
+
     version = 'v1.0.0'
 
     ext {
@@ -38,15 +40,11 @@ allprojects {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://oss.sonatype.org/content/repositories/releases/" }
     }
-
-    wrapper {
-        gradleVersion = "6.7"
-        distributionType = Wrapper.DistributionType.ALL
-    }
 }
 
 project(":desktop") {
     apply plugin: "java-library"
+
 
     dependencies {
         implementation project(":core")
@@ -70,6 +68,7 @@ project(":desktop") {
 
 project(":core") {
     apply plugin: "java-library"
+
 
     dependencies {
         implementation 'org.slf4j:slf4j-api:1.7.32'
