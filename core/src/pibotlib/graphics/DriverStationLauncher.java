@@ -1,5 +1,6 @@
 package pibotlib.graphics;
 
+import Robot.Robot;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -7,12 +8,19 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import pibotlib.graphics.DriverStation;
+import pibotlib.lib.addons.TimedRobotBase;
 
 public class DriverStationLauncher extends Game {
+
+	DriverStation driverStation = new DriverStation();
+
+	public DriverStationLauncher(TimedRobotBase robot){
+		driverStation.setRobot(robot);
+	}
 	
 	@Override
 	public void create () {
-		setScreen(new DriverStation());
+		setScreen(driverStation);
 	}
 
 	@Override

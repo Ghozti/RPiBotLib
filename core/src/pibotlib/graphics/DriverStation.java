@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 import pibotlib.graphics.utils.Font;
 import Robot.Robot;
+import pibotlib.lib.addons.TimedRobotBase;
 import pibotlib.lib.addons.sensors.Sensor;
 import pibotlib.lib.constants.Constants;
 import pibotlib.graphics.utils.DriverStationState;
@@ -24,6 +25,8 @@ public class DriverStation implements Screen {
     Font font, versionFont, interfaceFont;
     LocalXboxController controller;
     static ArrayList<Sensor> sensors = new ArrayList<>();
+    TimedRobotBase robot;
+    boolean robotStarted;
 
     @Override
     public void show() {
@@ -38,12 +41,15 @@ public class DriverStation implements Screen {
         versionFont = new Font(20);
         interfaceFont = new Font(35);
         controller = new LocalXboxController();
-
-        Thread thread = new Thread(new Robot(controller));
-        thread.start();
     }
 
     private void update(){
+        if (robot != null && !robotStarted){
+            Thread thread = new Thread(robot);
+            thread.start();
+            robotStarted = true;
+            System.out.println("end of update");
+        }
         mouseHitbox.x = Gdx.input.getX();
         mouseHitbox.y = Math.abs(Gdx.input.getY() - (int) Constants.Graphical.Screen.height);
         updateEnableButton();
@@ -196,5 +202,9 @@ public class DriverStation implements Screen {
         }else {
             sensors.add(sensor);
         }
+    }
+
+    public void setRobot(TimedRobotBase robot){
+        this.robot = robot;
     }
 }
