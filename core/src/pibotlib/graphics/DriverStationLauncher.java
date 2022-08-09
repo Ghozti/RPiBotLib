@@ -16,6 +16,7 @@ public class DriverStationLauncher extends Game {
 
 	public DriverStationLauncher(TimedRobotBase robot){
 		driverStation.setRobot(robot);
+		//driver station constructor
 	}
 	
 	@Override
