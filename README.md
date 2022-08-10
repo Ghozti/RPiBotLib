@@ -104,4 +104,4 @@
 > `implementation 'com.github.Ghozti:RPiBotLib:LatestGitHubVersion'`
 
 ### Version Logs
->#### ***1.0.0*** - provides a basic library with everything needed to run a simple robot with autonomous capabilities
+>#### ***v1.0.0*** - provides a basic library with everything needed to run a simple robot with autonomous capabilities
