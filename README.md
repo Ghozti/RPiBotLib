@@ -94,5 +94,14 @@
 > 
 >***NOTE: ensure that you have your raspberry pi plugged in to a monitor before running your program. Once the program runs, you may disconnect the raspberry pi from the monitor***
 > 
+### Updating to newer version
+>To update your RPiBotLib version, you can simply go to `gradle/build.gradle`, then go to your dependencies for both the core and desktop project and change the RPiBotLib dependency from:
+> 
+> `implementation 'com.github.Ghozti:RPiBotLib:CurrentVersion'` 
+> 
+> to:
+> 
+> `implementation 'com.github.Ghozti:RPiBotLib:LatestGitHubVersion'`
+
 ### Version Logs
 >#### ***1.0.0*** - provides a basic library with everything needed to run a simple robot with autonomous capabilities
