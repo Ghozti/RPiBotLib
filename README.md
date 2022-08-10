@@ -2,9 +2,9 @@
 ## Introduction
 > RPiBotLib is an open-sourced and simple to use LibGDX and Pi4J based library that uses the Raspberry Pi GPIO to be able to control robots or other electronics such as motors or sensors. Similarly to the FRC WPILib, the RPIBotLib functions on a time based runtime, as well as a similar user-side programming process. 
 
-## How To Use It
+## Getting Started
 ### Pre-Requirements
-> For optimal use, it is suggested to use IntelliJ IDEA to develop with RPIBotLib. Once the environment is set up you may clone this project into your IDE.
+> For optimal use, it is suggested to use IntelliJ IDEA to develop with RPIBotLib. Once the environment is set up, you may clone the RPiBotLibTemplate project and open it in your IDE.
 > + Download the latest version here: [Download IntelliJ IDEA: The Capable & Ergonomic Java IDE by JetBrains](https://www.jetbrains.com/idea/download/#section=windows)
 >
 > You will need to install the **latest Java version**. To do this, run the following command on your Raspberry Pi:
@@ -14,7 +14,7 @@
 > The **pigpio library** will also need to be installed. To do this, run the following command on your Raspberry Pi:
 > + `$sudo apt install pigpio python-pigpio python3-pigpio`
 >
-> Once the project is cloned, you may open the **RPIBotLib folder** then go to **core/src/Robot**. This is where you will find `Robot.java` and where you fill focus on to program your robot. While the entire project is available, it is not recommended for users to alter or change the source code of the library unless they are familar with the LibGDX and Pi4J libaries. Altering any other class except `Robot.java` could cause critical errors.
+> Once the project is cloned, you may open the **core/src** folder, then go to **Robot.java**. This is where you will focus to program your robot.
 >
 > It is recommended to set up **VNC Viewer** onto your raspberry pi in order to be able to remote control it from your PC. 
 > + visit: [How To Set Up VNC Connect on Raspberry Pi - RealVNC](https://www.realvnc.com/en/blog/how-to-setup-vnc-connect-raspberry-pi/)
