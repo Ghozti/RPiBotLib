@@ -54,8 +54,7 @@ project(":desktop") {
         implementation 'com.pi4j:pi4j-core:2.1.1'
         implementation 'com.pi4j:pi4j-plugin-raspberrypi:2.1.1'
         implementation 'com.pi4j:pi4j-plugin-pigpio:2.1.1'
-        implementation 'com.pi4j:pi4j-plugin-linuxfs:2.1.1'
-        implementation group: 'com.diozero', name: 'diozero-core', version: '1.3.3'
+        implementation group: 'com.diozero', name: 'diozero-core', version: '1.3.4'
         api "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
         api "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
@@ -79,8 +78,7 @@ project(":core") {
         implementation 'com.pi4j:pi4j-core:2.1.1'
         implementation 'com.pi4j:pi4j-plugin-raspberrypi:2.1.1'
         implementation 'com.pi4j:pi4j-plugin-pigpio:2.1.1'
-        implementation 'com.pi4j:pi4j-plugin-linuxfs:2.1.1'
-        implementation group: 'com.diozero', name: 'diozero-core', version: '1.3.3'
+        implementation group: 'com.diozero', name: 'diozero-core', version: '1.3.4'
         api "com.badlogicgames.gdx:gdx:$gdxVersion"
         api "com.badlogicgames.gdx:gdx-box2d:$gdxVersion"
         api "com.badlogicgames.gdx-controllers:gdx-controllers-core:$gdxControllersVersion"

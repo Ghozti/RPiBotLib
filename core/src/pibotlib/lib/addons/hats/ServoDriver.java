@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+import com.diozero.api.I2CConstants;
 import com.diozero.util.SleepUtil;
 import org.tinylog.Logger;
 import com.diozero.animation.Animation;
@@ -20,14 +21,15 @@ public class ServoDriver {
     private static final long SHORT_DELAY = 10;
 
     public static void main() {
-        int pwm_freq = 1000;
-        int pin_number = 0;
+        int pwm_freq = 50;
+        int pin_number = 12;
         test(pwm_freq, pin_number);
     }
 
     public static void test(int pwmFrequency, int gpio) {
-        ServoTrim trim = ServoTrim.TOWERPRO_SG90;
-        try (PCA9685 pca9685 = new PCA9685(pwmFrequency); ServoDevice servo = ServoDevice.newBuilder(gpio).setDeviceFactory(pca9685).setTrim(trim).build()) {
+        ServoTrim trim = ServoTrim.MG996R;
+        try (PCA9685 pca9685 = new PCA9685(I2CConstants.CONTROLLER_1,0x40,pwmFrequency);
+             ServoDevice servo = ServoDevice.newBuilder(gpio).setDeviceFactory(pca9685).setTrim(trim).build()) {
             Logger.info("Mid");
             pca9685.setDutyUs(gpio, trim.getMidPulseWidthUs());
             SleepUtil.sleepMillis(LARGE_DELAY);
