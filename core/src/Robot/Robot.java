@@ -1,5 +1,8 @@
 package Robot;
 
+import com.badlogic.gdx.controllers.Controller;
+import com.badlogic.gdx.controllers.Controllers;
+import com.diozero.api.ServoTrim;
 import com.pi4j.Pi4J;
 import com.pi4j.context.Context;
 import com.pi4j.io.i2c.I2CConfig;
@@ -20,6 +23,7 @@ import pibotlib.lib.motorcontrollers.DualHBridgeController;
 public class Robot extends TimedRobotBase {
 
     Context context;
+   // LocalXboxController controller;
     LocalXboxController controller;
     DualHBridgeController leftController, rightController;
     DifferentialDrive differentialDrive;
@@ -28,6 +32,7 @@ public class Robot extends TimedRobotBase {
     boolean controllerFound;
 
     TimedAutoBase autoBase;
+    ServoDriver driver;
 
     public Robot(){
 
@@ -38,6 +43,9 @@ public class Robot extends TimedRobotBase {
     public void robotInit() {
         try {
             context = Pi4J.newAutoContext();//always call first
+            controller = new LocalXboxController();
+            driver = new ServoDriver();
+            driver.addAllServos(ServoTrim.MG996R);
 
             leftController = new DualHBridgeController(context, 14, 15, 23, 24);
             rightController = new DualHBridgeController(context, 9, 25, 11, 8);
@@ -59,8 +67,6 @@ public class Robot extends TimedRobotBase {
 
             differentialDrive = new DifferentialDrive(leftController, rightController);
             stateLight = new RobotStateLight(context, 16);
-
-            ServoDriver.main();
         }catch (Exception e){
             System.out.println("Robot init fail, reboot raspberry pi and try again");
             e.printStackTrace();
@@ -70,7 +76,18 @@ public class Robot extends TimedRobotBase {
     //called periodically at all times
     @Override
     public void robotPeriodic() {
-
+        if (controller.getDPadUp()){
+            driver.setServoAngle(0,90);
+        }
+        if (controller.getDPadDown()){
+            driver.setServoAngle(0,0);
+        }
+        if (controller.getDPadLeft()){
+            driver.setServoAngle(0,180);
+        }
+        if (controller.getDPadRight()){
+            driver.setServoAngle(0,70);
+        }
     }
 
     //called periodically during autonomous

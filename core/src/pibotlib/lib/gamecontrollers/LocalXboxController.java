@@ -60,4 +60,20 @@ public class LocalXboxController {
     public synchronized boolean getY(){
         return controller.getButton(controller.getMapping().buttonY);
     }
+
+    /**
+     *returns a boolean if the D pad up button is pressed*/
+    public synchronized boolean getDPadUp(){return controller.getButton(controller.getMapping().buttonDpadUp);}
+
+    /**
+     *returns a boolean if the D pad down button is pressed*/
+    public synchronized boolean getDPadDown(){return controller.getButton(controller.getMapping().buttonDpadDown);}
+
+    /**
+     *returns a boolean if the D pad left button is pressed*/
+    public synchronized boolean getDPadLeft(){return controller.getButton(controller.getMapping().buttonDpadLeft);}
+
+    /**
+     *returns a boolean if the D pad right button is pressed*/
+    public synchronized boolean getDPadRight(){return controller.getButton(controller.getMapping().buttonDpadRight);}
 }
