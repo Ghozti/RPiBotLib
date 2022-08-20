@@ -105,3 +105,4 @@
 
 ### Version Logs
 >#### ***v1.0.0*** - provides a basic library with everything needed to run a simple robot with autonomous capabilities
+>#### ***v1.1.0*** - adds compatibility with PCA9685 devices
