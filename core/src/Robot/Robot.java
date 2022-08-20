@@ -1,9 +1,11 @@
 package Robot;
 
+import com.pi4j.context.Context;
 import pibotlib.lib.addons.TimedRobotBase;
-import pibotlib.lib.gamecontrollers.LocalXboxController;
 
 public class Robot extends TimedRobotBase {
+
+    Context context;
 
     public Robot(){
 
