@@ -32,7 +32,7 @@ public class ServoDriver {
 
     public void addServo(int gpio, ServoTrim trim){
         if (servos.size() >= maxServos){
-            System.out.println("servo limit is 12");
+            System.out.println("servo limit is 16");
             return;
         }else {
             try {
