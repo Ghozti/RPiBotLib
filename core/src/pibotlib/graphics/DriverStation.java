@@ -7,9 +7,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
 import pibotlib.graphics.utils.Font;
-import Robot.Robot;
 import pibotlib.lib.addons.TimedRobotBase;
-import pibotlib.lib.addons.sensors.Sensor;
+import pibotlib.lib.addons.sensors.DisplayAbleDevice;
 import pibotlib.lib.constants.Constants;
 import pibotlib.graphics.utils.DriverStationState;
 import pibotlib.lib.gamecontrollers.LocalXboxController;
@@ -24,7 +23,7 @@ public class DriverStation implements Screen {
     com.badlogic.gdx.math.Rectangle mouseHitbox;
     Font font, versionFont, interfaceFont;
     LocalXboxController controller;
-    static ArrayList<Sensor> sensors = new ArrayList<>();
+    static ArrayList<DisplayAbleDevice> sensors = new ArrayList<>();
     TimedRobotBase robot;
     boolean robotStarted;
 
@@ -195,7 +194,7 @@ public class DriverStation implements Screen {
 
     /**
      *adds a sensor to the graphical driver station. NOTE: only 3 sensors are allowed at a time*/
-    public static void addSensor(Sensor sensor){
+    public static void addSensor(DisplayAbleDevice sensor){
         if (sensors.size() == 3){
             System.out.println("Driver station sensor capacity full");
         }else {
