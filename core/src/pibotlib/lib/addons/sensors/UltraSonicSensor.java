@@ -12,7 +12,7 @@ import java.util.TimerTask;
 
 /**
  *Used for the HC-SR04 sensor or any other ultra-sonic sensor that works like it*/
-public class UltraSonicSensor implements Runnable, Sensor{
+public class UltraSonicSensor implements Runnable, DisplayAble {
 
     DigitalOutput sensorTriggerPin;
     DigitalInput sensorEchoPin;

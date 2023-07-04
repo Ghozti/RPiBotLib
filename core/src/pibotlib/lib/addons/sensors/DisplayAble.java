@@ -1,6 +1,6 @@
 package pibotlib.lib.addons.sensors;
 
-public interface DisplayAbleDevice {
+public interface DisplayAble {
 
     String getValueToString();
 
