@@ -31,6 +31,8 @@
 >
 > `teleopPeriodic()` is similar to `autonomousPeriodic()` but it will only run when the robot mode is set to tele-op and the robot state is enabled.
 >
+> `disabledPeriodic()` will run repeatedly whenever the robot is in a disabled state
+> 
 > `robotShutDown()` is similar `robotInit()` except it will only run when the driver station state is set to **"kill"**. By default, `robotShutDown()` will cancel any ongoing method and will suspend the program. 
 > 
 ### Understanding The Driver Station
@@ -138,3 +140,4 @@
 >#### ***v1.1.0*** - adds compatibility with PCA9685 devices
 >#### ***v1.1.1*** - added servo driver and PID support
 >#### ***v1.1.2*** - fixed no controller found issue when user is not using an xbox controller, optimized program performance, updated readMe driver station screenshot
+>#### ***v1.1.3*** - added disabled periodic method. Added more servo controller functions

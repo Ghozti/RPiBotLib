@@ -121,6 +121,11 @@ public class Robot extends TimedRobotBase {
     }
 
     @Override
+    public void disabledPeriodic() {
+
+    }
+
+    @Override
     public void robotShutDown() {
         stateLight.shutDown();
         differentialDrive.arcadeDrive(0, 0);

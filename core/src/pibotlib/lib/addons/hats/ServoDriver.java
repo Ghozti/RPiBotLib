@@ -79,4 +79,16 @@ public class ServoDriver {
     public void setServoAngle(int ID, float angle){
         servos.get(ID).setAngle(angle);
     }
+
+    public void setFrequency(int ID, int frequency){
+        servos.get(ID).setServoFrequency(frequency);
+    }
+
+    public void setValue(int ID,float value){
+        servos.get(ID).setValue(value);
+    }
+
+    public void setFrequencyUS(int ID, int frequency){
+        servos.get(ID).setPulseWidthUs(frequency);
+    }
 }

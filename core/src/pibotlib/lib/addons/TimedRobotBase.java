@@ -14,6 +14,7 @@ public abstract class TimedRobotBase implements Runnable {
     public abstract void autonomousPeriodic();
 
     public abstract void teleopPeriodic();
+    public abstract void disabledPeriodic();
 
     public abstract void robotShutDown();
 
@@ -36,6 +37,10 @@ public abstract class TimedRobotBase implements Runnable {
                         if (DriverStationState.getState().equals(Constants.DriverStationStates.ENABLED)){
                             teleopPeriodic();
                         }
+                    }
+
+                    if (DriverStationState.getState().equals(Constants.DriverStationStates.DISABLED)){
+                        disabledPeriodic();
                     }
 
                 }else {
