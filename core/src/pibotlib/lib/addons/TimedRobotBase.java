@@ -44,7 +44,7 @@ public abstract class TimedRobotBase implements Runnable {
                     System.exit(0);
                 }
             }
-        }, 0, 10);
+        }, 0, 35);
     }
 
     @Override

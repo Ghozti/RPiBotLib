@@ -21,7 +21,6 @@ public class PIDController implements DisplayAble {
     volatile double errorSum = 0;
     volatile double errorRate = 0;
     volatile double lastError = 0;
-    volatile double lastTimeStamp = 0;
     volatile double currentTime = 0;
     volatile double sensorValue;
 
@@ -60,9 +59,17 @@ public class PIDController implements DisplayAble {
         timer = new ElapseTimer();
     }
 
+    boolean timerStarted = false;
+
     public double getOutput(double sensorValue){
-        timer.startTimer();
-        currentTime = timer.getElapsedMilliseconds() - lastTimeStamp;
+
+        this.sensorValue = sensorValue;
+
+        if (!timerStarted){
+            timer.startTimer();
+            timerStarted = true;
+        }
+        currentTime = timer.getElapsedMilliseconds();
         if(sensorValue > target){
             error = target - sensorValue;
             greaterThanMax = true;
@@ -80,7 +87,6 @@ public class PIDController implements DisplayAble {
         }
 
         errorRate = (error - lastError)/currentTime;
-        lastTimeStamp = timer.getElapsedMilliseconds();
         lastError = error;
 
         isOnTarget = maxTarget >= sensorValue && minTarget <= sensorValue;
@@ -91,9 +97,12 @@ public class PIDController implements DisplayAble {
             errorRate = 0;
             timer.reset();
             timer.stopTimer();
+            timerStarted = false;
             return 0;
         }
-        return (kP * error) + (kI * errorSum) + (kD * errorRate);//only PI for now
+
+        output = (kP * error) + (kI * errorSum) + (kD * errorRate);
+        return output;//only PI for now
     }
 
     public void pause(){
@@ -102,6 +111,7 @@ public class PIDController implements DisplayAble {
         errorRate = 0;
         timer.reset();
         timer.stopTimer();
+        timerStarted = false;
     }
 
     public void setTarget(double minTolerance, double maxTolerance, double target){
@@ -124,7 +134,6 @@ public class PIDController implements DisplayAble {
     public synchronized double getError(){return error;}
     public synchronized double getErrorSum(){return errorSum;}
 
-    public synchronized double getLastTimeStamp(){return lastTimeStamp;}
     public synchronized double getCurrentTime(){return currentTime;}
 
     public synchronized double getSensorValue(){return sensorValue;}
@@ -135,7 +144,7 @@ public class PIDController implements DisplayAble {
 
     @Override
     public String getValueToString() {
-        return null;
+        return "error: " + getError() + "\n" + "sensor: " + getSensorValue() + "\n" + "output: " + output + "\n" + "is on target: " + isOnTarget() + "\n" + " Elapsed: " + getCurrentTime();
     }
 
     @Override

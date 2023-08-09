@@ -21,9 +21,10 @@ public class DriverStation implements Screen {
     TextureRegion img;
     DriverStationButton enableButton, disableButton , autoButton, teleopButton;
     com.badlogic.gdx.math.Rectangle mouseHitbox;
-    Font font, versionFont, interfaceFont;
+    Font font, versionFont, interfaceFont, displayableFont;
     LocalXboxController controller;
     static ArrayList<DisplayAble> sensors = new ArrayList<>();
+    static ArrayList<DisplayAble> pidControllers = new ArrayList<>();
     TimedRobotBase robot;
     boolean robotStarted;
 
@@ -39,7 +40,13 @@ public class DriverStation implements Screen {
         font = new Font(100);
         versionFont = new Font(20);
         interfaceFont = new Font(35);
-        controller = new LocalXboxController();
+        displayableFont = new Font(23);
+
+        try {
+            controller = new LocalXboxController();
+        }catch (Exception e){
+            System.err.println("Xbox controller not found...");;
+        }
     }
 
     private void update(){
@@ -74,26 +81,35 @@ public class DriverStation implements Screen {
         font.draw(batch, DriverStationState.getRobotMode(),480,300,0,false);
 
         interfaceFont.draw(batch,"Controller: ",80,590,0,false);
-        interfaceFont.draw(batch,controller.getLeftXAxis() + " LX",80,520,0,false);
-        interfaceFont.draw(batch,controller.getLeftYAxis() + " LY",80,450,0,false);
-        interfaceFont.draw(batch,controller.getRightXAxis() + " RX",250,520,0,false);
-        interfaceFont.draw(batch,controller.getRightYAxis() + " RY",250,450,0,false);
+
+        try {
+            interfaceFont.draw(batch, controller.getLeftXAxis() + " LX", 80, 520, 0, false);
+            interfaceFont.draw(batch, controller.getLeftYAxis() + " LY", 80, 450, 0, false);
+            interfaceFont.draw(batch, controller.getRightXAxis() + " RX", 250, 520, 0, false);
+            interfaceFont.draw(batch, controller.getRightYAxis() + " RY", 250, 450, 0, false);
+        }catch (Exception e){
+
+        }
 
         interfaceFont.draw(batch,"Sensors:",480,590,0,false);//sensors.get(0).getName()
         if ((sensors.size() >= 1)) {
-            interfaceFont.draw(batch, sensors.get(0).getName() + " :", 480, 520, 0, false);
-            interfaceFont.draw(batch, sensors.get(0).getValueToString(), 900, 520, 0, false);
+            displayableFont.draw(batch, sensors.get(0).getName() + " :", 420, 550, 0, false);
+            displayableFont.draw(batch, sensors.get(0).getValueToString(), 615, 550, 0, false);
         }
         if ((sensors.size() >= 2)) {
-            interfaceFont.draw(batch, sensors.get(1).getName() + " :", 480, 485, 0, false);
-            interfaceFont.draw(batch, sensors.get(1).getValueToString(), 900, 485, 0, false);
+            displayableFont.draw(batch, sensors.get(1).getName() + " :", 420, 485, 0, false);
+            displayableFont.draw(batch, sensors.get(1).getValueToString(), 615, 485, 0, false);
         }
         if ((sensors.size() == 3)) {
-            interfaceFont.draw(batch, sensors.get(2).getName() + " :", 480, 450, 0, false);
-            interfaceFont.draw(batch, sensors.get(2).getValueToString(), 900, 450, 0, false);
+            displayableFont.draw(batch, sensors.get(2).getName() + " :", 420, 450, 0, false);
+            displayableFont.draw(batch, sensors.get(2).getValueToString(), 615, 450, 0, false);
         }
 
-
+        interfaceFont.draw(batch,"PID:",930,590,0,false);
+        if ((pidControllers.size() == 1)) {
+            displayableFont.draw(batch, pidControllers.get(0).getName() + " :", 850, 550, 0, false);
+            displayableFont.draw(batch, pidControllers.get(0).getValueToString(), 850, 520, 0, false);
+        }
         versionFont.draw(batch,"Version: " + Constants.LibConstants.LIB_VERSION ,920,20,0,false);
         batch.end();
     }
@@ -199,6 +215,14 @@ public class DriverStation implements Screen {
             System.out.println("Driver station sensor capacity full");
         }else {
             sensors.add(sensor);
+        }
+    }
+
+    public static void addPidController(DisplayAble controller){
+        if (pidControllers.size() == 1){
+            System.out.println("Driver station sensor capacity full");
+        }else {
+            pidControllers.add(controller);
         }
     }
 

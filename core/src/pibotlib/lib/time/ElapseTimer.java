@@ -53,15 +53,15 @@ public class ElapseTimer implements Runnable {
     }
 
     @Override
-    public void run() {//TODO check this works
+    public void run() {
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
         Runnable helloRunnable = () -> {
-            elapsedMilliseconds +=  1;
+            elapsedMilliseconds +=  100;
             elapsedSeconds = elapsedMilliseconds/1000d;
             if (stopTimer){
                 executor.shutdown();
             }
         };
-        executor.scheduleAtFixedRate(helloRunnable, 0, 1, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(helloRunnable, 0, 100, TimeUnit.MILLISECONDS);
     }
 }

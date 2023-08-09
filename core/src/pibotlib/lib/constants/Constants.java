@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 public class Constants {
 
     public static class LibConstants {
-        public final static String LIB_VERSION = "1.1.0";
+        public final static String LIB_VERSION = "1.1.2";
     }
 
     public static class Graphical {

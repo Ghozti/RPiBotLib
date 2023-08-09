@@ -70,7 +70,7 @@ public class UltraSonicSensor implements Runnable, DisplayAble {
                         e.printStackTrace();
                     }
                 }
-            }, 0, 10);
+            }, 0, 35);
         }
     }
 

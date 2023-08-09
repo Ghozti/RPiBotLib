@@ -48,7 +48,7 @@ public class TimedCommand {
                     taskTimer.cancel();
                 }
             }
-        }, 0, 10);
+        }, 0, 35);
 
     }
 
