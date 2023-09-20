@@ -1,8 +1,5 @@
 package pibotlib.lib.time;
 
-import java.time.Duration;
-import java.time.Instant;
-import java.util.Timer;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -13,6 +10,12 @@ public class ElapseTimer implements Runnable {
 
     public volatile double elapsedSeconds;
     public volatile long elapsedMilliseconds;
+
+    volatile double savedElapsedSeconds;
+    volatile long savedElapsedMilSeconds;
+    boolean pause;
+
+    volatile long elapsedMillisecondsSaved;
     volatile boolean stopTimer;
 
     public ElapseTimer(){
@@ -33,9 +36,18 @@ public class ElapseTimer implements Runnable {
         stopTimer = true;
     }
 
+    public synchronized void pauseTimer(){
+        pause = true;
+    }
+
+    public synchronized void resumeTimer(){
+        pause = false;
+    }
+
     /**
      *resets current counted time to 0*/
     public synchronized void reset(){
+        pause = true;
         elapsedMilliseconds = 0;
         elapsedSeconds = 0;
     }
@@ -56,8 +68,11 @@ public class ElapseTimer implements Runnable {
     public void run() {
         ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
         Runnable helloRunnable = () -> {
-            elapsedMilliseconds +=  100;
-            elapsedSeconds = elapsedMilliseconds/1000d;
+
+            if (!pause) {
+                elapsedMilliseconds += 100;
+                elapsedSeconds = elapsedMilliseconds / 1000d;
+            }
             if (stopTimer){
                 executor.shutdown();
             }

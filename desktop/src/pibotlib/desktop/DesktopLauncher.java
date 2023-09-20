@@ -4,6 +4,7 @@ import Robot.Robot;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
 import pibotlib.graphics.DriverStationLauncher;
+import pibotlib.graphics.SimLauncher;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
@@ -13,6 +14,7 @@ public class DesktopLauncher {
 		config.setWindowedMode(1080,720);
 		config.setForegroundFPS(20);
 		config.setIdleFPS(5);
-		new Lwjgl3Application(new DriverStationLauncher(new Robot()), config);
+		new Lwjgl3Application(new SimLauncher(), config);
+		//new Lwjgl3Application(new DriverStationLauncher(new Robot()), config);
 	}
 }
