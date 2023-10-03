@@ -69,10 +69,10 @@ public class SimRobot {
                 this.maxDistancePerSecond = distancePerSecond;
                 break;
             case FEET:
-                this.acceleration = acceleration/UnitConstants.Distance.feetToM;
+                this.maxDistancePerSecond = distancePerSecond/UnitConstants.Distance.feetToM;
                 break;
             case MILLIMETERS:
-                this.acceleration = acceleration/UnitConstants.Distance.mmToM;
+                this.maxDistancePerSecond = distancePerSecond/UnitConstants.Distance.mmToM;
                 break;
         }
     }
@@ -122,19 +122,6 @@ public class SimRobot {
         startY = 400;
     }
 
-    private float getTorque(float rpm){
-        var a = ((rpm-((maxMotorRPM/1000)*.5))/((maxMotorRPM/1000)*.49));
-        return (float) -(a * a) + (maxTorque/maxTorque-.1f);
-    }
-
-    public float getCurrentMotorForce(float motorPower){
-        return (float) ((((getTorque((motorPower * maxMotorRPM)/1000)) * gearRatio) * 6)/((robotWheelDiameter / UnitConstants.Distance.inchToM)/2));
-    }
-
-    public float getTotalForceApplied(float motorPower, float frictionalForce){
-        return (float) ((getCurrentMotorForce(motorPower) + frictionalForce)/robotWeight);
-    }
-
     /*
     * 32 x 32 is the pixel size of the robot image
     * 64 px in the screen will equal to 1 inch irl
@@ -154,9 +141,7 @@ public class SimRobot {
     public void update(){
         normalForce = (float) (robotWeight * -9.8);//measured in newtowns
         slowDownFactor = (float) (.6 * normalForce);//TODO save it as constant
-        slowDownFactor = (float) (slowDownFactor/robotWeight);
-        //System.out.println(getTotalForceApplied(getCurrentMotorForce(.5f),slowDownFactor));
-
+        slowDownFactor = (float) (slowDownFactor/robotWeight)*Gdx.graphics.getDeltaTime();
         if (speedX != 0 && speedY != 0){
             velocityX = (float) (((Math.abs(robotGraphics.getX())- Math.abs(startX)))/ timer.elapsedSeconds);
             velocityY = (float) (((Math.abs(robotGraphics.getY())- Math.abs(startY)))/ timer.elapsedSeconds);
@@ -199,9 +184,9 @@ public class SimRobot {
             if (Gdx.input.isKeyJustPressed(Input.Keys.E) && lastPressed == 'Q'){
                 rotationSpeed = -rotationSpeed * .8f;
             }
-            robotGraphics.rotate(-rotationSpeed * Gdx.graphics.getDeltaTime());
+            robotGraphics.rotate(-rotationSpeed);
             lastPressed = 'E';
-            rotationSpeed += -(slowDownFactor*1.5) * Gdx.graphics.getDeltaTime();
+            rotationSpeed += -(slowDownFactor);
             if (rotationSpeed > maxDistancePerSecond){
                 rotationSpeed = (float) maxDistancePerSecond;
             }
@@ -209,14 +194,14 @@ public class SimRobot {
             if (Gdx.input.isKeyJustPressed(Input.Keys.Q) && lastPressed == 'E'){
                 rotationSpeed = -rotationSpeed * .8f;
             }
-            robotGraphics.rotate(rotationSpeed * Gdx.graphics.getDeltaTime());
+            robotGraphics.rotate(rotationSpeed);
             lastPressed = 'Q';
-            rotationSpeed += -(slowDownFactor*1.5) * Gdx.graphics.getDeltaTime();
+            rotationSpeed += -(slowDownFactor);
             if (rotationSpeed > maxDistancePerSecond){
                 rotationSpeed = (float) maxDistancePerSecond;
             }
         }else {
-            rotationSlowDown = ((slowDownFactor*2) * Gdx.graphics.getDeltaTime());
+            rotationSlowDown = ((slowDownFactor*2));
 
             if (rotationSpeed > 0){
                 rotationSpeed += rotationSlowDown;
@@ -234,10 +219,10 @@ public class SimRobot {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.W)) {
-            x -= slowDownFactor;
-            y -= slowDownFactor;
-            speedX -= slowDownFactor;
-            speedY -= slowDownFactor;
+            x += acceleration;
+            y += acceleration;
+            speedX += acceleration;
+            speedY += acceleration;
             if (x > maxDistancePerSecond){
                 x = (float) maxDistancePerSecond;
                 speedX = (float) maxDistancePerSecond;
@@ -247,10 +232,10 @@ public class SimRobot {
                 speedY = (float) maxDistancePerSecond;
             }
         }else if (Gdx.input.isKeyPressed(Input.Keys.S)){
-            x += slowDownFactor;
-            y += slowDownFactor;
-            speedX += slowDownFactor;
-            speedY += slowDownFactor;
+            x -= acceleration;
+            y -= acceleration;
+            speedX -= acceleration;
+            speedY -= acceleration;
             if (x < -.1){
                 x = (float) -maxDistancePerSecond;
                 speedX = (float) -maxDistancePerSecond;
@@ -261,22 +246,22 @@ public class SimRobot {
             }
         }else {
             if (x > .1) {
-                x += (slowDownFactor * Gdx.graphics.getDeltaTime());
-                speedX += (slowDownFactor * Gdx.graphics.getDeltaTime());
+                x += (slowDownFactor);
+                speedX += (slowDownFactor);
             }else if(x < -maxDistancePerSecond%slowDownFactor){
-                x -= (slowDownFactor * Gdx.graphics.getDeltaTime());
-                speedX -= (slowDownFactor * Gdx.graphics.getDeltaTime());
+                x -= (slowDownFactor);
+                speedX -= (slowDownFactor);
             }else {
                 x = 0;
                 speedX = 0;
             }
 
             if (y > .1) {
-                y += (slowDownFactor * Gdx.graphics.getDeltaTime());
-                speedY += (slowDownFactor * Gdx.graphics.getDeltaTime());
+                y += (slowDownFactor);
+                speedY += (slowDownFactor);
             }else if(y < -.1){
-                y -= (slowDownFactor * Gdx.graphics.getDeltaTime());
-                speedY -= (slowDownFactor* Gdx.graphics.getDeltaTime());
+                y -= (slowDownFactor);
+                speedY -= (slowDownFactor);
             }else {
                 y = 0;
                 speedY = 0;

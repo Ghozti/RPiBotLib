@@ -4,16 +4,17 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import pibotlib.lib.sim.characterization.SimRobot;
+import pibotlib.lib.sim.characterization.SimRobotNew;
 import pibotlib.lib.sim.utils.units.Units;
 
 public class AutoPathSim implements Screen {
 
     SpriteBatch batch;
-    SimRobot robot;
+    SimRobotNew robot;
     @Override
     public void show() {
         batch = new SpriteBatch();
-        robot = new SimRobot();
+        robot = new SimRobotNew();
         robot.setRobotWheelDiameter(6,Units.INCHES);
         robot.setRobotChassisDimensions(2,2,Units.INCHES);
         robot.setMaxDistancePerSecond(35, Units.FEET);
