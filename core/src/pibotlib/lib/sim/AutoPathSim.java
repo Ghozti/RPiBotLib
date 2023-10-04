@@ -3,7 +3,6 @@ package pibotlib.lib.sim;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import pibotlib.lib.sim.characterization.SimRobot;
 import pibotlib.lib.sim.characterization.SimRobotNew;
 import pibotlib.lib.sim.utils.units.Units;
 
@@ -16,7 +15,7 @@ public class AutoPathSim implements Screen {
         batch = new SpriteBatch();
         robot = new SimRobotNew();
         robot.setRobotWheelDiameter(6,Units.INCHES);
-        robot.setRobotChassisDimensions(2,2,Units.INCHES);
+        robot.setRobotChassisDimensions(1,1,Units.METERS);
         robot.setMaxDistancePerSecond(35, Units.FEET);
         robot.setRobotWeight(56,Units.KILOGRAMS);
         robot.setRobotAcceleration(3,Units.FEET);
@@ -28,6 +27,7 @@ public class AutoPathSim implements Screen {
     public void render(float delta) {
         ScreenUtils.clear(0, 0,0, 1f);
         batch.begin();
+        robot.setMotorPower(1f);
         robot.draw(batch);
         batch.end();
     }

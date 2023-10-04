@@ -37,6 +37,7 @@ public class SimRobotNew {
     float normalForce;
     float frictionalSlowDownFactor;
 
+    float motorPower;
     //sim fields
     boolean hasMoved;
 
@@ -56,8 +57,8 @@ public class SimRobotNew {
                 break;
         }
 
-        robotLength *= (62/robotLength);
-        robotWidth *= (62/robotWidth);
+        robotLength *= (36/robotLength);
+        robotWidth *= (36/robotWidth);
     }
 
     public void setRobotWheelDiameter(float wheelDiamater, Units wheelDiameterUnit) {
@@ -152,6 +153,14 @@ public class SimRobotNew {
         frictionalSlowDownFactor = (frictionalSlowDownFactor/robotWeight);
     }
 
+    float a_maxDistancePerSecond;
+    float a_acceleration;
+
+    public void setMotorPower(float motorPower){
+        this.a_maxDistancePerSecond = maxDistancePerSecond * motorPower;
+        this.a_acceleration = acceleration * motorPower;
+    }
+
     char lastPressed = ' ';
     float rotationalSlowDown;
     float rotationSpeed;
@@ -172,25 +181,19 @@ public class SimRobotNew {
         hasMoved = true;
 
         if (Gdx.input.isKeyPressed(Input.Keys.E)){
-            if (Gdx.input.isKeyJustPressed(Input.Keys.E) && lastPressed == 'Q'){
-                rotationSpeed = -rotationSpeed * .8f;
+            lastPressed = 'E';
+            rotationSpeed += (a_acceleration);
+            if (rotationSpeed > a_maxDistancePerSecond){
+                rotationSpeed = a_maxDistancePerSecond;
             }
             robotGraphics.rotate(-rotationSpeed);
-            lastPressed = 'E';
-            rotationSpeed += -(frictionalSlowDownFactor);
-            if (rotationSpeed > maxDistancePerSecond){
-                rotationSpeed = maxDistancePerSecond;
-            }
         }else if (Gdx.input.isKeyPressed(Input.Keys.Q)){
-            if (Gdx.input.isKeyJustPressed(Input.Keys.Q) && lastPressed == 'E'){
-                rotationSpeed = -rotationSpeed * .8f;
+            lastPressed = 'Q';
+            rotationSpeed += a_acceleration;
+            if (rotationSpeed > a_maxDistancePerSecond){
+                rotationSpeed = a_maxDistancePerSecond;
             }
             robotGraphics.rotate(rotationSpeed);
-            lastPressed = 'Q';
-            rotationSpeed += -frictionalSlowDownFactor;
-            if (rotationSpeed > maxDistancePerSecond){
-                rotationSpeed = maxDistancePerSecond;
-            }
         }else {
             rotationalSlowDown = ((frictionalSlowDownFactor*2));
 
@@ -206,40 +209,38 @@ public class SimRobotNew {
             if (lastPressed == 'Q')
                 robotGraphics.rotate (rotationSpeed * Gdx.graphics.getDeltaTime());
 
-            //frictionalSlowDownFactor = robotGraphics.getRotation() + rotationSpeed;
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.W)){
-            speedX += acceleration;
-            speedY += acceleration;
-            if (speedX > maxDistancePerSecond){
-                speedX = maxDistancePerSecond;
+            speedX += a_acceleration;
+            speedY += a_acceleration;
+            if (speedX > a_maxDistancePerSecond){
+                speedX = a_maxDistancePerSecond;
             }
-            if (speedY > maxDistancePerSecond){
-                speedY = maxDistancePerSecond;
+            if (speedY > a_maxDistancePerSecond){
+                speedY = a_maxDistancePerSecond;
             }
         }else if (Gdx.input.isKeyPressed(Input.Keys.S)){
-            speedX -= acceleration;
-            speedY -= acceleration;
-            if (speedX < -.1) {
-                speedX = -maxDistancePerSecond;
+            speedX -= a_acceleration;
+            speedY -= a_acceleration;
+            if (speedX < -a_maxDistancePerSecond) {
+                speedX = -a_maxDistancePerSecond;
             }
-            if (speedY < -maxDistancePerSecond){
-                speedY = -maxDistancePerSecond;
+            if (speedY < -a_maxDistancePerSecond){
+                speedY = -a_maxDistancePerSecond;
             }
         }else {
-            if (speedX > .1) {
+            if (speedX > a_maxDistancePerSecond%frictionalSlowDownFactor) {
                 speedX += (frictionalSlowDownFactor);
-                speedX += (frictionalSlowDownFactor);
-            }else if(speedX < -maxDistancePerSecond%frictionalSlowDownFactor){
+            }else if(speedX < -a_maxDistancePerSecond%frictionalSlowDownFactor){
                 speedX -= (frictionalSlowDownFactor);
             }else {
                 speedX = 0;
             }
 
-            if (speedY > .1) {
+            if (speedY > a_maxDistancePerSecond%frictionalSlowDownFactor) {
                 speedY += (frictionalSlowDownFactor);
-            }else if(speedY < -.1){
+            }else if(speedY < -a_maxDistancePerSecond%frictionalSlowDownFactor){
                 speedY -= (frictionalSlowDownFactor);
             }else {
                 speedY = 0;
@@ -255,7 +256,8 @@ public class SimRobotNew {
         }else {
             hasMoved = false;
         }
-        drive(speedX,speedY);
+        //System.out.println(speedY*36);
+        drive(speedX*36,speedY*36);
     }
 
     public void draw(Batch batch){
