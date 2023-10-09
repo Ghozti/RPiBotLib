@@ -153,6 +153,7 @@ public class SimRobotNew {
         frictionalSlowDownFactor = (frictionalSlowDownFactor/robotWeight);
     }
 
+
     float a_maxDistancePerSecond;
     float a_acceleration;
 
