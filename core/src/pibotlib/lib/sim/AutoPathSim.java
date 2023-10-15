@@ -16,7 +16,7 @@ public class AutoPathSim implements Screen {
         robot = new SimRobotNew();
         robot.setRobotWheelDiameter(6,Units.INCHES);
         robot.setRobotChassisDimensions(1,1,Units.METERS);
-        robot.setMaxDistancePerSecond(35, Units.FEET);
+        robot.setMaxDistancePerSecond(23, Units.FEET);
         robot.setRobotWeight(56,Units.KILOGRAMS);
         robot.setRobotAcceleration(3,Units.FEET);
         robot.setChassisMotors(6,2.6f,10.75f,6000);

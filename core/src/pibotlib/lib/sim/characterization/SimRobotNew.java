@@ -41,6 +41,11 @@ public class SimRobotNew {
     //sim fields
     boolean hasMoved;
 
+    float encoderTickCOunt = 36;//per meter
+    float rightEncoder, leftEncoder;
+
+    float ticksPerMeter = 10;
+
     public void setRobotChassisDimensions(float length, float width, Units dimentsionUnit) {
         switch (dimentsionUnit) {
             case INCHES:
@@ -162,6 +167,16 @@ public class SimRobotNew {
         this.a_acceleration = acceleration * motorPower;
     }
 
+    public void resetEncoders(){
+        rightEncoder = 0;
+        leftEncoder = 0;
+    }
+
+    private void updateEncoders(float left, float right){
+        leftEncoder += left * Gdx.graphics.getDeltaTime();
+        rightEncoder += right * Gdx.graphics.getDeltaTime();
+    }
+
     char lastPressed = ' ';
     float rotationalSlowDown;
     float rotationSpeed;
@@ -183,12 +198,14 @@ public class SimRobotNew {
 
         if (Gdx.input.isKeyPressed(Input.Keys.E)){
             lastPressed = 'E';
+            updateEncoders(encoderTickCOunt,-encoderTickCOunt);
             rotationSpeed += (a_acceleration);
             if (rotationSpeed > a_maxDistancePerSecond){
                 rotationSpeed = a_maxDistancePerSecond;
             }
             robotGraphics.rotate(-rotationSpeed);
         }else if (Gdx.input.isKeyPressed(Input.Keys.Q)){
+            updateEncoders(-encoderTickCOunt,encoderTickCOunt);
             lastPressed = 'Q';
             rotationSpeed += a_acceleration;
             if (rotationSpeed > a_maxDistancePerSecond){
@@ -213,6 +230,7 @@ public class SimRobotNew {
         }
 
         if (Gdx.input.isKeyPressed(Input.Keys.W)){
+            updateEncoders(encoderTickCOunt,encoderTickCOunt);
             speedX += a_acceleration;
             speedY += a_acceleration;
             if (speedX > a_maxDistancePerSecond){
@@ -222,6 +240,7 @@ public class SimRobotNew {
                 speedY = a_maxDistancePerSecond;
             }
         }else if (Gdx.input.isKeyPressed(Input.Keys.S)){
+            updateEncoders(-encoderTickCOunt,-encoderTickCOunt);
             speedX -= a_acceleration;
             speedY -= a_acceleration;
             if (speedX < -a_maxDistancePerSecond) {
