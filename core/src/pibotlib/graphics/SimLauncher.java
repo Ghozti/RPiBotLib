@@ -1,12 +1,12 @@
 package pibotlib.graphics;
 
 import com.badlogic.gdx.Game;
-import pibotlib.lib.sim.AutoPathSim;
+import pibotlib.lib.sim.Robot;
 
 public class SimLauncher extends Game {
     @Override
     public void create() {
-        setScreen(new AutoPathSim());
+        setScreen(new Robot());
     }
 
     @Override

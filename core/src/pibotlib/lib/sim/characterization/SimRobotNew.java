@@ -172,7 +172,15 @@ public class SimRobotNew {
         leftEncoder = 0;
     }
 
-    private void updateEncoders(float left, float right){
+    public float getLeftEncoder(){
+        return leftEncoder;
+    }
+
+    public float getRightEncoder(){
+        return rightEncoder;
+    }
+
+    private void updateEncoders(float left, float right) {
         leftEncoder += left * Gdx.graphics.getDeltaTime();
         rightEncoder += right * Gdx.graphics.getDeltaTime();
     }
@@ -184,6 +192,18 @@ public class SimRobotNew {
     float speedX, speedY;
 
     public void update(){
+        drive(speedX*36,speedY*36);
+    }
+
+    public void draw(Batch batch){
+        robotGraphics.draw(batch);
+        update();
+    }
+
+    //TODO make the method below behave like an arcade drive
+
+    public void arcadeDrive(float turnInput, float driveInput){
+        setMotorPower(driveInput);
         getFrictionalSlowDown();
         frictionalSlowDownFactor *= Gdx.graphics.getDeltaTime();
 
@@ -276,13 +296,6 @@ public class SimRobotNew {
         }else {
             hasMoved = false;
         }
-        //System.out.println(speedY*36);
-        drive(speedX*36,speedY*36);
-    }
-
-    public void draw(Batch batch){
-        robotGraphics.draw(batch);
-        update();
     }
 
 }

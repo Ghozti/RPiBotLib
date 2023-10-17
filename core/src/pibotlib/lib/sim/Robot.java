@@ -4,12 +4,19 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import pibotlib.lib.sim.characterization.SimRobotNew;
+import pibotlib.lib.sim.utils.commands.CommandRunner;
+import pibotlib.lib.sim.utils.commands.SimCommand;
 import pibotlib.lib.sim.utils.units.Units;
 
-public class AutoPathSim implements Screen {
+import java.util.ArrayList;
+
+public class Robot implements Screen {
 
     SpriteBatch batch;
     SimRobotNew robot;
+
+    CommandRunner commandRunner;
+    ArrayList<SimCommand> commands = new ArrayList<>();
     @Override
     public void show() {
         batch = new SpriteBatch();
@@ -21,6 +28,9 @@ public class AutoPathSim implements Screen {
         robot.setRobotAcceleration(3,Units.FEET);
         robot.setChassisMotors(6,2.6f,10.75f,6000);
         robot.buildRobot();
+
+        commands.add(new SampleCommand(robot));
+        commandRunner = new CommandRunner(commands);
     }
 
     @Override
@@ -29,6 +39,7 @@ public class AutoPathSim implements Screen {
         batch.begin();
         robot.setMotorPower(1f);
         robot.draw(batch);
+        commandRunner.runCommands();
         batch.end();
     }
 
