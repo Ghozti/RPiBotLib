@@ -197,19 +197,18 @@ public class SimRobotNew {
 
     public void draw(Batch batch){
         robotGraphics.draw(batch);
+        arcadeDrive(0,0);
         update();
     }
 
     //TODO make the method below behave like an arcade drive
 
     public void arcadeDrive(float turnInput, float driveInput){
-        setMotorPower(driveInput);
+        setMotorPower(.5f);
         getFrictionalSlowDown();
         frictionalSlowDownFactor *= Gdx.graphics.getDeltaTime();
 
-        if (hasMoved){
-
-        }else {
+        if (!hasMoved){
             startX = robotGraphics.getX();
             startY = robotGraphics.getY();
         }
@@ -223,7 +222,7 @@ public class SimRobotNew {
             if (rotationSpeed > a_maxDistancePerSecond){
                 rotationSpeed = a_maxDistancePerSecond;
             }
-            robotGraphics.rotate(-rotationSpeed);
+            robotGraphics.rotate(-rotationSpeed * 1.4f);
         }else if (Gdx.input.isKeyPressed(Input.Keys.Q)){
             updateEncoders(-encoderTickCOunt,encoderTickCOunt);
             lastPressed = 'Q';
@@ -231,7 +230,7 @@ public class SimRobotNew {
             if (rotationSpeed > a_maxDistancePerSecond){
                 rotationSpeed = a_maxDistancePerSecond;
             }
-            robotGraphics.rotate(rotationSpeed);
+            robotGraphics.rotate(rotationSpeed * 1.4f);
         }else {
             rotationalSlowDown = ((frictionalSlowDownFactor*2));
 
@@ -298,4 +297,53 @@ public class SimRobotNew {
         }
     }
 
+    public void differentialDrive(float rotate, float drive){
+        getFrictionalSlowDown();
+        frictionalSlowDownFactor *= Gdx.graphics.getDeltaTime();
+
+        if (!hasMoved){
+            startX = robotGraphics.getX();
+            startY = robotGraphics.getY();
+        }
+
+        hasMoved = true;
+
+        if (rotate < 0){
+            lastPressed = 'E';
+            updateEncoders(encoderTickCOunt,-encoderTickCOunt);
+            rotationSpeed += (a_acceleration);
+            if (rotationSpeed > a_maxDistancePerSecond){
+                rotationSpeed = a_maxDistancePerSecond;
+            }
+            robotGraphics.rotate(-rotationSpeed * 1.4f);
+        }else if(rotate > 0){
+            updateEncoders(-encoderTickCOunt,encoderTickCOunt);
+            lastPressed = 'Q';
+            rotationSpeed += a_acceleration;
+            if (rotationSpeed > a_maxDistancePerSecond){
+                rotationSpeed = a_maxDistancePerSecond;
+            }
+            robotGraphics.rotate(rotationSpeed * 1.4f);
+        }else {
+            rotationalSlowDown = ((frictionalSlowDownFactor*2));
+
+            if (rotationSpeed > 0){
+                rotationSpeed += rotationalSlowDown;
+            }else{
+                rotationSpeed = 0;
+            }
+
+            if (lastPressed == 'E')
+                robotGraphics.rotate(-rotationSpeed * Gdx.graphics.getDeltaTime());
+
+            if (lastPressed == 'Q')
+                robotGraphics.rotate (rotationSpeed * Gdx.graphics.getDeltaTime());
+        }
+
+        if (drive > 0){
+
+        }else if(drive < 0){
+
+        }
+    }
 }

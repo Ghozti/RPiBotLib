@@ -28,9 +28,6 @@ public class Robot implements Screen {
         robot.setRobotAcceleration(3,Units.FEET);
         robot.setChassisMotors(6,2.6f,10.75f,6000);
         robot.buildRobot();
-
-        commands.add(new SampleCommand(robot));
-        commandRunner = new CommandRunner(commands);
     }
 
     @Override
@@ -39,7 +36,6 @@ public class Robot implements Screen {
         batch.begin();
         robot.setMotorPower(1f);
         robot.draw(batch);
-        commandRunner.runCommands();
         batch.end();
     }
 
